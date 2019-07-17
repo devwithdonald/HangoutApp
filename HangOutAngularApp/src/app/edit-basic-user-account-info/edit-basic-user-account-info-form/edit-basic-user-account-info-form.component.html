@@ -1,0 +1,45 @@
+<!-- registration form -->
+
+<div class="editBasicUserAccountInfoForm">
+
+    <form>
+        <h2>Edit Account Information</h2>
+
+        <div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="usernameInput">Username</label>
+                    <input [(ngModel)]="username" type="text" name="username" class="form-control" id="basicUsername" [placeholder]="username">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="passwordInput">Password</label>
+                    <button (click)=togglePassword() class="btn btn-default float-right" id="showPasswordButton"><small>Show/Hide Password</small></button>
+
+                    <input [(ngModel)]="password" [type]="hidePassword" name="password" class="form-control"
+                        id="basicPassword">
+                         
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-12">
+                    <label for="firstNameInput">First Name</label>
+                    <input [(ngModel)]="firstName" type="text" name="firstName" class="form-control" id="basicFirstName">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="lastNameInput">Last Name</label>
+                    <input [(ngModel)]="lastName" type="text" name="lastName" class="form-control" id="basicLastName">
+                </div>
+            </div>
+            <button (click)=onBasicUserEditInfo() type="submit" class="btn btn-primary">Submit Changes</button>
+        </div>
+
+    </form>
+</div>

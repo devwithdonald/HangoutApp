@@ -1,0 +1,43 @@
+<div id="EventsTables">
+    <h2>Events</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Current</th>
+            <th>Event ID</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Description</th>
+            <th>Business Message</th>
+        </tr>
+    </thead>
+</table>
+</div>
+<div class='column'>
+    <div id="AddEventBtn">
+    <button (click)=onAdd() type="submit" class="btn btn-light">Add Event</button>
+</div>
+<div id="UpdateEventBtn">
+    <form action="" id="UpdateEventbutton">
+        <label for="Event id">Event ID</label>
+        <input type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
+         <button (click)=onUp() type="submit" class="btn btn-light">Update Event</button>
+    </form>   
+</div>
+<div id="ViewSubscribersEventBtn">
+        <form action="" id="ViewSubscribersEventbutton">
+            <label for="Event id">Event ID</label>
+            <input type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
+             <button (click)=onViewSubs() type="submit" class="btn btn-light">VSPE Event</button>
+        </form>   
+    </div>
+<div id="RemoveEventBtn">
+   <form action="" id="RemoveEventbutton">
+    <label for="Event id">Event ID</label>
+    <input type="text" name="RemoveEventId" id="RemoveBusinessEventIdbtn">
+    <button (click)=onRemove() type="submit" class="btn btn-light">Remove Event</button>
+    </form>   
+</div>
+</div>

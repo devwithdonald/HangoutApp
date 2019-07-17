@@ -1,0 +1,98 @@
+<!-- registration form -->
+
+<div class="registrationForm">
+
+    <form>
+        <h2>Registration Form</h2>
+
+        <div class="form-row" id="userChoice">
+            <div class="form-group col-md-12">
+                <label for="userType">Hello, please choose your user type.</label>
+                <select [(ngModel)]="userChoice" id="userType" name="userType" class="form-control">
+                    <option selected>Select User Type</option>
+                    <option>Basic User</option>
+                    <option>Business User</option>
+                </select>
+            </div>
+        </div>
+        <!-- 
+        <p> {{ userChoice }} </p> -->
+
+        <!-- THROW AN NG IF HERE -->
+        <div *ngIf="userChoice === 'Basic User'">
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="usernameInput">Username</label>
+                    <input [(ngModel)]="username" type="text" name="username" class="form-control" id="basicUsername"
+                        required="required">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="passwordInput">Password</label>
+                    <input [(ngModel)]="password" type="password" name="password" class="form-control"
+                        id="basicPassword" required="required">
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-12">
+                    <label for="firstNameInput">First Name</label>
+                    <input [(ngModel)]="firstName" type="text" name="firstName" class="form-control" id="basicFirstName"
+                        required="required">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="lastNameInput">Last Name</label>
+                    <input [(ngModel)]="lastName" type="text" name="lastName" class="form-control" id="basicLastName"
+                        required="required">
+                </div>
+            </div>
+            <button (click)=onBasicUserRegistration() type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+
+        <div *ngIf="userChoice === 'Business User'">
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="usernameInput">Username</label>
+                    <input [(ngModel)]="username" type="text" name="username" class="form-control" id="businessUsername"
+                        required="required">
+                </div>
+            </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="passwordInput">Password</label>
+                        <input [(ngModel)]="password" type="password" name="password" class="form-control"
+                            id="businessPassword" required="required">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="businessNameInput">Business Name</label>
+                        <input [(ngModel)]="businessName" type="text" name="businessName" class="form-control"
+                            id="businessName" required="required">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="businessLocationInput">Business Location</label>
+                        <input [(ngModel)]="businessLocation" type="text" name="businessLocation" class="form-control"
+                            id="businessLocation" required="required">
+                    </div>
+                </div>
+            
+
+                <button (click)=onBusinessUserRegistration() type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+    </form>
+</div>
