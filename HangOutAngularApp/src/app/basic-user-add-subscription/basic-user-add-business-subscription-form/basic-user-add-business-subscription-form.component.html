@@ -1,0 +1,9 @@
+<form>
+    <div class="form-group">
+        <label for="businessId">Business Id</label>
+        <input [(ngModel)]="businessId" name="businessId" type="text" class="form-control" id="businessId"
+            placeholder="Business Id" required>
+    </div>
+
+    <button (click)="onAddSubscription()" type="submit" class="btn btn-dark">Add Subscription</button>
+</form>

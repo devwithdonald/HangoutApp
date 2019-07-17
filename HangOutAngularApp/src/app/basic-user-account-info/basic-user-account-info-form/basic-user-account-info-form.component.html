@@ -1,0 +1,48 @@
+<div class="accountInfo">
+
+    <form>
+        <h2>Account Information</h2>
+
+        <div class="form-group row">
+            <label for="usernameOutput" class="col-md-7 col-form-label">Username</label>
+            <div class="col-md-5">
+                <input [value]="basicUserUsername" readonly class="form-control-plaintext" type="text" name="username"
+                    id="basicUserUsername">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="passwordOutput" class="col-md-7 col-form-label">Password</label>
+            <div class="col-md-5">
+                <input [value]="basicUserPassword" readonly class="form-control-plaintext" type="text" name="password"
+                    id="basicUserPassword">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="firstNameOutput" class="col-md-7 col-form-label">First Name</label>
+            <div class="col-md-5">
+                <input [value]="basicUserFirstName" readonly class="form-control-plaintext" type="text" name="firstName"
+                    id="basicUserFirstName">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="lastNameOutput" class="col-md-7 col-form-label">Last Name</label>
+            <div class="col-md-5">
+                <input [value]="basicUserLastName" readonly class="form-control-plaintext" type="text" name="lastName"
+                    id="basicUserLastName">
+            </div>
+        </div>
+
+
+
+        <div>
+            <button (click)=onEdit() type="submit" class="btn btn-primary">Edit Account</button>
+        </div>
+
+
+    </form>
+
+
+</div>
