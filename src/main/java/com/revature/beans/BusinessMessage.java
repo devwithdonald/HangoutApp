@@ -14,10 +14,6 @@ public class BusinessMessage extends Message {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="BUSINESS_ID")
 	private BusinessUser businessUser;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="EVENT_ID")
-	private Event event;
 
 	public BusinessMessage() {
 		super();
@@ -29,10 +25,9 @@ public class BusinessMessage extends Message {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessMessage(BusinessUser businessUser, Event event) {
+	public BusinessMessage(BusinessUser businessUser) {
 		super();
 		this.businessUser = businessUser;
-		this.event = event;
 	}
 
 	public BusinessUser getBusinessUser() {
@@ -43,18 +38,36 @@ public class BusinessMessage extends Message {
 		this.businessUser = businessUser;
 	}
 
-	public Event getEvent() {
-		return event;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((businessUser == null) ? 0 : businessUser.hashCode());
+		return result;
 	}
 
-	public void setEvent(Event event) {
-		this.event = event;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusinessMessage other = (BusinessMessage) obj;
+		if (businessUser == null) {
+			if (other.businessUser != null)
+				return false;
+		} else if (!businessUser.equals(other.businessUser))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "BusinessMessage [businessUser=" + businessUser + ", event=" + event + "]";
+		return "BusinessMessage [businessUser=" + businessUser + "]";
 	}
+
 	
 
 }
