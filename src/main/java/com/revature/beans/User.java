@@ -38,7 +38,7 @@ public abstract class User {
 	@JoinColumn(name = "ROLE_ID")
 	private Role role;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
 	private Set<Event> events = new HashSet<Event>();
 	
 	public User(int userId, String username, String password, Role role) {

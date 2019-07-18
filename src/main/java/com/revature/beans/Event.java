@@ -1,5 +1,8 @@
 package com.revature.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,18 +25,8 @@ public class Event {
 	private Integer eventId;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="BASIC_USER_ID")
-	private BasicUser basicUser;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="BUSINESS_ID")
-	private BusinessUser businessUser;
-	
-	//@Column(name="")
-	//private String posterName;
-	
-//	@Column(name="")
-//	private String eventType;
+	@JoinColumn(name="USER_ID")
+	private User user;
 	
 	@Column(name="TITLE")
 	private String title;
@@ -54,6 +48,9 @@ public class Event {
 	
 	@Column(name="ON_TIMELINE")
 	private Boolean onTimeLine;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
 
 	public Event() {
 		super();

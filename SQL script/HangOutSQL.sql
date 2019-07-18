@@ -10,6 +10,7 @@ drop table rsvps cascade;
 drop table friends cascade;
 drop table subscriptions cascade;
 drop table user_messages cascade;
+drop table messages cascade;
 
 
 --will need default values input
@@ -25,14 +26,11 @@ create table users (
 	role_id integer not null references role (role_id)
 );
 
-
-
 create table basic_user (
 	user_id integer not null unique references users (user_id),
 	first_name varchar not null,
 	last_name varchar not null
 );
-
 
 create table business_user (
 	user_id integer not null unique references users (user_id),
@@ -61,7 +59,7 @@ create table messages (
 create table business_messages(
 	message_id integer not null unique references messages (message_id),
 	business_id integer references business_user (user_id), 
-	event_id integer references events (event_id), 
+	event_id integer references events (event_id)
 );
 
 create table event_messages(
@@ -78,8 +76,7 @@ create table user_messages(
 
 create table business_employee_user (
 	user_id integer not null unique references users (user_id),
-	business_id integer references business_user (user_id),
-	business_message_id integer references business_messages (message_id)
+	business_id integer references business_user (user_id)
 );
 
 create table rsvps(

@@ -24,7 +24,7 @@ public class BusinessMessage extends Message {
 	private Event event;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="businessMessage")
-	private Set<BusinessMessage> messageList = new HashSet<BusinessMessage>();
+	private Set<BusinessEmployeeUser> employeeMessageList = new HashSet<BusinessEmployeeUser>();
 
 	public BusinessMessage() {
 		super();
