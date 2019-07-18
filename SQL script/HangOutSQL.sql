@@ -62,7 +62,7 @@ create table business_messages(
 
 
 create table business_employee_user (
-	business_employee_user_id integer references users (user_id),
+	user_id integer not null unique references  users (user_id),
 	business_id integer references business_user (user_id),
 	business_message_id integer references business_messages (business_message_id)
 );
