@@ -4,6 +4,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -64,6 +65,8 @@ import { BasicUserMessagesComponent } from './basic-user-messages/basic-user-mes
 import { BasicUserMessagesTableComponent } from './basic-user-messages/basic-user-messages-table/basic-user-messages-table.component';
 // tslint:disable-next-line: max-line-length
 import { BasicUserSendNewMessageButtonComponent } from './basic-user-messages/basic-user-send-new-message-button/basic-user-send-new-message-button.component';
+import { BasicUserService } from './BasicUser.service';
+import { BusinessUserService } from './BusinessUser.service';
 
 
 
@@ -145,8 +148,9 @@ const appRoutes: Routes = [
       AppRoutingModule,
       NgbModule,
       RouterModule.forRoot(appRoutes)
+      
     ],
-    providers: [],
+    providers: [BasicUserService, BusinessUserService],
     bootstrap: [ AppComponent ]
   })
   export class AppModule { }

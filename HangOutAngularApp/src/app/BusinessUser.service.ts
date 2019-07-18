@@ -1,31 +1,16 @@
 import { Injectable, Inject } from '@angular/core';
 import { BusinessUser } from 'src/app/BusinessUser';
 import { HttpClient } from '@angular/common/http';
-@Injectable()
+@Injectable({providedIn: 'root'})
 // tslint:disable-next-line: no-unused-expression
 export class BusinessUserService {
-    http: HttpClient;
-    constructor(
-        public businessUser: BusinessUser,
-        @Inject('username') public username: string,
+    constructor() {
 
-        @Inject('password') public password: string,
-
-        @Inject('businessName') public name: string,
-
-        @Inject('businessLocation') public location: string 
-
-    ) {
-        businessUser.name = name;
-        businessUser.location = location;
-        businessUser.user.password = password;
-        businessUser.user.role = 2;
-        businessUser.user.username = username;
     }
-    addBusinessUser(businessUser: BusinessUser) {
-        console.log(businessUser);
+    businessUser: BusinessUser;
+
+    addBusinessUser(username: string, password: string, businessName: string, businessLocation: string) {
         console.log('hello addbusinessuser');
-        //return this.http.post();
+        console.log(username, password, businessLocation, businessName);
     }
 }
- 
