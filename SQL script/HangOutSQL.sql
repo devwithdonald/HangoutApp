@@ -38,9 +38,22 @@ create table business_user (
 	business_location varchar not null
 );
 
+create table messages (
+	message_id serial primary key,
+	message varchar,
+	time_sent timestamp default current_timestamp
+);
+
+create table business_messages(
+	message_id integer not null unique references messages (message_id),
+	business_id integer references business_user (user_id) 
+	--event_id integer references events (event_id)
+);
+
 create table events (
 	event_id serial primary key,
 	user_id integer references users (user_id),
+	business_message_id integer references business_messages (message_id),
 	title varchar not null,
 	location varchar not null,
 	time_of_event time not null,
@@ -50,17 +63,8 @@ create table events (
 	on_timeline boolean default true
 );
 
-create table messages (
-	message_id serial primary key,
-	message varchar,
-	time_sent timestamp default current_timestamp
-);
 
-create table business_messages(
-	message_id integer not null unique references messages (message_id),
-	business_id integer references business_user (user_id), 
-	event_id integer references events (event_id)
-);
+
 
 create table event_messages(
 	message_id integer not null unique references messages (message_id),
@@ -103,4 +107,3 @@ create table subscriptions (
 
 insert into role (role_type)
 	values ('BasicUser'), ('Business'), ('BusinessEmployee'); 
-
