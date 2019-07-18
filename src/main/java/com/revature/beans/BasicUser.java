@@ -27,8 +27,8 @@ public class BasicUser extends User{
 	//TODO this may be wrong
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="FRIENDS",
-			joinColumns=@JoinColumn(name="BASIC_USER_ID"),
-			inverseJoinColumns=@JoinColumn(name="BASIC_USER_ID"))
+			joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="USER_ID"))
 	private Set<Friends> friendList;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
