@@ -1,5 +1,8 @@
 package com.revature.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,18 +26,8 @@ public class Event {
 	private Integer eventId;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="BASIC_USER_ID")
-	private BasicUser basicUser;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="BUSINESS_ID")
-	private BusinessUser businessUser;
-	
-	//@Column(name="")
-	//private String posterName;
-	
-//	@Column(name="")
-//	private String eventType;
+	@JoinColumn(name="USER_ID")
+	private User user;
 	
 	@Column(name="TITLE")
 	private String title;
@@ -54,18 +49,28 @@ public class Event {
 	
 	@Column(name="ON_TIMELINE")
 	private Boolean onTimeLine;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="event")
+	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="EVENT_ID")
+	private BusinessMessage businessMessage;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="event")
+	private Set<EventMessage> eventMessageList = new HashSet<EventMessage>();
 
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Event(Integer eventId, BasicUser basicUser, BusinessUser businessUser, String title, String location,
-			String timeOfEvent, String dateOfEvent, String timePosted, String description, Boolean onTimeLine) {
+	public Event(Integer eventId, User user, String title, String location, String timeOfEvent, String dateOfEvent,
+			String timePosted, String description, Boolean onTimeLine, Set<Rsvp> rsvps, BusinessMessage businessMessage,
+			Set<EventMessage> eventMessageList) {
 		super();
 		this.eventId = eventId;
-		this.basicUser = basicUser;
-		this.businessUser = businessUser;
+		this.user = user;
 		this.title = title;
 		this.location = location;
 		this.timeOfEvent = timeOfEvent;
@@ -73,6 +78,9 @@ public class Event {
 		this.timePosted = timePosted;
 		this.description = description;
 		this.onTimeLine = onTimeLine;
+		this.rsvps = rsvps;
+		this.businessMessage = businessMessage;
+		this.eventMessageList = eventMessageList;
 	}
 
 	public Integer getEventId() {
@@ -83,20 +91,12 @@ public class Event {
 		this.eventId = eventId;
 	}
 
-	public BasicUser getBasicUser() {
-		return basicUser;
+	public User getUser() {
+		return user;
 	}
 
-	public void setBasicUser(BasicUser basicUser) {
-		this.basicUser = basicUser;
-	}
-
-	public BusinessUser getBusinessUser() {
-		return businessUser;
-	}
-
-	public void setBusinessUser(BusinessUser businessUser) {
-		this.businessUser = businessUser;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getTitle() {
@@ -155,20 +155,46 @@ public class Event {
 		this.onTimeLine = onTimeLine;
 	}
 
+	public Set<Rsvp> getRsvps() {
+		return rsvps;
+	}
+
+	public void setRsvps(Set<Rsvp> rsvps) {
+		this.rsvps = rsvps;
+	}
+
+	public BusinessMessage getBusinessMessage() {
+		return businessMessage;
+	}
+
+	public void setBusinessMessage(BusinessMessage businessMessage) {
+		this.businessMessage = businessMessage;
+	}
+
+	public Set<EventMessage> getEventMessageList() {
+		return eventMessageList;
+	}
+
+	public void setEventMessageList(Set<EventMessage> eventMessageList) {
+		this.eventMessageList = eventMessageList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((basicUser == null) ? 0 : basicUser.hashCode());
-		result = prime * result + ((businessUser == null) ? 0 : businessUser.hashCode());
+		result = prime * result + ((businessMessage == null) ? 0 : businessMessage.hashCode());
 		result = prime * result + ((dateOfEvent == null) ? 0 : dateOfEvent.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
+		result = prime * result + ((eventMessageList == null) ? 0 : eventMessageList.hashCode());
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((onTimeLine == null) ? 0 : onTimeLine.hashCode());
+		result = prime * result + ((rsvps == null) ? 0 : rsvps.hashCode());
 		result = prime * result + ((timeOfEvent == null) ? 0 : timeOfEvent.hashCode());
 		result = prime * result + ((timePosted == null) ? 0 : timePosted.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -181,15 +207,10 @@ public class Event {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		if (basicUser == null) {
-			if (other.basicUser != null)
+		if (businessMessage == null) {
+			if (other.businessMessage != null)
 				return false;
-		} else if (!basicUser.equals(other.basicUser))
-			return false;
-		if (businessUser == null) {
-			if (other.businessUser != null)
-				return false;
-		} else if (!businessUser.equals(other.businessUser))
+		} else if (!businessMessage.equals(other.businessMessage))
 			return false;
 		if (dateOfEvent == null) {
 			if (other.dateOfEvent != null)
@@ -206,6 +227,11 @@ public class Event {
 				return false;
 		} else if (!eventId.equals(other.eventId))
 			return false;
+		if (eventMessageList == null) {
+			if (other.eventMessageList != null)
+				return false;
+		} else if (!eventMessageList.equals(other.eventMessageList))
+			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
@@ -215,6 +241,11 @@ public class Event {
 			if (other.onTimeLine != null)
 				return false;
 		} else if (!onTimeLine.equals(other.onTimeLine))
+			return false;
+		if (rsvps == null) {
+			if (other.rsvps != null)
+				return false;
+		} else if (!rsvps.equals(other.rsvps))
 			return false;
 		if (timeOfEvent == null) {
 			if (other.timeOfEvent != null)
@@ -231,16 +262,22 @@ public class Event {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Event [eventId=" + eventId + ", basicUser=" + basicUser + ", businessUser=" + businessUser + ", title="
-				+ title + ", location=" + location + ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent
-				+ ", timePosted=" + timePosted + ", description=" + description + ", onTimeLine=" + onTimeLine + "]";
+		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
+				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
+				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
+				+ ", businessMessage=" + businessMessage + ", eventMessageList=" + eventMessageList + "]";
 	}
 
-	
+
 	
 }
