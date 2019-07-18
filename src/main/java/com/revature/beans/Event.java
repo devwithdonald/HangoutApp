@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -49,8 +50,12 @@ public class Event {
 	@Column(name="ON_TIMELINE")
 	private Boolean onTimeLine;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="event")
 	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="EVENT_ID")
+	private BusinessMessage businessMessage;
 
 	public Event() {
 		super();
