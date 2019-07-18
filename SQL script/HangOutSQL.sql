@@ -1,10 +1,15 @@
-drop table users cascade;
 drop table basic_user cascade;
 drop table business_user cascade;
 drop table business_employee_user cascade;
 drop table business_messages cascade;
-drop table event cascade;
+drop table events cascade;
 drop table event_messages cascade;
+drop table role cascade;
+drop table users cascade;
+drop table rsvps cascade;
+drop table friends cascade;
+drop table subscriptions cascade;
+drop table user_messages cascade;
 
 
 --will need default values input
@@ -12,7 +17,6 @@ create table role (
 	role_id serial primary key,
 	role_type varchar unique not null
 );
-
 
 create table users (
 	user_id serial primary key,
@@ -101,4 +105,3 @@ create table subscriptions (
 
 insert into role (role_type)
 	values ('BasicUser'), ('Business'), ('BusinessEmployee'); 
-
