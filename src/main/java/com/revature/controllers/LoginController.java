@@ -19,7 +19,7 @@ public class LoginController {
 	
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 	
-	UserServiceImpl usi;
+	private UserServiceImpl usi;
 	
 	@Autowired
 	public void setUserServiceImpl(UserServiceImpl usi) {
@@ -29,12 +29,15 @@ public class LoginController {
 	@PostMapping(value="/login", consumes= {"application/json"})
 	public @ResponseBody User loginPost(@RequestBody User user, HttpSession sess) {
 		log.log(Level.INFO, "Attempted Login: " + user);
+		
 		User authUser = usi.validateUser(user);
+		
 		if (authUser != null) {
 			sess.setAttribute("user", authUser);
 			log.log(Level.INFO, "Logged in user: " + authUser);
 			return authUser;
 		}
+		
 		return null;
 	}
 	

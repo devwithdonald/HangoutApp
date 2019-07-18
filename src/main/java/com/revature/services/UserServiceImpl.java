@@ -1,13 +1,24 @@
 package com.revature.services;
 
-import com.revature.beans.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.revature.beans.User;
+import com.revature.dao.UserDao;
+
+@Service
 public class UserServiceImpl implements UserService {
 
+	private UserDaoImpl userDao;
+	
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
 	@Override
 	public User validateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.getUser(user);
 	}
 
 	@Override
