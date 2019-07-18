@@ -1,25 +1,55 @@
 package com.revature.beans;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import java.util.HashSet;
+import java.util.Set;
 
-@MappedSuperclass
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USERS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 	
 	@Id
+	@Column(name = "USER_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	
+	@Column(name = "USERNAME")
 	private String username;
+	
+	@Column(name = "PASSWORD")
 	private String password;
 	
-	public User() {
-		super();
-	}
-
-	public User(int userId, String username, String password) {
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+	private Set<Event> events = new HashSet<Event>();
+	
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JoinColumn(name="ROLE_ID")
+    private Role role;
+	
+	public User(int userId, String username, String password, Role role) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
+		this.role = role;
+	}
+
+	public User() {
+		super();
 	}
 
 	public int getUserId() {
@@ -46,12 +76,20 @@ public abstract class User {
 		this.password = password;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + userId;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -65,12 +103,12 @@ public abstract class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (userId != other.userId)
-			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (userId != other.userId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -83,6 +121,6 @@ public abstract class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + "]";
-	}	
-
+	}
+	
 }

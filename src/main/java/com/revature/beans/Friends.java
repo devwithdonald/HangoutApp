@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="FRIENDS")
 public class Friends {
-	
+
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID")
 	private BasicUser basicUser;
