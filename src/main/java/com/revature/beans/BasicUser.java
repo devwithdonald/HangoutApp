@@ -33,65 +33,64 @@ public class BasicUser extends User{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
-	
+
 	public BasicUser() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public BasicUser(int id, String username, String password) {
-		super(id, username, password);
-	}
-	
-	public BasicUser(String firstName, String lastName, Set<Friends> friendList,
-			Set<Subscriptions> subscriptions) {
-		super();
+
+	public BasicUser(int userId, String username, String password, Role role, String firstName, String lastName,
+			Set<Friends> friendList, Set<Subscriptions> subscriptions) {
+		super(userId, username, password, role);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.friendList = friendList;
 		this.subscriptions = subscriptions;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public Set<Friends> getFriendList() {
 		return friendList;
 	}
-	
+
 	public void setFriendList(Set<Friends> friendList) {
 		this.friendList = friendList;
 	}
-	
+
 	public Set<Subscriptions> getSubscriptions() {
 		return subscriptions;
 	}
-	
+
 	public void setSubscriptions(Set<Subscriptions> subscriptions) {
 		this.subscriptions = subscriptions;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((friendList == null) ? 0 : friendList.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((subscriptions == null) ? 0 : subscriptions.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,17 +105,30 @@ public class BasicUser extends User{
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (friendList == null) {
+			if (other.friendList != null)
+				return false;
+		} else if (!friendList.equals(other.friendList))
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (subscriptions == null) {
+			if (other.subscriptions != null)
+				return false;
+		} else if (!subscriptions.equals(other.subscriptions))
+			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "BasicUser [firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "BasicUser [firstName=" + firstName + ", lastName=" + lastName + ", friendList=" + friendList
+				+ ", subscriptions=" + subscriptions + "]";
 	}
+	
+
 	
 }
