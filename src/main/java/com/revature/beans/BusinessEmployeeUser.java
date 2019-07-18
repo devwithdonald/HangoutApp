@@ -13,6 +13,10 @@ public class BusinessEmployeeUser extends User{
 	@JoinColumn(name="business_message_id")
 	private BusinessMessage businessMessage;
 	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="business_id")
+	private BusinessUser businessUser;
+	
 	public BusinessEmployeeUser() {
 		super();
 	}

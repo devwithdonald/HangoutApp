@@ -19,6 +19,8 @@ public class BusinessMessage extends Message {
 	@JoinColumn(name="EVENT_ID")
 	private Event event;
 
+	
+	
 	public BusinessMessage() {
 		super();
 		// TODO Auto-generated constructor stub
