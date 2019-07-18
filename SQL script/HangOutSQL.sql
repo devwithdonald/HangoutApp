@@ -107,3 +107,4 @@ create table subscriptions (
 
 insert into role (role_type)
 	values ('BasicUser'), ('Business'), ('BusinessEmployee'); 
+

@@ -27,7 +27,7 @@ public class BusinessUser extends User {
 	private Set<BusinessMessage> messageList = new HashSet<BusinessMessage>();
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy="businessUser")
-	private Set<Subscriptions> subscriberList;
+	private Set<Subscriptions> subscriberList = new HashSet<Subscriptions>();
 
 	public BusinessUser() {
 		super();

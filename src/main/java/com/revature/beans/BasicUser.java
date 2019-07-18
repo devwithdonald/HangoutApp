@@ -31,6 +31,10 @@ public class BasicUser extends User{
 			inverseJoinColumns=@JoinColumn(name="USER_ID"))
 	private Set<Friends> friendList;
 	
+//	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicFriendUser")
+//	private Set<Friends> friendList = new HashSet<Friends>();
+//	
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
 
