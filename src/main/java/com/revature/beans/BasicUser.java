@@ -24,16 +24,14 @@ public class BasicUser extends User{
 	@Column(name="LAST_NAME")
 	private String lastName;
 	
-	//TODO this may be wrong
+	//FIX BROTHER
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="FRIENDS",
 			joinColumns=@JoinColumn(name="USER_ID"),
-			inverseJoinColumns=@JoinColumn(name="USER_ID"))
-	private Set<Friends> friendList;
+			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
+	private Set<BasicUser> friendList;
 	
-//	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicFriendUser")
-//	private Set<Friends> friendList = new HashSet<Friends>();
-//	
+
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();

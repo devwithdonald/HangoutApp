@@ -16,30 +16,29 @@ import com.revature.services.UserServiceImpl;
 
 @Controller
 public class LoginController {
-	
+
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
-	
+
 	private UserServiceImpl usi;
-	
+
 	@Autowired
 	public void setUserServiceImpl(UserServiceImpl usi) {
 		this.usi = usi;
 	}
-	
-	@PostMapping(value="/login", consumes= {"application/json"})
+
+	@PostMapping(value = "/login", consumes = { "application/json" })
 	public @ResponseBody User loginPost(@RequestBody User user, HttpSession sess) {
 		log.log(Level.INFO, "Attempted Login: " + user);
-		
+
 		User authUser = usi.validateUser(user);
-		
+
 		if (authUser != null) {
 			sess.setAttribute("user", authUser);
 			log.log(Level.INFO, "Logged in user: " + authUser);
 			return authUser;
 		}
-		
+
 		return null;
 	}
-	
-	
+
 }

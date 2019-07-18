@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
-import com.revature.dao.UserDao;
+import com.revature.dao.UserDaoImpl;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService {
 	private UserDaoImpl userDao;
 	
 	@Autowired
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserDaoImpl userDao) {
 		this.userDao = userDao;
 	}
 	
