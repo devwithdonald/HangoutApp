@@ -28,14 +28,14 @@ create table users (
 
 
 create table basic_user (
-	basic_user_id integer not null unique references users (user_id),
+	user_id integer not null unique references users (user_id),
 	first_name varchar not null,
 	last_name varchar not null
 );
 
 
 create table business_user (
-	business_id integer not null unique references users (user_id),
+	user_id integer not null unique references users (user_id),
 	business_name varchar not null,
 	business_location varchar not null
 );
@@ -54,7 +54,7 @@ create table events (
 
 create table business_messages(
 	business_message_id serial primary key, 
-	business_id integer references business_user (business_id), 
+	business_id integer references business_user (user_id), 
 	event_id integer references events (event_id), 
 	message varchar, 
 	time_of_message timestamp default current_timestamp
@@ -63,19 +63,19 @@ create table business_messages(
 
 create table business_employee_user (
 	business_employee_user_id integer references users (user_id),
-	business_id integer references business_user (business_id),
+	business_id integer references business_user (user_id),
 	business_message_id integer references business_messages (business_message_id)
 );
 
 create table rsvps(
 	rsvp_id serial primary key,
-	basic_user_id integer references basic_user (basic_user_id),
+	basic_user_id integer references basic_user (user_id),
 	event_id integer references events (event_id)
 );
 
 create table event_messages(
 	event_message_id serial primary key,
-	sender_id integer references basic_user (basic_user_id),
+	sender_id integer references basic_user (user_id),
 	event_id integer references events (event_id),
 	message varchar not null,
 	time_posted timestamp default current_timestamp
@@ -83,22 +83,22 @@ create table event_messages(
 
 -- create references in table
 create table friends (
-	user_id integer references basic_user (basic_user_id), 
-	friend_id integer references basic_user (basic_user_id)
+	user_id integer references basic_user (user_id), 
+	friend_id integer references basic_user (user_id)
 );
 
 create table user_messages(
 	user_message_id serial primary key, 
-	sender_id integer references basic_user (basic_user_id),  
-	receiver_id integer references basic_user (basic_user_id), 
+	sender_id integer references basic_user (user_id),  
+	receiver_id integer references basic_user (user_id), 
 	message varchar, 
 	time_of_message timestamp default current_timestamp
 );
 
 create table subscriptions (
 	subcription_id serial primary key, 
-	basic_user_id integer references basic_user (basic_user_id), 
-	business_id integer references business_user (business_id), 
+	basic_user_id integer references basic_user (user_id), 
+	business_id integer references business_user (user_id), 
 	time_of_sub timestamp default current_timestamp, 
 	rsvp_count integer
 );
