@@ -9,8 +9,18 @@
 		<property name="hibernate.connection.pool_size">5</property>
 		
 		<!-- Class Mapping -->
-		
-
+		<mapping class="com.revature.beans.BasicUser" />
+		<mapping class="com.revature.beans.BusinessEmployeeUser" />
+		<mapping class="com.revature.beans.BusinessMessage" />
+		<mapping class="com.revature.beans.BusinessUser" />
+		<mapping class="com.revature.beans.Event" />
+		<mapping class="com.revature.beans.EventMessage" />
+		<mapping class="com.revature.beans.Message" />
+		<mapping class="com.revature.beans.Role" />
+		<mapping class="com.revature.beans.Rsvp" />
+		<mapping class="com.revature.beans.Subscriptions" />
+		<mapping class="com.revature.beans.User" />
+		<mapping class="com.revature.beans.UserMessage" />
 		
 	</session-factory>
 </hibernate-configuration>
