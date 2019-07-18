@@ -22,7 +22,7 @@ create table users (
 	user_id serial primary key,
 	username varchar unique not null,
 	password varchar unique null,
-	role integer not null references role (role_id)
+	role_id integer not null references role (role_id)
 );
 
 
