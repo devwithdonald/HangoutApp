@@ -34,12 +34,18 @@ public class BasicUser extends User{
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
 
-	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="sender")
 	private Set<UserMessage> sentMessages = new HashSet<UserMessage>();
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="receiver")
 	private Set<UserMessage> recievedMessages = new HashSet<UserMessage>();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
+	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="basicUser")
+	private Set<EventMessage> eventMessages = new HashSet<EventMessage>();
+	
 	
 	public BasicUser() {
 		super();
