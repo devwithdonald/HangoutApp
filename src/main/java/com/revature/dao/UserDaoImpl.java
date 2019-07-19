@@ -25,11 +25,14 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUser(User user) {
 		log.log(Level.INFO, "in getUserDao");
+		log.log(Level.INFO, "user = " + user);
+		log.log(Level.INFO, "user username = " + user.getUsername());
+		log.log(Level.INFO, "user password = " + user.getPassword());
+		
 		User returnedUser;
-
 		Session sess = sf.openSession();
 		
-		String hql = "From User as u WHERE u.username = :username AND u.password = :password";
+		String hql = "FROM User as u WHERE u.username = :username AND u.password = :password";
 		
 		Query query = sess.createQuery(hql);
 		
@@ -38,8 +41,9 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			returnedUser = (User) query.getSingleResult();
+			log.log(Level.INFO, "ReturnedUser: " + returnedUser);
 		} catch (NoResultException e) {
-			log.log(Level.INFO, "database returned null");
+			log.log(Level.WARNING, "database returned null - user not found");
 			return null;
 		}
 		
