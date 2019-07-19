@@ -1,9 +1,12 @@
 package om.revature.driver;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.revature.beans.BasicUser;
+import com.revature.beans.User;
 import com.revature.dao.UserDaoImpl;
 import com.revature.util.SessionFactoryUtil;
 
@@ -14,10 +17,11 @@ public class Driver {
 
 	public static void main(String[] args) {
 		Session sess = sf.openSession();
-		BasicUser us = (BasicUser) sess.get(BasicUser.class, 1);
-		System.out.println(us.toString());
+//		User us = (User) sess.get(User.class, 1);
+//		System.out.println(us.toString());
 		
-		//List<User> user = udi.getAllUsers1();
+		List<User> user = udi.getAllUsers1();
+		System.out.println(user);
 		sess.close();
 		System.out.println("Everything fine");
 		

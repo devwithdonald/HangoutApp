@@ -51,7 +51,8 @@ public class SessionFactoryUtil {
 //		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(UserMessage.class).buildSessionFactory();
 //		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
 //	
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
+		sf = configuration.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(User.class)
 				.addAnnotatedClass(BasicUser.class)
 				.addAnnotatedClass(Event.class)
 				.addAnnotatedClass(Role.class)
@@ -59,6 +60,11 @@ public class SessionFactoryUtil {
 				.addAnnotatedClass(Subscriptions.class)
 				.addAnnotatedClass(UserMessage.class)
 				.addAnnotatedClass(EventMessage.class)
+				.addAnnotatedClass(BusinessEmployeeUser.class)
+				.addAnnotatedClass(BusinessMessage.class)
+				.addAnnotatedClass(BusinessUser.class)
+				.addAnnotatedClass(Message.class)
+				.addAnnotatedClass(BusinessEmployeeUser.class)
 				.buildSessionFactory();
 
 	}
