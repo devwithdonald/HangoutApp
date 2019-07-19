@@ -34,25 +34,6 @@ public class LoginController {
 		// TODO
 	}
 
-//	@RequestMapping(value="/login", method=RequestMethod.POST)
-//	public String loginPost(User user) {
-	// log.log(Level.INFO, "Attempted Login: " + user);
-	// System.out.println("there " + s);
-	// System.out.println(user);
-	// User authUser = usi.validateUser(user);
-
-	// if (authUser != null) {
-
-	// return "home";
-
-//		if (authUser != null) {
-//			//sess.setAttribute("user", authUser);
-//			//log.log(Level.INFO, "Logged in user: " + authUser);
-//			return "authUser";
-//		}
-//
-//		return "help";
-
 	@PostMapping(value = "/login", consumes = { "application/json" })
 	public @ResponseBody User loginPost(@RequestBody User user, HttpSession sess) {
 		log.log(Level.INFO, "Attempted Login: " + user);
@@ -60,11 +41,11 @@ public class LoginController {
 		User authUser = userService.validateUser(user);
 
 		if (authUser != null) {
-			// sess.setAttribute("user", authUser);
+			sess.setAttribute("user", authUser);
+			log.log(Level.INFO, "Session attribute set to: " + sess.getAttribute("user"));
 			log.log(Level.INFO, "Logged in user: " + authUser);
 			return authUser;
 		}
-
 		return null;
 	}
 

@@ -1,6 +1,6 @@
 package com.revature.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.User;
 
@@ -10,6 +10,6 @@ public interface UserDao {
 
 	public Boolean addUser(User user, String userType);
 
-	public ArrayList<User> getAllUsers();
+	public List<User> getAllUsers();
 
 }
