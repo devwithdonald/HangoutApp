@@ -9,6 +9,8 @@
 		<property name="hibernate.connection.pool_size">5</property>
 		
 		<!-- Class Mapping -->
+		
+		<!-- 
 		<mapping class="com.revature.beans.BasicUser" />
 		<mapping class="com.revature.beans.BusinessEmployeeUser" />
 		<mapping class="com.revature.beans.BusinessMessage" />
@@ -21,6 +23,7 @@
 		<mapping class="com.revature.beans.Subscriptions" />
 		<mapping class="com.revature.beans.User" />
 		<mapping class="com.revature.beans.UserMessage" />
-		
+		 -->
+		 
 	</session-factory>
 </hibernate-configuration>

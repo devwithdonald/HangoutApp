@@ -9,16 +9,16 @@ import com.revature.dao.UserDaoImpl;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserDaoImpl userDao;
+	private UserDaoImpl userDaoImpl;
 	
 	@Autowired
-	public void setUserDao(UserDaoImpl userDao) {
-		this.userDao = userDao;
+	public void setUserDao(UserDaoImpl userDaoImpl) {
+		this.userDaoImpl = userDaoImpl;
 	}
 	
 	@Override
 	public User validateUser(User user) {
-		return userDao.getUser(user);
+		return userDaoImpl.getUser(user);
 	}
 
 	@Override
