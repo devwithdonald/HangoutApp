@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
+import com.revature.dao.UserDaoImpl;
 import com.revature.services.UserServiceImpl;
 //@Controller
 @RestController("/login")
@@ -18,6 +19,7 @@ public class LoginController {
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
 	private UserServiceImpl usi;
+	private static UserDaoImpl udi;
 //
 	@Autowired
 	public void setUserService(UserServiceImpl userService) {
@@ -35,9 +37,8 @@ public class LoginController {
 	//@GetMapping
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGet() {
-		System.out.println("here");
+		
 		return "hillo";
-//		System.out.println("here");
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
