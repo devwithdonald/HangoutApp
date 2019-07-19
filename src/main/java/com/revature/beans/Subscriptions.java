@@ -21,7 +21,7 @@ public class Subscriptions {
 	private int subscriptionId;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="BASIC_USER_ID")
 	private BasicUser basicUser;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
@@ -86,53 +86,10 @@ public class Subscriptions {
 	public void setRsvpCount(int rsvpCount) {
 		this.rsvpCount = rsvpCount;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((basicUser == null) ? 0 : basicUser.hashCode());
-		result = prime * result + ((businessUser == null) ? 0 : businessUser.hashCode());
-		result = prime * result + rsvpCount;
-		result = prime * result + subscriptionId;
-		result = prime * result + ((timeOfSub == null) ? 0 : timeOfSub.hashCode());
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Subscriptions other = (Subscriptions) obj;
-		if (basicUser == null) {
-			if (other.basicUser != null)
-				return false;
-		} else if (!basicUser.equals(other.basicUser))
-			return false;
-		if (businessUser == null) {
-			if (other.businessUser != null)
-				return false;
-		} else if (!businessUser.equals(other.businessUser))
-			return false;
-		if (rsvpCount != other.rsvpCount)
-			return false;
-		if (subscriptionId != other.subscriptionId)
-			return false;
-		if (timeOfSub == null) {
-			if (other.timeOfSub != null)
-				return false;
-		} else if (!timeOfSub.equals(other.timeOfSub))
-			return false;
-		return true;
-	}
 
-	@Override
-	public String toString() {
-		return "Subscriptions [subscriptionId=" + subscriptionId + ", basicUser=" + basicUser + ", businessUser="
-				+ businessUser + ", timeOfSub=" + timeOfSub + ", rsvpCount=" + rsvpCount + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Subscriptions [subscriptionId=" + subscriptionId + ", basicUser=" + basicUser + ", businessUser="
+//				+ businessUser + ", timeOfSub=" + timeOfSub + ", rsvpCount=" + rsvpCount + "]";
+//	}
 }

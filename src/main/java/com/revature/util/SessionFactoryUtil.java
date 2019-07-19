@@ -1,7 +1,9 @@
 package com.revature.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import com.revature.beans.BasicUser;
 import com.revature.beans.BusinessEmployeeUser;
@@ -28,26 +30,42 @@ public class SessionFactoryUtil {
 		configuration.setProperty("hibernate.connection.password", System.getenv("HANGOUT_PASSWORD")); 
 		configuration.setProperty("hibernate.connection.url", 
 				"jdbc:postgresql://" + System.getenv("HANGOUT_URL") + ":5432/glory_1905java?");
+		configuration.setProperty("hibernate.default_schema", System.getenv("HANGOUT_SCHEMA"));
+
 		
-//		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-//				.applySettings(configuration.getProperties()).build();
-//		sf = configuration.buildSessionFactory(serviceRegistry);
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
+		sf = configuration.buildSessionFactory(serviceRegistry);
 		
 		
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BasicUser.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessEmployeeUser.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessMessage.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessUser.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Event.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(EventMessage.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Message.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Role.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Rsvp.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Subscriptions.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(UserMessage.class).buildSessionFactory();
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
-	
-		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(UserDaoImpl.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BasicUser.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessEmployeeUser.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessMessage.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(BusinessUser.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Event.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(EventMessage.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Message.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Role.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Rsvp.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Subscriptions.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(UserMessage.class).buildSessionFactory();
+//		sf = configuration.configure("hibernate.cfg.xml").addAnnotatedClass(User.class).buildSessionFactory();
+//	
+		sf = configuration.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(User.class)
+				.addAnnotatedClass(BasicUser.class)
+				.addAnnotatedClass(Event.class)
+				.addAnnotatedClass(Role.class)
+				.addAnnotatedClass(Rsvp.class)
+				.addAnnotatedClass(Subscriptions.class)
+				.addAnnotatedClass(UserMessage.class)
+				.addAnnotatedClass(EventMessage.class)
+				.addAnnotatedClass(BusinessEmployeeUser.class)
+				.addAnnotatedClass(BusinessMessage.class)
+				.addAnnotatedClass(BusinessUser.class)
+				.addAnnotatedClass(Message.class)
+				.addAnnotatedClass(BusinessEmployeeUser.class)
+				.buildSessionFactory();
 
 	}
 	
