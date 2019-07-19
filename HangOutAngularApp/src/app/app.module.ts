@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -148,7 +148,8 @@ const appRoutes: Routes = [
       BrowserModule,
       AppRoutingModule,
       NgbModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      HttpClientModule
     ],
     providers: [BasicUserService, BusinessUserService, HttpClient],
     bootstrap: [ AppComponent ]
