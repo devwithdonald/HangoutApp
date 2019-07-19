@@ -28,35 +28,10 @@ public class BusinessEmployeeUser extends User{
 		this.businessUser = businessUser;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((businessUser == null) ? 0 : businessUser.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BusinessEmployeeUser other = (BusinessEmployeeUser) obj;
-		if (businessUser == null) {
-			if (other.businessUser != null)
-				return false;
-		} else if (!businessUser.equals(other.businessUser))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "BusinessEmployeeUser [businessUser=" + businessUser + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "BusinessEmployeeUser [businessUser=" + businessUser + "]";
+//	}
 
 		
 	

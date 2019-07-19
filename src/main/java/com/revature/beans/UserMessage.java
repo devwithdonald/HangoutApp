@@ -46,41 +46,10 @@ public class UserMessage extends Message {
         this.receiver = receiver;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((receiver == null) ? 0 : receiver.hashCode());
-        result = prime * result + ((sender == null) ? 0 : sender.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        UserMessage other = (UserMessage) obj;
-        if (receiver == null) {
-            if (other.receiver != null)
-                return false;
-        } else if (!receiver.equals(other.receiver))
-            return false;
-        if (sender == null) {
-            if (other.sender != null)
-                return false;
-        } else if (!sender.equals(other.sender))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UserMessage [sender=" + sender + ", receiver=" + receiver + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "UserMessage [sender=" + sender + ", receiver=" + receiver + "]";
+//    }
 
                                                                                 
                                                                                 

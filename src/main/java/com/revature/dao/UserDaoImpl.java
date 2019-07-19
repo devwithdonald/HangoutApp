@@ -1,12 +1,14 @@
 package com.revature.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
@@ -46,6 +48,40 @@ public class UserDaoImpl implements UserDao {
 				
 		return returnedUser;
 	}
+	
+	public List<User> getAllUsers1() {
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(User.class);
+		List<User> result = crit.list();
+		sess.close();
+		return result;
+	}
+	
+	public User getUser1() {
+		log.log(Level.INFO, "in getUserDao");
+		User returnedUser = null;
+
+		Session sess = sf.openSession();
+		
+		String hql = "From User as u WHERE u.username = :username";
+		
+		Query query = sess.createQuery(hql);
+		
+		query.setParameter("username", "test_user1");
+		//query.setParameter("password", "test1");
+		
+//		try {
+//			returnedUser = (User) query.getSingleResult();
+//		} catch (NoResultException e) {
+//			log.log(Level.INFO, "database returned null");
+//			return null;
+//		}
+		
+		
+		//log.log(Level.INFO, "database returned: " + returnedUser);
+				
+		return returnedUser;
+	}
 
 	@Override
 	public Boolean addUser(User user, String userType) {
@@ -58,5 +94,10 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+//	public static void main(String[] args) {
+//		UserDaoImpl usi = new UserDaoImpl();
+//		usi.getUser1();
+//	}
 
 }

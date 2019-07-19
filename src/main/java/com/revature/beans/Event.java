@@ -50,14 +50,14 @@ public class Event {
 	@Column(name="ON_TIMELINE")
 	private Boolean onTimeLine;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="event")
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="event")
 	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="EVENT_ID")
 	private BusinessMessage businessMessage;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="event")
+	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="event")
 	private Set<EventMessage> eventMessageList = new HashSet<EventMessage>();
 
 	public Event() {
@@ -66,8 +66,7 @@ public class Event {
 	}
 
 	public Event(Integer eventId, User user, String title, String location, String timeOfEvent, String dateOfEvent,
-			String timePosted, String description, Boolean onTimeLine, Set<Rsvp> rsvps, BusinessMessage businessMessage,
-			Set<EventMessage> eventMessageList) {
+			String timePosted, String description, Boolean onTimeLine, BusinessMessage businessMessage) {
 		super();
 		this.eventId = eventId;
 		this.user = user;
@@ -78,9 +77,7 @@ public class Event {
 		this.timePosted = timePosted;
 		this.description = description;
 		this.onTimeLine = onTimeLine;
-		this.rsvps = rsvps;
 		this.businessMessage = businessMessage;
-		this.eventMessageList = eventMessageList;
 	}
 
 	public Integer getEventId() {
@@ -155,14 +152,6 @@ public class Event {
 		this.onTimeLine = onTimeLine;
 	}
 
-	public Set<Rsvp> getRsvps() {
-		return rsvps;
-	}
-
-	public void setRsvps(Set<Rsvp> rsvps) {
-		this.rsvps = rsvps;
-	}
-
 	public BusinessMessage getBusinessMessage() {
 		return businessMessage;
 	}
@@ -171,113 +160,13 @@ public class Event {
 		this.businessMessage = businessMessage;
 	}
 
-	public Set<EventMessage> getEventMessageList() {
-		return eventMessageList;
-	}
-
-	public void setEventMessageList(Set<EventMessage> eventMessageList) {
-		this.eventMessageList = eventMessageList;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((businessMessage == null) ? 0 : businessMessage.hashCode());
-		result = prime * result + ((dateOfEvent == null) ? 0 : dateOfEvent.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
-		result = prime * result + ((eventMessageList == null) ? 0 : eventMessageList.hashCode());
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((onTimeLine == null) ? 0 : onTimeLine.hashCode());
-		result = prime * result + ((rsvps == null) ? 0 : rsvps.hashCode());
-		result = prime * result + ((timeOfEvent == null) ? 0 : timeOfEvent.hashCode());
-		result = prime * result + ((timePosted == null) ? 0 : timePosted.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Event other = (Event) obj;
-		if (businessMessage == null) {
-			if (other.businessMessage != null)
-				return false;
-		} else if (!businessMessage.equals(other.businessMessage))
-			return false;
-		if (dateOfEvent == null) {
-			if (other.dateOfEvent != null)
-				return false;
-		} else if (!dateOfEvent.equals(other.dateOfEvent))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (eventId == null) {
-			if (other.eventId != null)
-				return false;
-		} else if (!eventId.equals(other.eventId))
-			return false;
-		if (eventMessageList == null) {
-			if (other.eventMessageList != null)
-				return false;
-		} else if (!eventMessageList.equals(other.eventMessageList))
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (onTimeLine == null) {
-			if (other.onTimeLine != null)
-				return false;
-		} else if (!onTimeLine.equals(other.onTimeLine))
-			return false;
-		if (rsvps == null) {
-			if (other.rsvps != null)
-				return false;
-		} else if (!rsvps.equals(other.rsvps))
-			return false;
-		if (timeOfEvent == null) {
-			if (other.timeOfEvent != null)
-				return false;
-		} else if (!timeOfEvent.equals(other.timeOfEvent))
-			return false;
-		if (timePosted == null) {
-			if (other.timePosted != null)
-				return false;
-		} else if (!timePosted.equals(other.timePosted))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
-				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
-				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
-				+ ", businessMessage=" + businessMessage + ", eventMessageList=" + eventMessageList + "]";
-	}
-
+//	@Override
+//	public String toString() {
+//		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
+//				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
+//				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
+//				+ ", businessMessage=" + businessMessage + ", eventMessageList=" + eventMessageList + "]";
+//	}
 
 	
 }
