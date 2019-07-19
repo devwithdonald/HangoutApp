@@ -29,7 +29,7 @@ public class LoginController {
 		this.userService = userService;
 	}
 
-	@GetMapping
+	@GetMapping("/login")
 	public void loginGet() {
 		// TODO
 	}
