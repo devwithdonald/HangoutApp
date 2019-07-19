@@ -49,11 +49,14 @@ public class UserDaoImpl implements UserDao {
 		return returnedUser;
 	}
 	
+	//HERE
 	public List<User> getAllUsers1() {
 		Session sess = sf.openSession();
 		Criteria crit = sess.createCriteria(User.class);
 		List<User> result = crit.list();
+		System.out.println("result pulled from database 1" + result);
 		sess.close();
+		System.out.println("result pulled from database 2" + result);
 		return result;
 	}
 	
@@ -91,7 +94,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public ArrayList<User> getAllUsers() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 	

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table(name="BASIC_USER")
@@ -27,24 +29,30 @@ public class BasicUser extends User{
 	private String lastName;
 	
 	//FIX BROTHER
+	@JsonIgnore
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="FRIENDS",
 			joinColumns=@JoinColumn(name="USER_ID"),
 			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
 	private Set<BasicUser> friendList;
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
 
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="sender")
 	private Set<UserMessage> sentMessages = new HashSet<UserMessage>();
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="receiver")
 	private Set<UserMessage> recievedMessages = new HashSet<UserMessage>();
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<EventMessage> eventMessages = new HashSet<EventMessage>();
 

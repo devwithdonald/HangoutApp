@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="BUSINESS_USER")
 public class BusinessUser extends User {
@@ -20,12 +22,15 @@ public class BusinessUser extends User {
 	@Column(name="BUSINESS_LOCATION")
 	private String location;
 	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy="businessUser")
 	private Set<BusinessEmployeeUser> employeeList = new HashSet<BusinessEmployeeUser>();
 	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy="businessUser")
 	private Set<BusinessMessage> messageList = new HashSet<BusinessMessage>();
 	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE, mappedBy="businessUser")
 	private Set<Subscriptions> subscriberList = new HashSet<Subscriptions>();
 

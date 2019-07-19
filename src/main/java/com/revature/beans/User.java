@@ -13,9 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="USERS")
@@ -33,11 +36,13 @@ public class User {
 	@Column(name = "PASSWORD")
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="user")
 	private Set<Event> events = new HashSet<Event>();
 	
-    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinColumn(name="ROLE_ID")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="ROLE_ID")
     private Role role;
 
 	public User() {
@@ -87,11 +92,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + "]";
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 
-	
-	
-	
-	
 }
