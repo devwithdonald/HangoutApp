@@ -22,7 +22,7 @@ export class LoginFormComponent implements OnInit {
     console.log(this.username);
     console.log(this.password);
     // pass login and username data
-    
+
     this.http.post('http://localhost:8080/HangoutApp/login', 
     {"username" : "test_user1", "password" : "user1"}, ).subscribe(
         responseData =>  {
