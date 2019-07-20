@@ -1,5 +1,8 @@
 package com.revature.dao;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,10 +38,18 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public Boolean addBasicUserEvent(Event event) {
+		//set time_posted now 
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		event.setTimePosted(dtf.format(now));
+		
+		// set on timeline
+		event.setOnTimeLine(true);
+		
 		log.log(Level.INFO, "in addBasicUserEvent - EventDao");
 		Session sess = sf.openSession();
 		Transaction tx = sess.beginTransaction();
-		sess.saveOrUpdate(event);
+		sess.save(event);
 		tx.commit();
 		sess.close();
 		return true;

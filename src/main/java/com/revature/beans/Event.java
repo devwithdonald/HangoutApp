@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -45,6 +47,7 @@ public class Event {
 	@Column(name="DATE_OF_EVENT")
 	private String dateOfEvent;
 	
+	// @JsonIgnore
 	@Column(name="TIME_POSTED")
 	private String timePosted;
 	
