@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
+import com.revature.beans.UserDTO;
 import com.revature.dao.UserDaoImpl;
 
 @Service
@@ -24,9 +25,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Boolean addUser(User user, String userType) {
+	public Boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println(userType +": " + user);
+		return userDao.addUser(user, userType);
 	}
 
 	@Override

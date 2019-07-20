@@ -10,9 +10,16 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.revature.beans.BasicUser;
+import com.revature.beans.BusinessUser;
 import com.revature.beans.User;
+import com.revature.beans.UserDTO;
 import com.revature.util.SessionFactoryUtil;
 
 @Component
@@ -49,9 +56,35 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public Boolean addUser(User user, String userType) {
+	public Boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		System.out.println(userType);
+		boolean createUser = false;
+		if(userType.equals("BasicUser")) {
+			BasicUser basicUser1 = new BasicUser();
+			basicUser1.setFirstName(user.getFirstName());
+			basicUser1.setLastName(user.getLastName());
+			basicUser1.setPassword(user.getPassword());
+			basicUser1.setUsername(user.getUsername());
+			basicUser1.setRole(user.getRole());
+			sess.save(basicUser1);
+			tx.commit();
+			createUser = true;
+		}
+		else if(userType.equals("BusinessUser")) {
+			BusinessUser businessUser = new BusinessUser();
+			businessUser.setBusinessName(user.getBusinessName());
+			businessUser.setLocation(user.getLocation());
+			businessUser.setPassword(user.getPassword());
+			businessUser.setUsername(user.getUsername());
+			businessUser.setRole(user.getRole());
+			sess.save(businessUser);
+			tx.commit();
+			createUser = true;
+		}
+		return createUser;
 	}
 
 	@Override

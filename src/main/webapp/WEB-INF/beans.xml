@@ -17,4 +17,5 @@
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
 
+	
 </beans>
