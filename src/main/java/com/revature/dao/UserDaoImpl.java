@@ -1,6 +1,5 @@
 package com.revature.dao;
 
-import java.beans.Beans;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.BasicUser;
@@ -55,12 +55,11 @@ public class UserDaoImpl implements UserDao {
 		return returnedUser;
 	}
 	
-	@SuppressWarnings("finally")
 	@Override
 	public Boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
 		Session sess = sf.openSession();
-		ApplicationContext ct=new AnnotationConfigApplicationContext("beans.xml");
+		ApplicationContext ct=new ClassPathXmlApplicationContext("beans.xml");
 		Transaction tx = sess.beginTransaction();
 		System.out.println(userType);
 		boolean createUser = false;
