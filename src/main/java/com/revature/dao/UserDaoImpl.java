@@ -59,20 +59,31 @@ public class UserDaoImpl implements UserDao {
 	public Boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
 		Session sess = sf.openSession();
-		ApplicationContext ct=new ClassPathXmlApplicationContext("beans.xml");
 		Transaction tx = sess.beginTransaction();
 		System.out.println(userType);
 		boolean createUser = false;
-		BasicUser basicUser1 = (BasicUser) ct.getBean("basicUser");
-		basicUser1.setFirstName(user.getFirstName());
-		basicUser1.setLastName(user.getLastName());
-		basicUser1.setPassword(user.getPassword());
-		basicUser1.setUsername(user.getUsername());
-		basicUser1.setRole(user.getRole());
-		System.out.println(basicUser1.toString());
-		sess.save(basicUser1);
-		createUser = true;
-		tx.commit();
+		if(userType.equals("BasicUser")) {
+			BasicUser basicUser1 = new BasicUser();
+			basicUser1.setFirstName(user.getFirstName());
+			basicUser1.setLastName(user.getLastName());
+			basicUser1.setPassword(user.getPassword());
+			basicUser1.setUsername(user.getUsername());
+			basicUser1.setRole(user.getRole());
+			sess.save(basicUser1);
+			tx.commit();
+			createUser = true;
+		}
+		else if(userType.equals("BusinessUser")) {
+			BusinessUser businessUser = new BusinessUser();
+			businessUser.setBusinessName(user.getBusinessName());
+			businessUser.setLocation(user.getLocation());
+			businessUser.setPassword(user.getPassword());
+			businessUser.setUsername(user.getUsername());
+			businessUser.setRole(user.getRole());
+			sess.save(businessUser);
+			tx.commit();
+			createUser = true;
+		}
 		return createUser;
 	}
 
