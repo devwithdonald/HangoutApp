@@ -73,7 +73,8 @@ import { BusinessUserService } from './BusinessUser.service';
 
 
 const appRoutes: Routes = [
-    { path: '', component: LoginComponent},
+    // { path: '', component: LoginComponent},
+    { path: 'login', component: LoginComponent},
     { path: 'BasicUser/ViewAccountInfo', component: BasicUserAccountInfoComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'BasicUser/ViewAccountInfo/EditAccountInfo', component: EditBasicUserAccountInfoComponent},

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
+import { UserService } from 'src/app/user.service';
+import { User } from 'src/app/User';
 
 @Component({
   selector: 'app-login-form',
@@ -8,11 +10,13 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-
+  
+  //loggedInUser: UserDTO;
+  user: User;
   username: string;
   password: string;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -21,14 +25,12 @@ export class LoginFormComponent implements OnInit {
     console.log('login button clicked');
     console.log(this.username);
     console.log(this.password);
+    //populate user
+    this.user = new User(this.username, this.password);
+    //this.user.username = this.username;
+    //this.user.password = this.password;
     // pass login and username data
-
-    this.http.post('http://localhost:8080/HangoutApp/login', 
-    {"username" : "test_user1", "password" : "user1"}, ).subscribe(
-        responseData =>  {
-          console.log(responseData);
-        }
-    );
+    this.userService.postLogin('login', this.user);
 
   }
 

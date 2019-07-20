@@ -39,10 +39,12 @@ public class UserDaoImpl implements UserDao {
 			returnedUser = (User) query.getSingleResult();
 		} catch (NoResultException e) {
 			log.log(Level.WARNING, "database returned null - user not found");
+			sess.close();
 			return null;
 		}
 		log.log(Level.INFO, "database returned: " + returnedUser);
 				
+		sess.close();
 		return returnedUser;
 	}
 	

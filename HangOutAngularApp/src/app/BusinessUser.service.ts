@@ -1,19 +1,19 @@
 import { Injectable, Inject } from '@angular/core';
 import { BusinessUser } from 'src/app/BusinessUser';
+import { UserDTO } from './user-dto';
 // import { HttpClient } from '@angular/common/http';
 @Injectable({providedIn: 'root'})
 // tslint:disable-next-line: no-unused-expression
 export class BusinessUserService {
-    constructor() {
+    constructor() {}
 
-    }
     businessUser: BusinessUser;
 
-    addBusinessUser(username: string, password: string, businessName: string, businessLocation: string) {
-        console.log('hello addbusinessuser');
-        console.log(username, password, businessLocation, businessName);
-        const business = new BusinessUser(businessName, businessLocation, username, password, 'BusinessUser');
-        console.log(business);
-        return business;
+    addBusinessUser(userDTO: UserDTO) {
+        this.businessUser.userId = userDTO.userId;
+        this.businessUser.username = userDTO.username;
+        this.businessUser.password = userDTO.password;
+        this.businessUser.businessName = userDTO.businessName;
+        this.businessUser.location = userDTO.location;
     }
 }
