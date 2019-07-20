@@ -59,9 +59,9 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<Event> getAllUserEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> getAllBasicUserEvents() {
+		log.log(Level.INFO, "in getAllUserEvents - EventService");
+		return eventDao.getAllBasicUserEvents();
 	}
 
 	@Override

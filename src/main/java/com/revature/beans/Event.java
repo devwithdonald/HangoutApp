@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="EVENTS")
 public class Event {
@@ -25,6 +27,8 @@ public class Event {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer eventId;
 	
+	// changed this for getting all events!
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="USER_ID")
 	private User user;
@@ -160,6 +164,16 @@ public class Event {
 		this.businessMessage = businessMessage;
 	}
 
+	@Override
+	public String toString() {
+		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
+				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
+				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
+				+ ", businessMessage=" + businessMessage +  "]";
+	}
+
+	
+	
 //	@Override
 //	public String toString() {
 //		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location

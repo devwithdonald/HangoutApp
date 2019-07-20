@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -75,9 +75,17 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<Event> getAllUserEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> getAllBasicUserEvents() {
+		log.log(Level.INFO, "in getAllBasicUserEvents - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class);
+		List<Event> eventList = crit.list();
+		//
+		for (Event event: eventList) {
+			System.out.println(event);
+		}
+		sess.close();
+		return eventList;
 	}
 
 	@Override
