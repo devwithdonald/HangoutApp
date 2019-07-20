@@ -44,17 +44,10 @@ export class RegisterFormComponent implements OnInit {
     user.lastName = this.lastName;
     user.role = role;
     console.log(user);
-    const url = 'http://localhost:8082/HangoutApp/register';
+    const url = 'http://localhost:8080/HangoutApp/register';
     this.router.navigate(['/login']);
-    // console.log('--after navigate--')
-    // console.log(user);
-    // console.log('--JSON--');
-    // console.log(JSON.stringify(user));
-    // console.log('--No JSON--');
-    // console.log(this.basicUserService.addBasicUser(user));
     return this.http.post(url, user).subscribe(Boolean);
-    // TODO need to alert user that registration was successful
-    // TODO if successful registration then redirect
+    
 
   }
 
@@ -73,9 +66,9 @@ export class RegisterFormComponent implements OnInit {
     businessUser.location = this.businessLocation;
     businessUser.role = role;
     console.log(businessUser);
-    const url = 'http://localhost:8082/HangoutApp/register';
+    const url = 'http://localhost:8080/HangoutApp/register';
     this.router.navigate(['/login']);
-    return this.http.post(url, JSON.stringify(this.businessService.addBusinessUser(businessUser))).subscribe();
+    return this.http.post(url, businessUser).subscribe(Boolean);
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
 
