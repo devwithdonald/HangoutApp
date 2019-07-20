@@ -19,7 +19,7 @@ public interface EventService {
 	
 	public Boolean sendEventNotificationOut(Event event);
 	
-	public List<Event> getAllUserEvents();
+	public List<Event> getAllBasicUserEvents();
 	
 	public Event getEventByEventId(int id);
 	

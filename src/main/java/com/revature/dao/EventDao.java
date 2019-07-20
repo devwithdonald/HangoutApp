@@ -23,7 +23,7 @@ public interface EventDao {
 
 	public Boolean sendEventNotificationOut(Event event);
 	
-	public List<Event> getAllUserEvents();
+	public List<Event> getAllBasicUserEvents();
 	
 	public List<Event> getAllEventsByUser(User user);
 	
