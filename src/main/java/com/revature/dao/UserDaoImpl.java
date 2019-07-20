@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.beans.Beans;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,9 +11,15 @@ import javax.persistence.Query;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.revature.beans.BasicUser;
+import com.revature.beans.BusinessUser;
 import com.revature.beans.User;
+import com.revature.beans.UserDTO;
 import com.revature.util.SessionFactoryUtil;
 
 @Component
@@ -46,10 +53,26 @@ public class UserDaoImpl implements UserDao {
 		return returnedUser;
 	}
 	
+	@SuppressWarnings("finally")
 	@Override
-	public Boolean addUser(User user, String userType) {
+	public Boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess = sf.openSession();
+		ApplicationContext ct=new AnnotationConfigApplicationContext("beans.xml");
+		Transaction tx = sess.beginTransaction();
+		System.out.println(userType);
+		boolean createUser = false;
+		BasicUser basicUser1 = (BasicUser) ct.getBean("basicUser");
+		basicUser1.setFirstName(user.getFirstName());
+		basicUser1.setLastName(user.getLastName());
+		basicUser1.setPassword(user.getPassword());
+		basicUser1.setUsername(user.getUsername());
+		basicUser1.setRole(user.getRole());
+		System.out.println(basicUser1.toString());
+		sess.save(basicUser1);
+		createUser = true;
+		tx.commit();
+		return createUser;
 	}
 
 	@Override
