@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusinessUserService } from 'src/app/BusinessUser.service';
 import { BasicUserService } from 'src/app/BasicUser.service';
-import { BasicUser } from 'src/app/BasicUser';
-import { BusinessUser } from 'src/app/BusinessUser';
+import { UserDTO } from 'src/app/user-dto';
 import { HttpClient } from '@angular/common/http';
+import { Role } from 'src/app/Role';
 
 @Component({
   selector: 'app-register-form',
@@ -13,9 +13,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterFormComponent implements OnInit {
 
-  
+
   userChoice = 'Select User Type'; // defualt value
-  url : "http://localhost:8080/HangoutApp/register";
+  
+
   username: string;
   password: string;
   firstName: string;
@@ -28,16 +29,27 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit() {
   }
 
+
   onBasicUserRegistration() {
     console.log('onBasicUserRegistration clicked');
     console.log(`username: ${this.username}`);
     console.log(`password: ${this.password}`);
     console.log(`firstName: ${this.firstName}`);
     console.log(`lastName: ${this.lastName}`);
-    return this.http.post(this.url, this.basicUserService.addBasicUser(this.username, this.password, this.firstName, this.lastName));
+    const user = new UserDTO();
+    const role = new Role(1, 'BasicUser');
+    user.username = this.username;
+    user.password = this.password;
+    user.firstName = this.firstName;
+    user.lastName = this.lastName;
+    user.role = role;
+    console.log(user);
+    const url = 'http://localhost:8080/HangoutApp/register';
+    this.router.navigate(['/login']);
+    return this.http.post(url, this.basicUserService.addBasicUser(user)).subscribe();
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
-    this.router.navigate(['']);
+
   }
 
   onBusinessUserRegistration() {
@@ -47,11 +59,20 @@ export class RegisterFormComponent implements OnInit {
     console.log(`password: ${this.password}`);
     console.log(`businessName: ${this.businessName}`);
     console.log(`businessLocation: ${this.businessLocation}`);
-    return this.http.post(this.url, this.businessService.addBusinessUser(this.username, this.password, this.businessName, this.businessLocation));
+    const businessUser = new UserDTO();
+    const role = new Role(2, 'BusinessUser');
+    businessUser.username = this.username;
+    businessUser.password = this.password;
+    businessUser.businessName = this.businessName;
+    businessUser.location = this.businessLocation;
+    businessUser.role = role;
+    console.log(businessUser);
+    const url = 'http://localhost:8080/HangoutApp/register';
+    this.router.navigate(['/login']);
+    return this.http.post(url, this.businessService.addBusinessUser(businessUser)).subscribe();
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
-    this.router.navigate(['']);
+
   }
-  
 
 }
