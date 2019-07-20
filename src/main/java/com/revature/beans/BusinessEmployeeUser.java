@@ -16,7 +16,7 @@ public class BusinessEmployeeUser extends User{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="BUSINESS_ID")
-	private User businessUser;
+	private BusinessUser businessUser;
 //	private BusinessUser businessUser;
 
 	public BusinessEmployeeUser() {
@@ -31,11 +31,11 @@ public class BusinessEmployeeUser extends User{
 
 	
 	//CHANGING THIS
-	public User getBusinessUser() {
+	public BusinessUser getBusinessUser() {
 		return businessUser;
 	}
 	//CHANGING THIS
-	public void setBusinessUser(User businessUser) {
+	public void setBusinessUser(BusinessUser businessUser) {
 		this.businessUser = businessUser;
 	}
 
