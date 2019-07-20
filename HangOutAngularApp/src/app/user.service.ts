@@ -5,6 +5,7 @@ import { BasicUserService } from './BasicUser.service';
 import { UserDTO } from './user-dto';
 import { BusinessUserService } from './BusinessUser.service';
 import { BusinessEmployeeUserService } from './business-employee-user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,11 @@ export class UserService {
   userDTO: UserDTO;
   user: User;
  
-  constructor(private http: HttpClient, private basicUserService: BasicUserService, 
+  constructor(private router: Router, private http: HttpClient, private basicUserService: BasicUserService, 
     private businessUserService: BusinessUserService, private businessEmployeeUserService: BusinessEmployeeUserService) { }
 
   url = 'http://localhost:8080/HangoutApp/';
+  
 
   // url -> 'login'
   postLogin(urlEnd: string, user: User) {
@@ -47,12 +49,18 @@ export class UserService {
     if (this.userDTO.role.roleType === 'BasicUser') {
       console.log('basic user passed');
       this.basicUserService.addBasicUser(this.userDTO);
+      // navigate
+      this.router.navigate(['/BasicUser/Homepage']);
     } else if (this.userDTO.role.roleType === 'Business') {
       console.log('business user passed');
       this.businessUserService.addBusinessUser(this.userDTO);
+      // navigate
+      this.router.navigate(['BusinessUser/HomePage']);
     } else if (this.userDTO.role.roleType === 'BusinessEmployee') {
       console.log('business employee user passed');
       this.businessEmployeeUserService.addBusinessEmployeeUser(this.userDTO);
+      this.router.navigate(['/BusinessEmployeeUser/Homepage']);
     }
+
   }
 }
