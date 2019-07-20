@@ -2,13 +2,22 @@ package com.revature.beans;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="BUSINESS_EMPLOYEE_USER")
 public class BusinessEmployeeUser extends User{
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="business_id")
-	private BusinessUser businessUser;
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinColumn(name="business_id")
+	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="BUSINESS_ID")
+	private User businessUser;
+//	private BusinessUser businessUser;
 
 	public BusinessEmployeeUser() {
 		super();
@@ -20,11 +29,13 @@ public class BusinessEmployeeUser extends User{
 		this.businessUser = businessUser;
 	}
 
-	public BusinessUser getBusinessUser() {
+	
+	//CHANGING THIS
+	public User getBusinessUser() {
 		return businessUser;
 	}
-
-	public void setBusinessUser(BusinessUser businessUser) {
+	//CHANGING THIS
+	public void setBusinessUser(User businessUser) {
 		this.businessUser = businessUser;
 	}
 
