@@ -62,6 +62,7 @@ public class UserDaoImpl implements UserDao {
 		Transaction tx = sess.beginTransaction();
 		System.out.println(userType);
 		boolean createUser = false;
+		try {
 		if(userType.equals("BasicUser")) {
 			BasicUser basicUser1 = new BasicUser();
 			basicUser1.setFirstName(user.getFirstName());
@@ -83,6 +84,10 @@ public class UserDaoImpl implements UserDao {
 			sess.save(businessUser);
 			tx.commit();
 			createUser = true;
+		}
+		} catch(Exception e) {
+			tx.rollback();
+			createUser = false;
 		}
 		return createUser;
 	}
