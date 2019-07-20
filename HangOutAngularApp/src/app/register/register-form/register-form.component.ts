@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BusinessUserService } from 'src/app/BusinessUser.service';
 import { BasicUserService } from 'src/app/BasicUser.service';
 import { UserDTO } from 'src/app/user-dto';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Role } from 'src/app/Role';
 
 @Component({
@@ -44,9 +44,15 @@ export class RegisterFormComponent implements OnInit {
     user.lastName = this.lastName;
     user.role = role;
     console.log(user);
-    const url = 'http://localhost:8080/HangoutApp/register';
+    const url = 'http://localhost:8082/HangoutApp/register';
     this.router.navigate(['/login']);
-    return this.http.post(url, this.basicUserService.addBasicUser(user)).subscribe();
+    // console.log('--after navigate--')
+    // console.log(user);
+    // console.log('--JSON--');
+    // console.log(JSON.stringify(user));
+    // console.log('--No JSON--');
+    // console.log(this.basicUserService.addBasicUser(user));
+    return this.http.post(url, user).subscribe(Boolean);
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
 
@@ -67,9 +73,9 @@ export class RegisterFormComponent implements OnInit {
     businessUser.location = this.businessLocation;
     businessUser.role = role;
     console.log(businessUser);
-    const url = 'http://localhost:8080/HangoutApp/register';
+    const url = 'http://localhost:8082/HangoutApp/register';
     this.router.navigate(['/login']);
-    return this.http.post(url, this.businessService.addBusinessUser(businessUser)).subscribe();
+    return this.http.post(url, JSON.stringify(this.businessService.addBusinessUser(businessUser))).subscribe();
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
 
