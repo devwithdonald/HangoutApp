@@ -27,8 +27,6 @@ export class LoginFormComponent implements OnInit {
     console.log(this.password);
     //populate user
     this.user = new User(this.username, this.password);
-    //this.user.username = this.username;
-    //this.user.password = this.password;
     // pass login and username data
     this.userService.postLogin('login', this.user);
 

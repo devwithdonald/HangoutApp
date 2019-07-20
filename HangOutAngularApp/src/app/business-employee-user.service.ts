@@ -11,11 +11,9 @@ export class BusinessEmployeeUserService {
   constructor() { }
 
   addBusinessEmployeeUser(userDTO: UserDTO) {
-    // const businessEmployeeUser = new BusinessEmployeeUser(userDTO.userId);
-    this.businessEmployeeUser.userId = userDTO.userId;
-    this.businessEmployeeUser.username = userDTO.username;
-    this.businessEmployeeUser.password = userDTO.password;
-    this.businessEmployeeUser.role = userDTO.role;
-    this.businessEmployeeUser.businessUser = userDTO.businessUser;
+    this.businessEmployeeUser = new BusinessEmployeeUser(userDTO.userId, userDTO.username,
+      userDTO.password, userDTO.role, userDTO.businessUser);
+    console.log('business user employee added to service');
+    console.log(this.businessEmployeeUser);
   }
 }

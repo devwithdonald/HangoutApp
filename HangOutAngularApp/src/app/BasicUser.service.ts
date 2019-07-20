@@ -1,6 +1,5 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BasicUser } from 'src/app/BasicUser';
-import { stringify } from 'querystring';
 import { UserDTO } from './user-dto';
 
 @Injectable({providedIn: 'root'})
@@ -15,6 +14,8 @@ export class BasicUserService {
     addBasicUser(userDTO: UserDTO) {
        this.basicUser = new BasicUser(userDTO.userId, userDTO.username,
         userDTO.password, userDTO.firstName, userDTO.lastName);
+       console.log('basic user added to service');
+       console.log(this.basicUser);
     }
 }
 

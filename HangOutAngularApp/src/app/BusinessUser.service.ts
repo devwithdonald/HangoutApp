@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BusinessUser } from 'src/app/BusinessUser';
 import { UserDTO } from './user-dto';
 // import { HttpClient } from '@angular/common/http';
@@ -10,10 +10,9 @@ export class BusinessUserService {
     businessUser: BusinessUser;
 
     addBusinessUser(userDTO: UserDTO) {
-        this.businessUser.userId = userDTO.userId;
-        this.businessUser.username = userDTO.username;
-        this.businessUser.password = userDTO.password;
-        this.businessUser.businessName = userDTO.businessName;
-        this.businessUser.location = userDTO.location;
+        this.businessUser = new BusinessUser(userDTO.userId, userDTO.username,
+            userDTO.password, userDTO.businessName, userDTO.location);
+        console.log('business user added to service');
+        console.log(this.businessUser);
     }
 }
