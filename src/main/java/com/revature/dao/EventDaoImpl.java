@@ -144,9 +144,19 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<Event> getAllBusinessEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> getAllBusinessUserEvents(User user) {
+		log.log(Level.INFO, "in getAllBusinessUserEvents - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class);
+
+		crit.add(Restrictions.eq("user.userId", user.getUserId()));
+		List<Event> eventList = crit.list();
+		
+		for (Event event : eventList) {
+			System.out.println(event);
+		}
+		sess.close();
+		return eventList;
 	}
 
 	@Override

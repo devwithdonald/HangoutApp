@@ -60,7 +60,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Event> getAllBasicUserEvents() {
-		log.log(Level.INFO, "in getAllUserEvents - EventService");
+		log.log(Level.INFO, "in getAllBasicUserEvents - EventService");
 		List<Event> eventList = eventDao.getAllBasicUserEvents();
 		Collections.reverse(eventList);
 		return eventList;
@@ -79,9 +79,11 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<Event> getAllBusinessEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> getAllBusinessUserEvents(User user) {
+		log.log(Level.INFO, "in getAllBusinessUserEvents - EventService");
+		List<Event> eventList = eventDao.getAllBusinessUserEvents(user);
+		Collections.reverse(eventList);
+		return eventList;
 	}
 
 	@Override
