@@ -14,14 +14,16 @@ export class BasicUserAddEventFormComponent implements OnInit {
   private eventTime: string;
   private eventDate: string;
 
-  constructor(private router: Router) { }
+  constructor(private: private router: Router) { }
 
   ngOnInit() {
   }
 
   onAddEvent() {
     // Need to send to db
-    this.router.navigate(['/BasicUser/PrivateEvents']);
+    
+
+    //this.router.navigate(['/BasicUser/PrivateEvents']);
     console.log(`Event Title: ${this.eventTitle}`);
     console.log(`Event Description: ${this.eventDescription}`);
     console.log(`Time of Event: ${this.eventTime}`);
