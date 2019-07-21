@@ -19,7 +19,7 @@ public interface EventService {
 	
 	public Boolean sendEventNotificationOut(Event event);
 	
-	public List<Event> getAllUserEvents();
+	public List<Event> getAllBasicUserEvents();
 	
 	public Event getEventByEventId(int id);
 	
@@ -35,5 +35,7 @@ public interface EventService {
 	public List<Event> getAllSubscribedEventsByUser(User user);
 	
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user);
+	
+	public boolean validateEventForUser(Event event, User user);
 	
 }

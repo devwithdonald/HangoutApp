@@ -26,10 +26,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Boolean addUser(UserDTO user, String userType) {
+	public boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
 		System.out.println(userType +": " + user);
-		return userDao.addUser(user, userType);
+		boolean ie = userDao.addUser(user, userType);
+		return ie;
 	}
 
 	@Override

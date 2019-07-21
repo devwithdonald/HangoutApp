@@ -27,7 +27,10 @@ create table users (
 );
 
 create table basic_user (
-	user_id integer not null unique references users (user_id),
+	user_id integer,
+	primary key (user_id),
+	foreign key (user_id) references users(user_id),
+--	user_id integer primary key not null unique references users (user_id),
 	first_name varchar not null,
 	last_name varchar not null
 );
@@ -56,12 +59,17 @@ create table events (
 	business_message_id integer references business_messages (message_id),
 	title varchar not null,
 	location varchar not null,
-	time_of_event time not null,
-	date_of_event date not null,
-	time_posted timestamp default current_timestamp,
+	--time_of_event time not null,
+	time_of_event varchar not null,
+	--date_of_event date not null,
+	date_of_event varchar not null,
+	--time_posted timestamp default current_timestamp,
+	time_posted varchar default current_timestamp,
 	description varchar,
 	on_timeline boolean default true
 );
+
+select * from events;
 
 
 
@@ -80,7 +88,8 @@ create table user_messages(
 
 create table business_employee_user (
 	user_id integer not null unique references users (user_id),
-	business_id integer references business_user (user_id)
+	--business_id integer references business_user (user_id)
+	user_id integer references business_user (user_id)
 );
 
 create table rsvps(
@@ -98,7 +107,8 @@ create table friends (
 
 
 create table subscriptions (
-	subcription_id serial primary key, 
+	subscription_id serial primary key, 
+	--user_id integer references users (user_id), 
 	basic_user_id integer references basic_user (user_id), 
 	business_id integer references business_user (user_id), 
 	time_of_sub timestamp default current_timestamp, 
