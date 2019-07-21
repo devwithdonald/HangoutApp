@@ -17,7 +17,7 @@ public interface EventDao {
 
 	public Boolean addBusinessPrivateEvent(Event event);
 
-	public Boolean updateEvent(Event event);
+	public Boolean updateEvent(Event event, Event verifiedEvent);
 
 	public Boolean removeEvent(Event event);
 

@@ -30,26 +30,20 @@ public class BasicUserUpdateEventController {
 		this.eventService = eventService;
 	}
 	
-	// MAKE GET REQUEST TO UPDATE FORM
 	
 	@PostMapping(value = "/BasicUser/PrivateEvents/UpdateEvent",consumes = { "application/json" })
 	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
-		log.log(Level.INFO, "inside basicUserEventGet");
+		log.log(Level.INFO, "inside basicUserEventPost");
+		
+		// TODO uncomment when session works
+		//User user = (User) sess.getAttribute("user");
 		
 		//TODO THIS NEEDS TO CHANGE
-		//User user = (User) sess.getAttribute("user");
 		User user = new User();
 		user.setUserId(1);
 		
-		Event event1 = new Event();
-		event1.setEventId(8);
 		
-		return eventService.validateEventForUser(event1, user);
+		return eventService.validateEventForUser(event, user);
 	}
 	
-	@PutMapping(value = "/BasicUser/PrivateEvents/UpdateEvent",consumes = { "application/json" })
-	public @ResponseBody boolean basicUserEventPut(@RequestBody Event event) {
-		log.log(Level.INFO, "inside basicUserEventGet");
-		return eventService.updateEvent(event);
-	}
 }

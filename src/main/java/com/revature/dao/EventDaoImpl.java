@@ -71,20 +71,37 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public Boolean updateEvent(Event event) {
-		// HQL QUERY NEEDED
+	public Boolean updateEvent(Event event, Event verifiedEvent) {
+		log.log(Level.INFO, "updateEvent - EventDaoImpl");
+		
+		// setting event information that did not get updated in Angular form
+		event.setUser(verifiedEvent.getUser());
+		event.setTimePosted(verifiedEvent.getTimePosted());
+		event.setOnTimeLine(verifiedEvent.getOnTimeLine());
+		event.setBusinessMessage(verifiedEvent.getBusinessMessage());
+		
+		log.log(Level.INFO, "updated event we are trying to update to: " + event);
+		
 		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
 		String hql = "UPDATE Event e SET e.title = :title, e.description = :description,"
 				+ "e.location = :location, e.timeOfEvent = :timeOfEvent, e.dateOfEvent = :dateOfEvent"
 				+ " WHERE e.eventId = :eventId";
 		
 		Query query = sess.createQuery(hql);
+		log.log(Level.INFO, "after create query statement - EventDaoImpl");
+		
 		query.setParameter("title", event.getTitle());
 		query.setParameter("description", event.getDescription());
 		query.setParameter("location", event.getLocation());
 		query.setParameter("timeOfEvent", event.getTimeOfEvent());
 		query.setParameter("dateOfEvent", event.getDateOfEvent());
+		query.setParameter("eventId", event.getEventId());
+		
 		int numberOfRows = query.executeUpdate();
+		tx.commit();
+		sess.close();
+		log.log(Level.INFO, "after execute update statement - EventDaoImpl");
 		
 		if (numberOfRows == 1) {
 			return true;
@@ -159,10 +176,17 @@ public class EventDaoImpl implements EventDao {
 		crit.add(Restrictions.and(Restrictions.eq("eventId", event.getEventId()),
 				Restrictions.eq("user.userId", user.getUserId())));
 
-		if (crit.uniqueResult() == null) {
+		
+		
+		Event returnedEvent = (Event) crit.uniqueResult();
+		
+		log.log(Level.INFO, "validateEventForUser returned the event: " + returnedEvent);
+		
+		if (returnedEvent == null) {
 			return false;
 		} else {
-			return true;
+			// Passing in returnedEvent to get old information that does not get updated
+			return updateEvent(event, returnedEvent);
 		}
 	}
 

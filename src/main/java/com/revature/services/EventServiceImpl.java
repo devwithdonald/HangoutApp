@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Boolean updateEvent(Event event) {
-		return eventDao.updateEvent(event);
+		return null;
 	}
 
 	@Override
