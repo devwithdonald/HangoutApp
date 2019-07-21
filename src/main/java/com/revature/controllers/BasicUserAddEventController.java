@@ -31,6 +31,7 @@ public class BasicUserAddEventController {
 		this.eventService = eventService;
 	}
 	
+	//TODO need to move to own controller
 	@GetMapping("/BasicUser/PrivateEvents/AddEvent")
 	public List<Event> basicUserEventGet() {
 		return eventService.getAllBasicUserEvents();

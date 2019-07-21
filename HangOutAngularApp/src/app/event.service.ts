@@ -21,6 +21,17 @@ export class EventService {
     );
   }
 
+  getEvents(urlEnd: string) {
+    this.http.get(this.url + urlEnd).subscribe(
+      response => {
+        console.log('response from server');
+        console.log(response);
+        return response;
+      }
+    );
+    return null;
+  }
+
   eventAddCheck(response) {
     if (response) {
       this.router.navigate(['/BasicUser/PrivateEvents']);
