@@ -11,6 +11,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,6 +43,14 @@ public class UserDaoImpl implements UserDao {
 		
 		query.setParameter("username", user.getUsername());
 		query.setParameter("password", user.getPassword());
+
+		
+		
+		String hqlFriend = "FROM friends as f WHERE f.user_id = :user_id";
+		
+		Query queryFriend = sess.createQuery(hqlFriend);
+		
+		query.setParameter("user", user.getUserId());
 		
 		try {
 			returnedUser = (User) query.getSingleResult();
@@ -99,5 +109,26 @@ public class UserDaoImpl implements UserDao {
 		List<User> result = crit.list();
 		sess.close();
 		return result;
+	}
+
+	@Override
+	public List<User> getAllFriends(BasicUser user) {
+		log.log(Level.INFO, "passing username: " + user.getUsername() + " into getUser() - DAO");
+		
+		List<User> returnedUser = null;
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(User.class).add(Restrictions.eq("userId", user.getUserId()));
+		
+		try {
+			
+		} catch (NoResultException e) {
+			log.log(Level.WARNING, "database returned null - user not found");
+			sess.close();
+			return null;
+		}
+		log.log(Level.INFO, "database returned: " + returnedUser);
+				
+		sess.close();
+		return returnedUser;
 	}
 }

@@ -67,7 +67,8 @@ import { BasicUserMessagesTableComponent } from './basic-user-messages/basic-use
 import { BasicUserSendNewMessageButtonComponent } from './basic-user-messages/basic-user-send-new-message-button/basic-user-send-new-message-button.component';
 import { BasicUserService } from './BasicUser.service';
 import { BusinessUserService } from './BusinessUser.service';
-
+import { FriendsComponent } from './basic-user-friends/basic-user-friends.component';
+import { AddBasicUserFriendFormComponent } from './basic-user-friends/add-basic-user-friend-form/add-basic-user-friend-form.component';
 
 
 
@@ -92,7 +93,7 @@ const appRoutes: Routes = [
     { path: 'BasicUser/Messages', component: BasicUserMessagesComponent},
     { path: 'BasicUser/Homepage', component: BasicUserHomepageComponent},
     { path: 'BasicUser/Subscriptions', component: SubscriptionComponent},
-
+    { path: 'BasicUser/Friends', component: FriendsComponent}
   ];
 
 @NgModule({
@@ -140,7 +141,8 @@ const appRoutes: Routes = [
       SubscriptionTableComponent,
       BasicUserMessagesComponent,
       BasicUserMessagesTableComponent,
-      BasicUserSendNewMessageButtonComponent
+      BasicUserSendNewMessageButtonComponent,
+      FriendsComponent
 
 
     ],
