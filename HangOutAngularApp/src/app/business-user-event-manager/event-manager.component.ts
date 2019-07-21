@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-manager',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventManagerComponent implements OnInit {
 
-  constructor() { }
+  events: Event[];
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager')
+    .subscribe(
+      (response: Event[]) => {
+        console.log('response from server');
+        console.log(response);
+        this.events = response;
+        console.log('-- local events array --');
+        console.log(this.events);
+      }
+    );
   }
 
 }
