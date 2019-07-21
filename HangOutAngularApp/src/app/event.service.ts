@@ -18,18 +18,11 @@ export class EventService {
 
   postEvent(urlEnd: string, event: EventAdd) {
     this.http.post(this.url + urlEnd, event).subscribe(
-      response => {
+      (response: boolean) => {
         console.log('response from server: ' + response);
-        this.eventAddCheck(response);
+        return response;
       }
     );
   }
 
-  eventAddCheck(response) {
-    if (response) {
-      this.router.navigate(['/BasicUser/PrivateEvents']);
-    } else {
-      alert('Event not added, please try again.');
-    }
-  }
 }

@@ -31,8 +31,8 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Boolean addBusinessPublicEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		log.log(Level.INFO, "in addBusinessPublicEvent - EventService");
+		return eventDao.addBusinessPublicEvent(event);
 	}
 
 	@Override
