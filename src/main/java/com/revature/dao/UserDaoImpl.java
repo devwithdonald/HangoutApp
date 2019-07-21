@@ -128,12 +128,19 @@ public class UserDaoImpl implements UserDao {
 	public Boolean addFriend(User user, String username) {
 		User user2 = getUser(username);
 		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
 		String sqlString = "insert into friends(user_id, friend_id) values (?, ?);";
 		Query query = sess.createNativeQuery(sqlString);
 		query.setParameter(1, user.getUserId());
 		query.setParameter(2, user2.getUserId());
-		query.executeUpdate();
-		return null;
+		try {
+			query.executeUpdate();
+			tx.commit();
+			return true;
+		}catch (Exception e) {
+			tx.rollback();
+			return false;
+		}
 	}
 
 	@Override
