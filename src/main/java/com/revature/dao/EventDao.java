@@ -35,4 +35,6 @@ public interface EventDao {
 	
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user);
 	
+	public boolean validateEventForUser(Event event, User user);
+	
 }

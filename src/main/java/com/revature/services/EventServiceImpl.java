@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,8 +43,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Boolean updateEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.updateEvent(event);
 	}
 
 	@Override
@@ -61,7 +61,9 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> getAllBasicUserEvents() {
 		log.log(Level.INFO, "in getAllUserEvents - EventService");
-		return eventDao.getAllBasicUserEvents();
+		List<Event> eventList = eventDao.getAllBasicUserEvents();
+		Collections.reverse(eventList);
+		return eventList;
 	}
 
 	@Override
@@ -98,6 +100,11 @@ public class EventServiceImpl implements EventService {
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validateEventForUser(Event event, User user) {
+		return eventDao.validateEventForUser(event, user);
 	}
 
 }
