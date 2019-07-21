@@ -4,7 +4,8 @@
 
     <div class="form-group">
         <label for="eventId">Event Id</label>
-        <input (ngModelChange)=updateForm() [(ngModel)]="eventId" name="eventId" type="text" class="form-control"
+        <!-- (ngModelChange)=updateForm() -->
+        <input  [(ngModel)]="eventId" name="eventId" type="text" class="form-control"
             id="eventId" placeholder="Event Id" required>
     </div>
 
