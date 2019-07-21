@@ -15,7 +15,8 @@ export class BasicUserService {
        this.basicUser = new BasicUser(userDTO.userId, userDTO.username,
         userDTO.password, userDTO.firstName, userDTO.lastName);
        console.log('basic user added to service');
-       console.log(this.basicUser);
+      // console.log(this.basicUser);
+       return this.basicUser;
     }
 }
 

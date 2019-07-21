@@ -1,6 +1,7 @@
 package com.revature.beans;
 
 public class UserDTO {
+	private int userId;
 	private String firstName;
 	private String lastName;
 	private String businessName;
@@ -8,6 +9,7 @@ public class UserDTO {
 	private String username;
 	private String password;
 	private Role role;
+	private BusinessUser businessUser;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -64,6 +66,18 @@ public class UserDTO {
 	public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public BusinessUser getBusinessUser() {
+		return businessUser;
+	}
+	public void setBusinessUser(BusinessUser businessUser) {
+		this.businessUser = businessUser;
 	}
 	
 	

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BusinessUserService } from 'src/app/BusinessUser.service';
 import { BasicUserService } from 'src/app/BasicUser.service';
 import { UserDTO } from 'src/app/user-dto';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Role } from 'src/app/Role';
 
 @Component({
@@ -46,9 +46,8 @@ export class RegisterFormComponent implements OnInit {
     console.log(user);
     const url = 'http://localhost:8080/HangoutApp/register';
     this.router.navigate(['/login']);
-    return this.http.post(url, this.basicUserService.addBasicUser(user)).subscribe();
-    // TODO need to alert user that registration was successful
-    // TODO if successful registration then redirect
+    return this.http.post(url, user).subscribe(Boolean);
+    
 
   }
 
@@ -69,7 +68,7 @@ export class RegisterFormComponent implements OnInit {
     console.log(businessUser);
     const url = 'http://localhost:8080/HangoutApp/register';
     this.router.navigate(['/login']);
-    return this.http.post(url, this.businessService.addBusinessUser(businessUser)).subscribe();
+    return this.http.post(url, businessUser).subscribe(Boolean);
     // TODO need to alert user that registration was successful
     // TODO if successful registration then redirect
 
