@@ -3,10 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { EventAdd } from './event-add';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
+
+
+
 
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -19,17 +23,6 @@ export class EventService {
         this.eventAddCheck(response);
       }
     );
-  }
-
-  getEvents(urlEnd: string) {
-    this.http.get(this.url + urlEnd).subscribe(
-      response => {
-        console.log('response from server');
-        console.log(response);
-        return response;
-      }
-    );
-    return null;
   }
 
   eventAddCheck(response) {

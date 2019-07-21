@@ -31,11 +31,6 @@ public class BasicUserAddEventController {
 		this.eventService = eventService;
 	}
 	
-	@GetMapping("/BasicUser/PrivateEvents/AddEvent")
-	public void basicUserEventGet() {
-
-	}
-	
 	
 	@PostMapping(value = "/BasicUser/PrivateEvents/AddEvent", consumes = { "application/json" })
 	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {

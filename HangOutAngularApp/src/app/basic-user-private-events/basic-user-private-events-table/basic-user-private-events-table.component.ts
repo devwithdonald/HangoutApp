@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from 'src/app/event';
-import { User } from 'src/app/User';
-import { UserDTO } from 'src/app/user-dto';
-import { NgbTabTitle } from '@ng-bootstrap/ng-bootstrap';
-import { Tree } from 'src/app/tree';
 import { EventService } from 'src/app/event.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-basic-user-private-events-table',
@@ -13,17 +9,22 @@ import { EventService } from 'src/app/event.service';
 })
 export class BasicUserPrivateEventsTableComponent implements OnInit {
 
-  events = [];
+  events: Event[];
 
-
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('http://localhost:8080/HangoutApp/BasicUser/PrivateEvents')
+    .subscribe(
+      (response: Event[]) => {
+        console.log('response from server');
+        console.log(response);
+        this.events = response;
+        console.log('-- local events array --');
+        console.log(this.events);
+      }
+    );
+
   }
 
-  ngAfterViewInit() {
-    
-    this.events = this.eventService.getEvents('BasicUser/PrivateEvents');
-
-  }
 }

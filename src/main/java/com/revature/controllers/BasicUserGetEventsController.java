@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class BasicUserGetEventsController {
 	
 	@GetMapping("/BasicUser/PrivateEvents")
 	public List<Event> basicUserEventGet() {
+		log.log(Level.INFO, "inside basicUserEventGet");
 		return eventService.getAllBasicUserEvents();
 	}
 
