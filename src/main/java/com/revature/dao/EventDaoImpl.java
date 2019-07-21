@@ -60,8 +60,21 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public Boolean addBusinessPublicEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		// set time_posted now
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		event.setTimePosted(dtf.format(now));
+
+		// set on timeline
+		event.setOnTimeLine(true);
+
+		log.log(Level.INFO, "in addBusinessPublicEvent - EventDao");
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		sess.save(event);
+		tx.commit();
+		sess.close();
+		return true;
 	}
 
 	@Override
@@ -73,36 +86,36 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public Boolean updateEvent(Event event, Event verifiedEvent) {
 		log.log(Level.INFO, "updateEvent - EventDaoImpl");
-		
+
 		// setting event information that did not get updated in Angular form
 		event.setUser(verifiedEvent.getUser());
 		event.setTimePosted(verifiedEvent.getTimePosted());
 		event.setOnTimeLine(verifiedEvent.getOnTimeLine());
 		event.setBusinessMessage(verifiedEvent.getBusinessMessage());
-		
+
 		log.log(Level.INFO, "updated event we are trying to update to: " + event);
-		
+
 		Session sess = sf.openSession();
 		Transaction tx = sess.beginTransaction();
 		String hql = "UPDATE Event e SET e.title = :title, e.description = :description,"
 				+ "e.location = :location, e.timeOfEvent = :timeOfEvent, e.dateOfEvent = :dateOfEvent"
 				+ " WHERE e.eventId = :eventId";
-		
+
 		Query query = sess.createQuery(hql);
 		log.log(Level.INFO, "after create query statement - EventDaoImpl");
-		
+
 		query.setParameter("title", event.getTitle());
 		query.setParameter("description", event.getDescription());
 		query.setParameter("location", event.getLocation());
 		query.setParameter("timeOfEvent", event.getTimeOfEvent());
 		query.setParameter("dateOfEvent", event.getDateOfEvent());
 		query.setParameter("eventId", event.getEventId());
-		
+
 		int numberOfRows = query.executeUpdate();
 		tx.commit();
 		sess.close();
 		log.log(Level.INFO, "after execute update statement - EventDaoImpl");
-		
+
 		if (numberOfRows == 1) {
 			return true;
 		} else {
@@ -144,9 +157,19 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<Event> getAllBusinessEvents() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Event> getAllBusinessUserEvents(User user) {
+		log.log(Level.INFO, "in getAllBusinessUserEvents - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class);
+
+		crit.add(Restrictions.eq("user.userId", user.getUserId()));
+		List<Event> eventList = crit.list();
+
+		for (Event event : eventList) {
+			System.out.println(event);
+		}
+		sess.close();
+		return eventList;
 	}
 
 	@Override
@@ -176,12 +199,10 @@ public class EventDaoImpl implements EventDao {
 		crit.add(Restrictions.and(Restrictions.eq("eventId", event.getEventId()),
 				Restrictions.eq("user.userId", user.getUserId())));
 
-		
-		
 		Event returnedEvent = (Event) crit.uniqueResult();
-		
+
 		log.log(Level.INFO, "validateEventForUser returned the event: " + returnedEvent);
-		
+
 		if (returnedEvent == null) {
 			return false;
 		} else {

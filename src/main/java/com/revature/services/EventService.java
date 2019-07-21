@@ -28,7 +28,7 @@ public interface EventService {
 	 * to send to the correct DAO */
 	public List<Event> getAllEventsByUser(User user);
 	
-	public List<Event> getAllBusinessEvents();
+	public List<Event> getAllBusinessUserEvents(User user);
 	
 	public List<Event> getAllFriendEventsByUser(User user);
 	

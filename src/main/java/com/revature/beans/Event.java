@@ -60,9 +60,12 @@ public class Event {
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="event")
 	private Set<Rsvp> rsvps = new HashSet<Rsvp>();
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="EVENT_ID")
-	private BusinessMessage businessMessage;
+//	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+//	@JoinColumn(name="EVENT_ID")
+//	private BusinessMessage businessMessage;
+
+	@Column(name="BUSINESS_MESSAGE")
+	private String businessMessage;
 	
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="event")
 	private Set<EventMessage> eventMessageList = new HashSet<EventMessage>();
@@ -73,7 +76,7 @@ public class Event {
 	}
 
 	public Event(Integer eventId, User user, String title, String location, String timeOfEvent, String dateOfEvent,
-			String timePosted, String description, Boolean onTimeLine, BusinessMessage businessMessage) {
+			String timePosted, String description, Boolean onTimeLine, String businessMessage) {
 		super();
 		this.eventId = eventId;
 		this.user = user;
@@ -159,11 +162,11 @@ public class Event {
 		this.onTimeLine = onTimeLine;
 	}
 
-	public BusinessMessage getBusinessMessage() {
+	public String getBusinessMessage() {
 		return businessMessage;
 	}
 
-	public void setBusinessMessage(BusinessMessage businessMessage) {
+	public void setBusinessMessage(String businessMessage) {
 		this.businessMessage = businessMessage;
 	}
 
@@ -171,19 +174,11 @@ public class Event {
 	public String toString() {
 		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
 				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
-				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
-				+ ", businessMessage=" + businessMessage +  "]";
+				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", businessMessage=" + businessMessage
+				+ "]";
 	}
 
-	
-	
-//	@Override
-//	public String toString() {
-//		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
-//				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
-//				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", rsvps=" + rsvps
-//				+ ", businessMessage=" + businessMessage + ", eventMessageList=" + eventMessageList + "]";
-//	}
+
 
 	
 }

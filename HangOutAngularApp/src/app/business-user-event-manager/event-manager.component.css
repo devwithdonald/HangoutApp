@@ -1,8 +1,30 @@
+h3{
+    padding-top: 2%;
+    margin-left: 15em;
+}
+
+table {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    margin-left: 1%;
+    margin-right: 30%;
+    margin-top: 1%; 
+    margin-bottom: 3%;
+    width: 67%; 
+    /* bottom: 60px; */
+    position: fixed;
+    text-align: center;
+    border-radius: 5px;
+  }
 
 .column{
-    position: relative;
-    left: 900px;
+    position: fixed;
+    margin-top: 1%;
+    left: 70%;
     padding: 1em;
-    display: inline-block;
+    display: inline-block; 
     box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#events-view-table-body td{
+    word-wrap: break-word;
+}  

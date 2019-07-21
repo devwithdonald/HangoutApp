@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,11 +18,10 @@ import com.revature.beans.Event;
 import com.revature.beans.User;
 import com.revature.dao.UserDaoImpl;
 import com.revature.services.EventServiceImpl;
-import com.revature.services.UserServiceImpl;
 
-@RestController("/BasicUser/PrivateEvents/AddEvent")
+@RestController("/BusinessUser/BusinessUserEventManager")
 @CrossOrigin(origins = "*")
-public class BasicUserAddEventController {
+public class BusinessUserEventsController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
@@ -40,23 +41,37 @@ public class BasicUserAddEventController {
 		this.eventService = eventService;
 	}
 
-	@PostMapping(value = "/BasicUser/PrivateEvents/AddEvent", consumes = { "application/json" })
-	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
-		log.log(Level.INFO, "Attempting to add event: " + event);
+	@GetMapping("/BusinessUser/BusinessUserEventManager")
+	public List<Event> businessUserEventGet(HttpSession sess) {
+		log.log(Level.INFO, "inside businessUserEventGet");
+		// TODO need to uncomment when session works
+		// User user = (User) sess.getAttribute("user");
 
-		// TODO ADD USER SESSION
-		// event.setUser((User) sess.getAttribute("user"));
-
-		// Need to Delete
-		// Faking user
+		// TODO THIS NEEDS TO CHANGE
 		User user = new User();
-		user.setUsername("test_user1");
-		user.setPassword("user1");
+		user.setUserId(2);
+		
+		return eventService.getAllBusinessUserEvents(user);
+	}
+	
+	@PostMapping(value="/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = { "application/json" })
+	public @ResponseBody Boolean businessUserEventPost(@RequestBody Event event, HttpSession sess) {
+		log.log(Level.INFO, "Attempting to add event: " + event);
+		
+		// TODO ADD USER SESSION
+		//event.setUser((User) sess.getAttribute("user"));
+		
+		//Need to Delete
+		//Faking user
+		User user = new User();
+		user.setUsername("test_biz2");
+		user.setPassword("biz1");
 		event.setUser(userDao.getUser(user));
-
-		if (eventService.addBasicUserEvent(event)) {
+		
+		if (eventService.addBusinessPublicEvent(event)) {
 			return true;
 		}
 		return false;
 	}
+
 }

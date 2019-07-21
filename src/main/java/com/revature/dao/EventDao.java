@@ -27,7 +27,7 @@ public interface EventDao {
 	
 	public List<Event> getAllEventsByUser(User user);
 	
-	public List<Event> getAllBusinessEvents();
+	public List<Event> getAllBusinessUserEvents(User user);
 	
 	public List<Event> getAllFriendEventsByUser(User user);
 	
