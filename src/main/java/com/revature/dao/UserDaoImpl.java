@@ -44,14 +44,6 @@ public class UserDaoImpl implements UserDao {
 		query.setParameter("username", user.getUsername());
 		query.setParameter("password", user.getPassword());
 
-		
-		
-		String hqlFriend = "FROM friends as f WHERE f.user_id = :user_id";
-		
-		Query queryFriend = sess.createQuery(hqlFriend);
-		
-		query.setParameter("user", user.getUserId());
-		
 		try {
 			returnedUser = (User) query.getSingleResult();
 		} catch (NoResultException e) {
@@ -130,5 +122,46 @@ public class UserDaoImpl implements UserDao {
 				
 		sess.close();
 		return returnedUser;
+	}
+
+	@Override
+	public Boolean addFriend(User user, String username) {
+		User user2 = getUser(username);
+		Session sess = sf.openSession();
+		String sqlString = "insert into friends(user_id, friend_id) values (?, ?);";
+		Query query = sess.createNativeQuery(sqlString);
+		query.setParameter(1, user.getUserId());
+		query.setParameter(2, user2.getUserId());
+		query.executeUpdate();
+		return null;
+	}
+
+	@Override
+	public Boolean removeFriend(User user, String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUser(String username) {
+		User returnedUser = null;
+		Session sess = sf.openSession();
+		
+		String hql = "FROM User as u WHERE u.username = :username";
+		
+		Query query = sess.createQuery(hql);
+		
+		query.setParameter("username", username);
+		try {
+			returnedUser = (User) query.getSingleResult();
+		} catch (NoResultException e) {
+			log.log(Level.WARNING, "database returned null - user not found");
+			sess.close();
+			return returnedUser;
+		}
+		log.log(Level.INFO, "database returned: " + returnedUser);
+		
+		
+		return null;
 	}
 }

@@ -68,7 +68,7 @@ import { BasicUserSendNewMessageButtonComponent } from './basic-user-messages/ba
 import { BasicUserService } from './BasicUser.service';
 import { BusinessUserService } from './BusinessUser.service';
 import { FriendsComponent } from './basic-user-friends/basic-user-friends.component';
-import { AddBasicUserFriendFormComponent } from './basic-user-friends/add-basic-user-friend-form/add-basic-user-friend-form.component';
+import { EditBasicUserFriendFormComponent } from './basic-user-friends/edit-basic-user-friend-form/edit-basic-user-friend-form.component';
 
 
 
@@ -142,7 +142,8 @@ const appRoutes: Routes = [
       BasicUserMessagesComponent,
       BasicUserMessagesTableComponent,
       BasicUserSendNewMessageButtonComponent,
-      FriendsComponent
+      FriendsComponent,
+      EditBasicUserFriendFormComponent
 
 
     ],
