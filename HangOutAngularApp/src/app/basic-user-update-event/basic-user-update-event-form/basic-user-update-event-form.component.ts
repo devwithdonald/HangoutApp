@@ -15,6 +15,7 @@ export class BasicUserUpdateEventFormComponent implements OnInit {
   // this information will be change on user event Id input
   private eventTitle: string;
   private eventDescription: string;
+  private eventLocation: string;
   private eventTime: string;
   private eventDate: string;
 
@@ -35,6 +36,8 @@ export class BasicUserUpdateEventFormComponent implements OnInit {
     // TODO
     // this should get fired off every time the user inputs something
     // should be a get request to populate the values in the table
+    
+    //get request
 
     // if response from get request is not null then update the form
     // if (response !== null){

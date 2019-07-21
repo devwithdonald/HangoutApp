@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Event;
@@ -127,6 +130,22 @@ public class EventDaoImpl implements EventDao {
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean validateEventForUser(Event event, User user) {
+		log.log(Level.INFO, "in validateEventForUser - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class);
+		
+		crit.add(Restrictions.and(Restrictions.eq("eventId", event.getEventId()),
+				Restrictions.eq("user.userId", user.getUserId())));
+		
+		if(crit.uniqueResult() == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

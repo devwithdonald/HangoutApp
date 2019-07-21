@@ -103,4 +103,9 @@ public class EventServiceImpl implements EventService {
 		return null;
 	}
 
+	@Override
+	public boolean validateEventForUser(Event event, User user) {
+		return eventDao.validateEventForUser(event, user);
+	}
+
 }
