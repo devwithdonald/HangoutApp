@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-manager',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class EventManagerComponent implements OnInit {
 
   events: Event[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.http.get('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager')
@@ -22,6 +23,10 @@ export class EventManagerComponent implements OnInit {
         console.log(this.events);
       }
     );
+  }
+
+  onAdd() {
+    this.router.navigate(['BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent']);
   }
 
 }
