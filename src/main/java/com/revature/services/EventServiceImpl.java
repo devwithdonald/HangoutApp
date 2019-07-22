@@ -10,16 +10,22 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Event;
 import com.revature.beans.User;
-import com.revature.dao.EventDaoImpl;
+import com.revature.dao.EventDao;
 
 @Service
 public class EventServiceImpl implements EventService {
 	
-	private EventDaoImpl eventDao;
+	//private EventDaoImpl eventDao;
+	private EventDao eventDao;
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 	
+//	@Autowired
+//	private void setEventDao(EventDaoImpl eventDao) {
+//		this.eventDao = eventDao;
+//	}
+	
 	@Autowired
-	private void setEventDao(EventDaoImpl eventDao) {
+	private void setEventDao(EventDao eventDao) {
 		this.eventDao = eventDao;
 	}
 
