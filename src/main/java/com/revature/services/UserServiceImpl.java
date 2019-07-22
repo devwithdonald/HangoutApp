@@ -7,18 +7,26 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
 import com.revature.beans.UserDTO;
+import com.revature.dao.UserDao;
 import com.revature.dao.UserDaoImpl;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserDaoImpl userDao;
-	
+//	private UserDaoImpl userDao;
+//	
+//	@Autowired
+//	public void setUserDao(UserDaoImpl userDao) {
+//		this.userDao = userDao;
+//	}
+
+	private UserDao userDao;
+
 	@Autowired
-	public void setUserDao(UserDaoImpl userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Override
 	public User validateUser(User user) {
 		return userDao.getUser(user);
@@ -27,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean addUser(UserDTO user, String userType) {
 		// TODO Auto-generated method stub
-		System.out.println(userType +": " + user);
+		System.out.println(userType + ": " + user);
 		boolean ie = userDao.addUser(user, userType);
 		return ie;
 	}

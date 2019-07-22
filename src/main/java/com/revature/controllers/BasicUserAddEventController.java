@@ -16,7 +16,6 @@ import com.revature.beans.Event;
 import com.revature.beans.User;
 import com.revature.dao.UserDaoImpl;
 import com.revature.services.EventServiceImpl;
-import com.revature.services.UserServiceImpl;
 
 @RestController("/BasicUser/PrivateEvents/AddEvent")
 @CrossOrigin(origins = "*")
@@ -44,15 +43,22 @@ public class BasicUserAddEventController {
 	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
 
+		
+		
+		// attempting to get the user from the session
+		System.out.println(sess.getAttribute("user"));
+		
 		// TODO ADD USER SESSION
-		// event.setUser((User) sess.getAttribute("user"));
+		event.setUser((User) sess.getAttribute("user"));
+		
+		
 
 		// Need to Delete
 		// Faking user
-		User user = new User();
-		user.setUsername("test_user1");
-		user.setPassword("user1");
-		event.setUser(userDao.getUser(user));
+//		User user = new User();
+//		user.setUsername("test_user1");
+//		user.setPassword("user1");
+//		event.setUser(userDao.getUser(user));
 
 		if (eventService.addBasicUserEvent(event)) {
 			return true;

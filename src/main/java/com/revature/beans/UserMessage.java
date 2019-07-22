@@ -1,7 +1,16 @@
 package com.revature.beans;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name = "USER_MESSAGES")
 public class UserMessage extends Message {
@@ -34,6 +43,7 @@ public class UserMessage extends Message {
         return sender;
     }
 
+    @Autowired
     public void setSender(BasicUser sender) {
         this.sender = sender;
     }
@@ -42,6 +52,7 @@ public class UserMessage extends Message {
         return receiver;
     }
 
+    @Autowired
     public void setReceiver(BasicUser receiver) {
         this.receiver = receiver;
     }

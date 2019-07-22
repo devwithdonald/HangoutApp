@@ -13,13 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Component
 @Entity
 @Table(name="EVENTS")
 public class Event {
@@ -102,6 +103,7 @@ public class Event {
 		return user;
 	}
 
+	@Autowired
 	public void setUser(User user) {
 		this.user = user;
 	}

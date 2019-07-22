@@ -1,9 +1,18 @@
 package com.revature.beans;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Component
 @Entity
 @Table(name="BUSINESS_EMPLOYEE_USER")
 public class BusinessEmployeeUser extends User{
@@ -35,6 +44,7 @@ public class BusinessEmployeeUser extends User{
 		return businessUser;
 	}
 	//CHANGING THIS
+	@Autowired
 	public void setBusinessUser(BusinessUser businessUser) {
 		this.businessUser = businessUser;
 	}

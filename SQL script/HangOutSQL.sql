@@ -1,7 +1,7 @@
 drop table basic_user cascade;
 drop table business_user cascade;
 drop table business_employee_user cascade;
-drop table business_messages cascade;
+--drop table business_messages cascade;
 drop table events cascade;
 drop table event_messages cascade;
 drop table role cascade;
@@ -47,16 +47,17 @@ create table messages (
 	time_sent timestamp default current_timestamp
 );
 
-create table business_messages(
-	message_id integer not null unique references messages (message_id),
-	business_id integer references business_user (user_id) 
-	--event_id integer references events (event_id)
-);
+--create table business_messages(
+--	message_id integer not null unique references messages (message_id),
+--	business_id integer references business_user (user_id) 
+--	--event_id integer references events (event_id)
+--);
 
 create table events (
 	event_id serial primary key,
 	user_id integer references users (user_id),
-	business_message_id integer references business_messages (message_id),
+	--business_message_id integer references business_messages (message_id),
+	business_message varchar,
 	title varchar not null,
 	location varchar not null,
 	--time_of_event time not null,
@@ -118,3 +119,18 @@ create table subscriptions (
 insert into role (role_type)
 	values ('BasicUser'), ('Business'), ('BusinessEmployee'); 
 
+
+-- inserting dummy data
+--insert into basic_user (username, password, first_name, last_name)
+--values 
+--('test_user1','test1','donny','henderson'), 
+--('test_user2','test2','matthew','alston'), 
+--('test_user3','test3','ashton','sullivan'),
+--('test_user4','test4','glory','umeasalugo');
+--
+--insert into business_user (username, password, business_name, business_location)
+--values 
+--('test_biz1','biz1','donny','FL'), 
+--('test_biz2','biz2','matthew','TX'), 
+--('test_biz3','biz3','ashton','MN'),
+--('test_biz4','biz4','glory','OK');
