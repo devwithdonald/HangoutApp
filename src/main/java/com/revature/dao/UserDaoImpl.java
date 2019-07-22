@@ -64,6 +64,8 @@ public class UserDaoImpl implements UserDao {
 		boolean createUser = false;
 		try {
 		if(userType.equals("BasicUser")) {
+			//ApplicationContext ac = XMLClasspath(beans.xml)
+			//BasicUser basicUser1 = ac.getBeans("basicUser", BasicUser.class);
 			BasicUser basicUser1 = new BasicUser();
 			basicUser1.setFirstName(user.getFirstName());
 			basicUser1.setLastName(user.getLastName());
@@ -73,6 +75,7 @@ public class UserDaoImpl implements UserDao {
 			sess.save(basicUser1);
 			tx.commit();
 			createUser = true;
+			// ac.close();
 		}
 		else if(userType.equals("BusinessUser")) {
 			BusinessUser businessUser = new BusinessUser();

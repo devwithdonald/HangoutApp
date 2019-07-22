@@ -50,7 +50,8 @@ export class UserService {
       console.log('basic user passed');
       this.basicUserService.addBasicUser(this.userDTO);
       // navigate
-      this.router.navigate(['/BasicUser/Homepage']);
+      // this.router.navigate(['/BasicUser/Homepage']);
+      this.router.navigate(['/BasicUser/PrivateEvents/AddEvent']);
     } else if (this.userDTO.role.roleType === 'Business') {
       console.log('business user passed');
       this.businessUserService.addBusinessUser(this.userDTO);

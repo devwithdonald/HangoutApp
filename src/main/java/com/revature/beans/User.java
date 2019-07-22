@@ -18,12 +18,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
+//@Scope("session")
 @Entity
 @Table(name="USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
