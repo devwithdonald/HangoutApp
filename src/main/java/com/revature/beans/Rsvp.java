@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="RSVPS")
 public class Rsvp {
@@ -51,6 +55,7 @@ public class Rsvp {
 		return event;
 	}
 
+	@Autowired
 	public void setEvent(Event event) {
 		this.event = event;
 	}
@@ -59,6 +64,7 @@ public class Rsvp {
 		return basicUser;
 	}
 
+	@Autowired
 	public void setBasicUser(BasicUser basicUser) {
 		this.basicUser = basicUser;
 	}

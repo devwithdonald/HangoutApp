@@ -9,6 +9,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="MESSAGES")
 @Inheritance(strategy = InheritanceType.JOINED)

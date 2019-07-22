@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="SUBSCRIPTIONS")
 public class Subscriptions {
@@ -38,6 +42,7 @@ public class Subscriptions {
 		return basicUser;
 	}
 
+	@Autowired
 	public void setBasicUser(BasicUser basicUser) {
 		this.basicUser = basicUser;
 	}
@@ -46,6 +51,7 @@ public class Subscriptions {
 		return businessUser;
 	}
 
+	@Autowired
 	public void setBusinessUser(BusinessUser businessUser) {
 		this.businessUser = businessUser;
 	}

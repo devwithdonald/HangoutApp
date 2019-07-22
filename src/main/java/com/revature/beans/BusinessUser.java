@@ -10,8 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Component
 @Entity
 @Table(name="BUSINESS_USER")
 public class BusinessUser extends User {

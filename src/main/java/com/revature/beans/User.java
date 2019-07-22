@@ -17,9 +17,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Component
 @Entity
 @Table(name="USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -86,6 +90,7 @@ public class User {
 		return role;
 	}
 
+	@Autowired
 	public void setRole(Role role) {
 		this.role = role;
 	}
