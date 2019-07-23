@@ -4,48 +4,48 @@
         <div class="form-group row">
             <label for="EventID" class="col-md-7 col-form-label">Event ID</label>
             <div class="col-md-5">
-                <input [value]="EventID" readonly class="form-control-plaintext" type="text" name="Eventid"
+                <input [value]="eventId" readonly class="form-control-plaintext" type="text" name="eventId"
                     id="UpdateBusinessEventId">
             </div>
         </div>
         <div class="form-group row">
             <label for="EventTitle" class="col-md-7 col-form-label">Event Title</label>
             <div class="col-md-5">
-                <input type="text" name="EventTitle"
+                <input [(ngModel)]="title" type="text" name="title"
                     id="UpdateBusinessEventTitle">
             </div>
         </div>
         <div class="form-group row">
             <label for="EventLocation" class="col-md-7 col-form-label">Event Location</label>
             <div class="col-md-5">
-                <input type="text" name="BusinessEventLocation"
+                <input [(ngModel)]="location" type="text" name="location"
                     id="UpdateBusinessEventLocation">
             </div>
         </div>
         <div class="form-group row">
             <label for="EventTime" class="col-md-7 col-form-label">Time of Event</label>
             <div class="col-md-5">
-                <input type="text" name="BusinessEventTime"
+                <input [(ngModel)]="timeOfEvent" type="time" name="timeOfEvent"
                     id="UpdateBusinessEventTime">
             </div>
         </div>
         <div class="form-group row">
             <label for="EventDate" class="col-md-7 col-form-label">Date of Event</label>
             <div class="col-md-5">
-                <input type="date" name="BusinessEventDate"
+                <input [(ngModel)]="dateOfEvent" type="date" name="dateOfEvent"
                     id="UpdateBusinessEventDate">
             </div>
         </div>
         <div class="form-group row">
             <label for="EventDescription" class="col-md-7 col-form-label">Description of Event</label>
             <div class="col-md-5">
-                <textarea name="BusinessEventDescription" id="UpdateBusinessEventDescription" cols="20" rows="5"></textarea>
+                <textarea [(ngModel)]="description" name="description" id="UpdateBusinessEventDescription" cols="20" rows="5"></textarea>
             </div>
         </div>
         <div class="form-group row">
             <label for="EventBusinessMessage" class="col-md-7 col-form-label">(Optional) Business Message</label>
             <div class="col-md-5">
-                <textarea name="BusinessEventMessage" id="UpdateBusinessEventMessage" cols="20" rows="5"></textarea>
+                <textarea [(ngModel)]="businessMessage" name="businessMessage" id="UpdateBusinessEventMessage" cols="20" rows="5"></textarea>
             </div>
         </div>
         <div>

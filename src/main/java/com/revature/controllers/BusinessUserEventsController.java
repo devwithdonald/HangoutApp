@@ -54,7 +54,7 @@ public class BusinessUserEventsController {
 		return eventService.getAllBusinessUserEvents(user);
 	}
 	
-	@PostMapping(value="/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = { "application/json" })
+	@PostMapping(path="/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = { "application/json" })
 	public @ResponseBody Boolean businessUserEventPost(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
 		
@@ -72,6 +72,24 @@ public class BusinessUserEventsController {
 			return true;
 		}
 		return false;
+	}
+	
+	@PostMapping(path="/BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent", consumes = { "application/json" })
+	public @ResponseBody Boolean businessUserEventUpdate(@RequestBody Event event, HttpSession sess) {
+		log.log(Level.INFO, "Attempting to update event: " + event);
+		
+		// TODO ADD USER SESSION
+		//event.setUser((User) sess.getAttribute("user"));
+		
+		//Need to Delete
+		//Faking user
+		User user = new User();
+		user.setUsername("test_biz2");
+		user.setPassword("biz1");
+		user = userDao.getUser(user);
+		event.setUser(user);
+		
+		return eventService.validateEventForUser(event, user);
 	}
 
 }
