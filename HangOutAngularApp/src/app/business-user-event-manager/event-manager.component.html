@@ -54,7 +54,7 @@
     <div id="RemoveEventBtn">
         <form action="" id="RemoveEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="RemoveEventId" id="RemoveBusinessEventIdbtn">
+            <input [(ngModel)]="eventId" type="text" name="eventId" id="RemoveBusinessEventIdbtn">
             <button (click)=onRemove() type="submit" class="btn btn-light">Remove Event</button>
         </form>
     </div>

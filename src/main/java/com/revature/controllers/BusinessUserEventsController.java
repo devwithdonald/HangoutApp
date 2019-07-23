@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Event;
 import com.revature.beans.User;
-import com.revature.dao.UserDaoImpl;
-import com.revature.services.EventServiceImpl;
+import com.revature.dao.UserDao;
+import com.revature.services.EventService;
 
 @RestController("/BusinessUser/BusinessUserEventManager")
 @CrossOrigin(origins = "*")
@@ -25,19 +25,19 @@ public class BusinessUserEventsController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private EventServiceImpl eventService;
-	
-	//NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDaoImpl userDao;
+	private EventService eventService;
 
-	//NEED TO DELETE ONCE USER SESSION WORKS
+	// NEED TO DELETE ONCE USER SESSION WORKS
+	private UserDao userDao;
+
+	// NEED TO DELETE ONCE USER SESSION WORKS
 	@Autowired
-	public void setUserDao(UserDaoImpl userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
 	@Autowired
-	public void setEventService(EventServiceImpl eventService) {
+	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
 	}
 
@@ -50,46 +50,82 @@ public class BusinessUserEventsController {
 		// TODO THIS NEEDS TO CHANGE
 		User user = new User();
 		user.setUserId(2);
-		
+
 		return eventService.getAllBusinessUserEvents(user);
 	}
-	
-	@PostMapping(path="/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = { "application/json" })
+
+	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = {
+			"application/json" })
 	public @ResponseBody Boolean businessUserEventPost(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
-		
+
 		// TODO ADD USER SESSION
-		//event.setUser((User) sess.getAttribute("user"));
-		
-		//Need to Delete
-		//Faking user
+		// event.setUser((User) sess.getAttribute("user"));
+
+		// Need to Delete
+		// Faking user
 		User user = new User();
 		user.setUsername("test_biz2");
 		user.setPassword("biz1");
 		event.setUser(userDao.getUser(user));
-		
+
 		if (eventService.addBusinessPublicEvent(event)) {
 			return true;
 		}
 		return false;
 	}
-	
-	@PostMapping(path="/BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent", consumes = { "application/json" })
+
+	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent", consumes = {
+			"application/json" })
 	public @ResponseBody Boolean businessUserEventUpdate(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "Attempting to update event: " + event);
-		
+
 		// TODO ADD USER SESSION
-		//event.setUser((User) sess.getAttribute("user"));
-		
-		//Need to Delete
-		//Faking user
+		// event.setUser((User) sess.getAttribute("user"));
+
+		// Need to Delete
+		// Faking user
 		User user = new User();
 		user.setUsername("test_biz2");
 		user.setPassword("biz1");
 		user = userDao.getUser(user);
 		event.setUser(user);
-		
-		return eventService.validateEventForUser(event, user);
+
+		// verifying event
+		Event verifiedEvent = eventService.validateEventForUser(event, user);
+
+		if (verifiedEvent != null) {
+			return eventService.updateBusinessEvent(event, verifiedEvent);
+		} else {
+			return false;
+		}
+
+		// return eventService.validateEventForUser(event, user);
 	}
 
+	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent", consumes = {
+			"application/json" })
+	public @ResponseBody Boolean businessUserEventRemove(@RequestBody Event event, HttpSession sess) {
+		log.log(Level.INFO, "Attempting to delete event: " + event);
+
+		// TODO ADD USER SESSION
+		// event.setUser((User) sess.getAttribute("user"));
+
+		// Need to Delete
+		// Faking user
+		User user = new User();
+		user.setUsername("test_biz2");
+		user.setPassword("biz1");
+		user = userDao.getUser(user);
+		event.setUser(user);
+
+		// verifying event
+		Event verifiedEvent = eventService.validateEventForUser(event, user);
+		
+		if (verifiedEvent != null) {
+			return eventService.removeEvent(event);
+		} else {
+			return false;
+		}
+	}
 }

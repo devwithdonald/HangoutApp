@@ -13,7 +13,9 @@ public interface EventService {
 	
 	public Boolean addBusinessPrivateEvent(Event event);
 	
-	public Boolean updateEvent(Event event);
+	public Boolean updateBasicUserEvent(Event event, Event verifiedEvent);
+	
+	public Boolean updateBusinessEvent(Event event, Event verifiedEvent);
 	
 	public Boolean removeEvent(Event event);
 	
@@ -36,6 +38,6 @@ public interface EventService {
 	
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user);
 	
-	public boolean validateEventForUser(Event event, User user);
+	public Event validateEventForUser(Event event, User user);
 	
 }

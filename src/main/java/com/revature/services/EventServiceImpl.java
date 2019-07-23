@@ -46,16 +46,20 @@ public class EventServiceImpl implements EventService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Boolean updateBasicUserEvent(Event event, Event verifiedEvent) {
+		return eventDao.updateBasicUserEvent(event, verifiedEvent);
+	}
 
 	@Override
-	public Boolean updateEvent(Event event) {
-		return null;
+	public Boolean updateBusinessEvent(Event event, Event verifiedEvent) {
+		return eventDao.updateBusinessEvent(event, verifiedEvent);
 	}
 
 	@Override
 	public Boolean removeEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.removeEvent(event);
 	}
 
 	@Override
@@ -111,7 +115,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public boolean validateEventForUser(Event event, User user) {
+	public Event validateEventForUser(Event event, User user) {
 		return eventDao.validateEventForUser(event, user);
 	}
 
