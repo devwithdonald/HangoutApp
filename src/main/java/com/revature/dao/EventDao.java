@@ -37,4 +37,6 @@ public interface EventDao {
 	
 	public boolean validateEventForUser(Event event, User user);
 	
+	public List<Event> getAllPublicEvents();
+	
 }

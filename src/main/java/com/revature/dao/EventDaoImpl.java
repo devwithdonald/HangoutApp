@@ -35,6 +35,7 @@ public class EventDaoImpl implements EventDao {
 		Session sess = sf.openSession();
 		Event event = (Event) sess.get(Event.class, eventId);
 		log.log(Level.INFO, "Returned Event: " + event);
+		sess.close();
 		return event;
 	}
 
@@ -214,6 +215,16 @@ public class EventDaoImpl implements EventDao {
 			// Passing in returnedEvent to get old information that does not get updated
 			return updateEvent(event, returnedEvent);
 		}
+	}
+
+	@Override
+	public List<Event> getAllPublicEvents() {
+		log.log(Level.INFO, "in get public events - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true));
+		List<Event> publicEventList = crit.list();
+		log.log(Level.INFO, "grabbing event list: " + publicEventList);
+		return publicEventList;
 	}
 
 }

@@ -55,6 +55,12 @@ public class BusinessUser extends User {
 		this.location = location;
 	}
 
+	public BusinessUser(UserDTO user) {
+		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole());
+		this.businessName = user.getBusinessName();
+		this.location = user.getLocation();
+	}
+
 	public String getBusinessName() {
 		return businessName;
 	}

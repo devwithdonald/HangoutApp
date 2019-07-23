@@ -1,16 +1,16 @@
 package com.revature.beans;
 
 public class RsvpDTO {
-	private int EventID;
+	private int eventId;
 	private BasicUser user;
 	private Event event;
-	private String Status;
+	private String status;
 	
-	public int getEventID() {
-		return EventID;
+	public int getEventId() {
+		return eventId;
 	}
-	public void setEventID(int eventID) {
-		EventID = eventID;
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 	public Event getEvent() {
 		return event;
@@ -26,9 +26,9 @@ public class RsvpDTO {
 	}
 	public String getStatus() {
 		// TODO Auto-generated method stub
-		return Status;
+		return status;
 	}
 	public void setStatus(String status) {
-		this.Status = status;
+		this.status = status;
 	}
 }

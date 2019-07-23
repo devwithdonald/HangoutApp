@@ -37,5 +37,7 @@ public interface EventService {
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user);
 	
 	public boolean validateEventForUser(Event event, User user);
+
+	public List<Event> getAllPublicEvents();
 	
 }

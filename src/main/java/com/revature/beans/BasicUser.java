@@ -75,6 +75,18 @@ public class BasicUser extends User{
 		this.lastName = lastName;
 		this.friendList = friendList;
 	}
+	
+	public BasicUser(int userId, String username, String password, Role role, String firstName, String lastName) {
+		super(userId, username, password, role);
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public BasicUser(UserDTO userDTO) {
+		super(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getRole());
+		this.firstName = userDTO.getFirstName();
+		this.lastName = userDTO.getLastName();
+	}
 
 	public String getFirstName() {
 		return firstName;

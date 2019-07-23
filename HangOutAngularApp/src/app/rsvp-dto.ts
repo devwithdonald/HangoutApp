@@ -7,4 +7,9 @@ export class RSVP {
     Event: Event;
     BasicUser: BasicUser;
 
+    constructor(status: string, eventId: number) {
+        this.Status = status;
+        this.EventId = eventId;
+    }
+
 }

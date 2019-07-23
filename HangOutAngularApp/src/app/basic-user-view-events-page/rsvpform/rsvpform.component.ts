@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RSVP } from 'src/app/RSVP';
+import { RSVP } from 'src/app/rsvp-dto';
 
 @Component({
   selector: 'app-rsvpform',
@@ -18,17 +18,13 @@ export class RSVPFormComponent implements OnInit {
 
   onAccept() {
     const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
-    const rsvp = new RSVP();
-    rsvp.EventId = this.id;
-    rsvp.Status = 'Accepted';
+    const rsvp = new RSVP('Accepted', this.id);
     return this.http.post(url, rsvp).subscribe(Boolean);
   }
 
   onRejected() {
     const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
-    const rsvp = new RSVP();
-    rsvp.EventId = this.id;
-    rsvp.Status = 'Rejected';
+    const rsvp = new RSVP('Rejected', this.id);
     return this.http.post(url, rsvp).subscribe(Boolean);
   }
 }
