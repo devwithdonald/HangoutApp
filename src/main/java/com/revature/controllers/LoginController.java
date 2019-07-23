@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
-import com.revature.services.UserServiceImpl;
+import com.revature.services.UserService;
 
 @RestController("/login")
 @CrossOrigin(origins = "*")
@@ -22,10 +22,10 @@ public class LoginController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
-	public void setUserService(UserServiceImpl userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 

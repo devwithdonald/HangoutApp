@@ -90,7 +90,7 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public Boolean updateEvent(Event event, Event verifiedEvent) {
+	public Boolean updateBasicUserEvent(Event event, Event verifiedEvent) {
 		log.log(Level.INFO, "updateEvent - EventDaoImpl");
 
 		// setting event information that did not get updated in Angular form
@@ -132,8 +132,25 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public Boolean removeEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		log.log(Level.INFO, "in removeEvent - EventDao");
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		String hql = "UPDATE Event e SET e.onTimeLine = false WHERE e.eventId = :eventId";
+		Query query = sess.createQuery(hql);
+		
+		log.log(Level.INFO, "after create query statement - EventDaoImpl");
+		query.setParameter("eventId", event.getEventId());
+		
+		int numberOfRows = query.executeUpdate();
+		tx.commit();
+		sess.close();
+		log.log(Level.INFO, "after execute update statement - EventDaoImpl");
+
+		if (numberOfRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -168,7 +185,8 @@ public class EventDaoImpl implements EventDao {
 		Session sess = sf.openSession();
 		Criteria crit = sess.createCriteria(Event.class);
 
-		crit.add(Restrictions.eq("user.userId", user.getUserId()));
+		crit.add(Restrictions.and(Restrictions.eq("user.userId", user.getUserId()), 
+				Restrictions.eq("onTimeLine", true)));
 		List<Event> eventList = crit.list();
 
 		for (Event event : eventList) {
@@ -197,7 +215,7 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public boolean validateEventForUser(Event event, User user) {
+	public Event validateEventForUser(Event event, User user) {
 		log.log(Level.INFO, "in validateEventForUser - EventDao");
 		Session sess = sf.openSession();
 		Criteria crit = sess.createCriteria(Event.class);
@@ -210,10 +228,62 @@ public class EventDaoImpl implements EventDao {
 		log.log(Level.INFO, "validateEventForUser returned the event: " + returnedEvent);
 
 		if (returnedEvent == null) {
-			return false;
+			return null;
 		} else {
-			// Passing in returnedEvent to get old information that does not get updated
-			return updateEvent(event, returnedEvent);
+			
+			log.log(Level.INFO, "returned event NOT null");
+			return returnedEvent;
+//			if (user.getRole().getRoleType().equals("BasicUser")) {
+//				log.log(Level.INFO, "update basic user event");
+//				// Passing in returnedEvent to get old information that does not get updated
+//				//return updateEvent(event, returnedEvent);
+//				return returnedEvent;
+//			} else if (user.getRole().getRoleType().equals("BusinessUser")){
+//				log.log(Level.INFO, "update business user event");
+//				//return updateBusinessEvent(event, returnedEvent);
+//			} else {
+//				return false;
+//			}
+		}
+	}
+
+	@Override
+	public Boolean updateBusinessEvent(Event event, Event verifiedEvent) {
+		log.log(Level.INFO, "updateBusinessEvent - EventDaoImpl");
+
+		// setting event information that did not get updated in Angular form
+		event.setUser(verifiedEvent.getUser());
+		event.setTimePosted(verifiedEvent.getTimePosted());
+		event.setOnTimeLine(verifiedEvent.getOnTimeLine());
+
+		log.log(Level.INFO, "updated event we are trying to update to: " + event);
+
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		String hql = "UPDATE Event e SET e.businessMessage = :businessMessage, e.title = :title, e.description = :description,"
+				+ "e.location = :location, e.timeOfEvent = :timeOfEvent, e.dateOfEvent = :dateOfEvent"
+				+ " WHERE e.eventId = :eventId";
+
+		Query query = sess.createQuery(hql);
+		log.log(Level.INFO, "after create query statement - EventDaoImpl");
+
+		query.setParameter("businessMessage", event.getBusinessMessage());
+		query.setParameter("title", event.getTitle());
+		query.setParameter("description", event.getDescription());
+		query.setParameter("location", event.getLocation());
+		query.setParameter("timeOfEvent", event.getTimeOfEvent());
+		query.setParameter("dateOfEvent", event.getDateOfEvent());
+		query.setParameter("eventId", event.getEventId());
+
+		int numberOfRows = query.executeUpdate();
+		tx.commit();
+		sess.close();
+		log.log(Level.INFO, "after execute update statement - EventDaoImpl");
+
+		if (numberOfRows == 1) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 

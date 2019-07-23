@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BusinessUser } from '../BusinessUser';
+import { BusinessUserService } from '../BusinessUser.service';
 
 @Component({
   selector: 'app-event-manager',
@@ -10,7 +12,10 @@ import { Router } from '@angular/router';
 export class EventManagerComponent implements OnInit {
 
   events: Event[];
-  constructor(private http: HttpClient, private router: Router) { }
+  eventIdUpdate: number;
+  eventId: number;
+
+  constructor(private businessUserService: BusinessUserService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.http.get('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager')
@@ -27,6 +32,21 @@ export class EventManagerComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(['BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent']);
+  }
+
+  onUpdate() {
+    this.businessUserService.eventId = this.eventIdUpdate;
+    this.router.navigate(['BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent']);
+  }
+
+  onRemove() {
+    this.http.post('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent', { "eventId" : this.eventId })
+    .subscribe(
+      (response: boolean) => {
+        console.log('response from server: ' + response);
+        return response;
+      }
+    );
   }
 
 }

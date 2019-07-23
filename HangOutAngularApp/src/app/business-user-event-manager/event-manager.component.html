@@ -10,6 +10,7 @@
             <th class="col">Event Id</th>
             <th class="col">Title</th>
             <th class="col">Description</th>
+            <th class="col">Message</th>
             <th class="col">Location</th>
             <th class="col">Time of Event</th>
             <th class="col">Date of Event</th>
@@ -22,6 +23,7 @@
             <td class="col">{{ event.eventId }}</td>
             <td class="col">{{ event.title }}</td>
             <td class="col">{{ event.description }}</td>
+            <td class="col">{{ event.businessMessage }}</td>
             <td class="col">{{ event.location }}</td>
             <td class="col">{{ event.timeOfEvent }}</td>
             <td class="col">{{ event.dateOfEvent }}</td>
@@ -38,21 +40,21 @@
     <div id="UpdateEventBtn">
         <form action="" id="UpdateEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
-            <button (click)=onUp() type="submit" class="btn btn-light">Update Event</button>
+            <input [(ngModel)]="eventIdUpdate" type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
+            <button (click)=onUpdate() type="submit" class="btn btn-light">Update Event</button>
         </form>
     </div>
     <div id="ViewSubscribersEventBtn">
         <form action="" id="ViewSubscribersEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
+            <input  type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
             <button (click)=onViewSubs() type="submit" class="btn btn-light">VSPE Event</button>
         </form>
     </div>
     <div id="RemoveEventBtn">
         <form action="" id="RemoveEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="RemoveEventId" id="RemoveBusinessEventIdbtn">
+            <input [(ngModel)]="eventId" type="text" name="eventId" id="RemoveBusinessEventIdbtn">
             <button (click)=onRemove() type="submit" class="btn btn-light">Remove Event</button>
         </form>
     </div>

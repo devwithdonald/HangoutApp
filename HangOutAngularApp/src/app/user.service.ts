@@ -50,13 +50,14 @@ export class UserService {
       console.log('basic user passed');
       this.basicUserService.addBasicUser(this.userDTO);
       // navigate
-      this.router.navigate(['/BasicUser/Homepage']);
+      this.router.navigate(['/BasicUser/PrivateEvents']);
 
-    } else if (this.userDTO.role.roleType === 'Business') {
+    } else if (this.userDTO.role.roleType === 'BusinessUser') {
       console.log('business user passed');
       this.businessUserService.addBusinessUser(this.userDTO);
       // navigate
-      this.router.navigate(['BusinessUser/HomePage']);
+      this.router.navigate(['/BusinessUser/BusinessUserEventManager']);
+      //this.router.navigate(['/BusinessUser/HomePage']);
     } else if (this.userDTO.role.roleType === 'BusinessEmployee') {
       console.log('business employee user passed');
       this.businessEmployeeUserService.addBusinessEmployeeUser(this.userDTO);
