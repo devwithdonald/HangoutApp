@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Event;
 import com.revature.beans.User;
-import com.revature.dao.UserDaoImpl;
+import com.revature.dao.UserDao;
+import com.revature.services.EventService;
 import com.revature.services.EventServiceImpl;
 
 @RestController("/BasicUser/PrivateEvents/AddEvent")
@@ -23,14 +24,14 @@ public class BasicUserAddEventController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private EventServiceImpl eventService;
+	private EventService eventService;
 	
 	//NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDaoImpl userDao;
+	private UserDao userDao;
 
 	//NEED TO DELETE ONCE USER SESSION WORKS
 	@Autowired
-	public void setUserDao(UserDaoImpl userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
@@ -45,20 +46,20 @@ public class BasicUserAddEventController {
 
 		
 		
-		// attempting to get the user from the session
-		System.out.println(sess.getAttribute("user"));
-		
-		// TODO ADD USER SESSION
-		event.setUser((User) sess.getAttribute("user"));
-		
+//		// attempting to get the user from the session
+//		System.out.println(sess.getAttribute("user"));
+//		
+//		// TODO ADD USER SESSION
+//		event.setUser((User) sess.getAttribute("user"));
+//		
 		
 
-		// Need to Delete
+		// TODO Need to Delete
 		// Faking user
-//		User user = new User();
-//		user.setUsername("test_user1");
-//		user.setPassword("user1");
-//		event.setUser(userDao.getUser(user));
+		User user = new User();
+		user.setUsername("test_user1");
+		user.setPassword("user1");
+		event.setUser(userDao.getUser(user));
 
 		if (eventService.addBasicUserEvent(event)) {
 			return true;

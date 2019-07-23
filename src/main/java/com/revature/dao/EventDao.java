@@ -17,7 +17,7 @@ public interface EventDao {
 
 	public Boolean addBusinessPrivateEvent(Event event);
 
-	public Boolean updateEvent(Event event, Event verifiedEvent);
+	public Boolean updateBasicUserEvent(Event event, Event verifiedEvent);
 	
 	public Boolean updateBusinessEvent(Event event, Event verifiedEvent);
 
@@ -37,6 +37,6 @@ public interface EventDao {
 	
 	public List<Event> viewSummaryOfSubscribedBusinessEvents(User user);
 	
-	public boolean validateEventForUser(Event event, User user);
+	public Event validateEventForUser(Event event, User user);
 	
 }

@@ -84,7 +84,7 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public Boolean updateEvent(Event event, Event verifiedEvent) {
+	public Boolean updateBasicUserEvent(Event event, Event verifiedEvent) {
 		log.log(Level.INFO, "updateEvent - EventDaoImpl");
 
 		// setting event information that did not get updated in Angular form
@@ -192,7 +192,7 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public boolean validateEventForUser(Event event, User user) {
+	public Event validateEventForUser(Event event, User user) {
 		log.log(Level.INFO, "in validateEventForUser - EventDao");
 		Session sess = sf.openSession();
 		Criteria crit = sess.createCriteria(Event.class);
@@ -205,21 +205,22 @@ public class EventDaoImpl implements EventDao {
 		log.log(Level.INFO, "validateEventForUser returned the event: " + returnedEvent);
 
 		if (returnedEvent == null) {
-			return false;
+			return null;
 		} else {
 			
 			log.log(Level.INFO, "returned event NOT null");
-			
-			if (user.getRole().getRoleType().equals("BasicUser")) {
-				log.log(Level.INFO, "update basic user event");
-				// Passing in returnedEvent to get old information that does not get updated
-				return updateEvent(event, returnedEvent);
-			} else if (user.getRole().getRoleType().equals("BusinessUser")){
-				log.log(Level.INFO, "update business user event");
-				return updateBusinessEvent(event, returnedEvent);
-			} else {
-				return false;
-			}
+			return returnedEvent;
+//			if (user.getRole().getRoleType().equals("BasicUser")) {
+//				log.log(Level.INFO, "update basic user event");
+//				// Passing in returnedEvent to get old information that does not get updated
+//				//return updateEvent(event, returnedEvent);
+//				return returnedEvent;
+//			} else if (user.getRole().getRoleType().equals("BusinessUser")){
+//				log.log(Level.INFO, "update business user event");
+//				//return updateBusinessEvent(event, returnedEvent);
+//			} else {
+//				return false;
+//			}
 		}
 	}
 

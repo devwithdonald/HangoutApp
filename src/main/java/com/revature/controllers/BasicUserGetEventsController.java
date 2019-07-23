@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Event;
-import com.revature.services.EventServiceImpl;
+import com.revature.services.EventService;
 
 @RestController("/BasicUser/PrivateEvents")
 @CrossOrigin(origins = "*")
@@ -18,10 +18,10 @@ public class BasicUserGetEventsController {
 	
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private EventServiceImpl eventService;
+	private EventService eventService;
 
 	@Autowired
-	public void setEventService(EventServiceImpl eventService) {
+	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
 	}
 	

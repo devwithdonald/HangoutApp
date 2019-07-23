@@ -8,14 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Event;
 import com.revature.beans.User;
-import com.revature.services.EventServiceImpl;
+import com.revature.dao.UserDao;
+import com.revature.services.EventService;
 
 @RestController("/BasicUser/PrivateEvents/UpdateEvent")
 @CrossOrigin(origins = "*")
@@ -23,27 +23,44 @@ public class BasicUserUpdateEventController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private EventServiceImpl eventService;
+	private EventService eventService;
+	// NEED TO DELETE ONCE USER SESSION WORKS
+	private UserDao userDao;
+
+	// NEED TO DELETE ONCE USER SESSION WORKS
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
 
 	@Autowired
-	public void setEventService(EventServiceImpl eventService) {
+	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
 	}
-	
-	
-	@PostMapping(value = "/BasicUser/PrivateEvents/UpdateEvent",consumes = { "application/json" })
+
+	@PostMapping(value = "/BasicUser/PrivateEvents/UpdateEvent", consumes = { "application/json" })
 	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "inside basicUserEventPost");
-		
+
 		// TODO uncomment when session works
-		//User user = (User) sess.getAttribute("user");
-		
-		//TODO THIS NEEDS TO CHANGE
+		// User user = (User) sess.getAttribute("user");
+
+		// Need to Delete
+		// Faking user
 		User user = new User();
-		user.setUserId(1);
-		
-		
-		return eventService.validateEventForUser(event, user);
+		user.setUsername("test_user1");
+		user.setPassword("user1");
+		user = userDao.getUser(user);
+		event.setUser(user);
+
+		// verifying event
+		Event verifiedEvent = eventService.validateEventForUser(event, user);
+
+		if (verifiedEvent != null) {
+			return eventService.updateBasicUserEvent(event, verifiedEvent);
+		} else {
+			return false;
+		}
 	}
-	
+
 }

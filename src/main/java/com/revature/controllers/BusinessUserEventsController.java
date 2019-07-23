@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Event;
 import com.revature.beans.User;
-import com.revature.dao.UserDaoImpl;
-import com.revature.services.EventServiceImpl;
+import com.revature.dao.UserDao;
+import com.revature.services.EventService;
 
 @RestController("/BusinessUser/BusinessUserEventManager")
 @CrossOrigin(origins = "*")
@@ -25,19 +25,19 @@ public class BusinessUserEventsController {
 
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
-	private EventServiceImpl eventService;
+	private EventService eventService;
 	
 	//NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDaoImpl userDao;
+	private UserDao userDao;
 
 	//NEED TO DELETE ONCE USER SESSION WORKS
 	@Autowired
-	public void setUserDao(UserDaoImpl userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
 	@Autowired
-	public void setEventService(EventServiceImpl eventService) {
+	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
 	}
 
@@ -89,7 +89,22 @@ public class BusinessUserEventsController {
 		user = userDao.getUser(user);
 		event.setUser(user);
 		
-		return eventService.validateEventForUser(event, user);
+		// verifying event
+		Event verifiedEvent = eventService.validateEventForUser(event, user);
+		
+		
+		if (verifiedEvent != null) {
+			return eventService.updateBusinessEvent(event, verifiedEvent);
+		} else {
+			return false;
+		}
+		
+		//return eventService.validateEventForUser(event, user);
 	}
-
+	
+	@PostMapping(path="/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent", consumes = { "application/json" })
+	public @ResponseBody Boolean businessUserEventRemove(@RequestBody Event event, HttpSession sess) {
+		log.log(Level.INFO, "Attempting to update event: " + event);
+		return null;
+	}
 }

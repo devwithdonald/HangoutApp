@@ -2,7 +2,6 @@ package com.revature.controllers;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.jboss.logging.Logger;
 import org.jboss.logging.Logger.Level;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.BasicUser;
-import com.revature.beans.User;
-import com.revature.services.UserServiceImpl;
 import com.revature.beans.UserDTO;
+import com.revature.services.UserService;
 
 @RestController("/register")
 @CrossOrigin(origins = "*")
@@ -26,10 +23,10 @@ public class RegistrationController {
 	
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 	
-	private UserServiceImpl userService;
+	private UserService userService;
 	
 	@Autowired
-	public void setUserService(UserServiceImpl userService) {
+	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 	
