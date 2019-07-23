@@ -59,8 +59,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Boolean removeEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.removeEvent(event);
 	}
 
 	@Override

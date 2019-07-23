@@ -126,8 +126,25 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public Boolean removeEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		log.log(Level.INFO, "in removeEvent - EventDao");
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		String hql = "UPDATE Event e SET e.onTimeLine = false WHERE e.eventId = :eventId";
+		Query query = sess.createQuery(hql);
+		
+		log.log(Level.INFO, "after create query statement - EventDaoImpl");
+		query.setParameter("eventId", event.getEventId());
+		
+		int numberOfRows = query.executeUpdate();
+		tx.commit();
+		sess.close();
+		log.log(Level.INFO, "after execute update statement - EventDaoImpl");
+
+		if (numberOfRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
