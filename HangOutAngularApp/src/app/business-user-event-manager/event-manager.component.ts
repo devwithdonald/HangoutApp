@@ -13,6 +13,8 @@ export class EventManagerComponent implements OnInit {
 
   events: Event[];
   eventIdUpdate: number;
+  eventId: number;
+
   constructor(private businessUserService: BusinessUserService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
@@ -35,6 +37,16 @@ export class EventManagerComponent implements OnInit {
   onUpdate() {
     this.businessUserService.eventId = this.eventIdUpdate;
     this.router.navigate(['BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent']);
+  }
+
+  onRemove() {
+    this.http.post('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent', { "eventId" : this.eventId })
+    .subscribe(
+      (response: boolean) => {
+        console.log('response from server: ' + response);
+        return response;
+      }
+    );
   }
 
 }
