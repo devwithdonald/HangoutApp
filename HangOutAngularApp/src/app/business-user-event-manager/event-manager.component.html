@@ -38,14 +38,14 @@
     <div id="UpdateEventBtn">
         <form action="" id="UpdateEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
-            <button (click)=onUp() type="submit" class="btn btn-light">Update Event</button>
+            <input [(ngModel)]="eventIdUpdate" type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
+            <button (click)=onUpdate() type="submit" class="btn btn-light">Update Event</button>
         </form>
     </div>
     <div id="ViewSubscribersEventBtn">
         <form action="" id="ViewSubscribersEventbutton">
             <label for="Event id">Event ID</label>
-            <input type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
+            <input  type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
             <button (click)=onViewSubs() type="submit" class="btn btn-light">VSPE Event</button>
         </form>
     </div>
