@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/event';
 import { EventUpdate } from 'src/app/event-update';
+import { LoggedInUserService } from 'src/app/logged-in-user.service';
 
 
 @Component({
@@ -26,14 +27,14 @@ export class BasicUserUpdateEventFormComponent implements OnInit {
   private eventTime: string;
   private eventDate: string;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private loggedInUserService: LoggedInUserService) { }
 
   ngOnInit() {
   }
 
   onUpdateEvent() {
 
-    this.event = new EventUpdate(this.eventId, this.eventTitle, this.eventLocation, this.eventTime, this.eventDate, this.eventDescription);
+    this.event = new EventUpdate(this.eventId, this.eventTitle, this.eventLocation, this.eventTime, this.eventDate, this.eventDescription, this.loggedInUserService.loggedInUser);
 
     this.http.post('http://localhost:8080/HangoutApp/BasicUser/PrivateEvents/UpdateEvent', this.event).subscribe(
       (response: boolean) => {

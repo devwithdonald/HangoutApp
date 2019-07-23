@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { EventAdd } from 'src/app/event-add';
 import { EventService } from 'src/app/event.service';
+import { LoggedInUserService } from 'src/app/logged-in-user.service';
 
 @Component({
   selector: 'app-basic-user-add-event-form',
@@ -16,8 +17,10 @@ export class BasicUserAddEventFormComponent implements OnInit {
   location: string;
   timeOfEvent: string;
   dateOfEvent: string;
+  //TODO get user here
 
-  constructor(private http: HttpClient, private router: Router, private eventService: EventService) { }
+  constructor(private http: HttpClient, private router: Router, private eventService: EventService,
+              private loggedInUserService: LoggedInUserService) { }
 
   ngOnInit() {
   }
@@ -32,7 +35,7 @@ export class BasicUserAddEventFormComponent implements OnInit {
 
     // Passing to server
     this.eventAdd = new EventAdd(this.title, this.location, this.timeOfEvent, this.dateOfEvent,
-    this.description);
+    this.description, this.loggedInUserService.loggedInUser);
     this.eventService.postEvent('BasicUser/PrivateEvents/AddEvent', this.eventAdd);
 
     // TODO need to fix navigating before loading all events

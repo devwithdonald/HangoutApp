@@ -21,7 +21,6 @@ export class EventService {
 
   postEvent(urlEnd: string, event: EventAdd) {
     // SETTING THE LOGGED IN USER!
-    event.user = this.loggedInUser.loggedInUser;
 
     this.http.post(this.url + urlEnd, event).subscribe(
       (response: boolean) => {

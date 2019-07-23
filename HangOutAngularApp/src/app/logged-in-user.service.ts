@@ -9,5 +9,5 @@ export class LoggedInUserService {
   loggedInUser: LoggedInUser;
 
   constructor() { }
-  
+
 }

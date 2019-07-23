@@ -43,23 +43,6 @@ public class BasicUserAddEventController {
 	@PostMapping(value = "/BasicUser/PrivateEvents/AddEvent", consumes = { "application/json" })
 	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
-
-		
-		
-//		// attempting to get the user from the session
-//		System.out.println(sess.getAttribute("user"));
-//		
-//		// TODO ADD USER SESSION
-//		event.setUser((User) sess.getAttribute("user"));
-//		
-		
-
-		// TODO Need to Delete
-		// Faking user
-//		User user = new User();
-//		user.setUsername("test_user1");
-//		user.setPassword("user1");
-//		event.setUser(userDao.getUser(user));
 		
 		System.out.println("Event passed in contents -> " + event);
 

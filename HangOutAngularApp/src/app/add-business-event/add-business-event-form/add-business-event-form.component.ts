@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventAddBusiness } from 'src/app/event-add-business';
 import { EventService } from 'src/app/event.service';
 import { Router } from '@angular/router';
+import { LoggedInUserService } from 'src/app/logged-in-user.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AddBusinessEventFormComponent implements OnInit {
   response: boolean;
 
   eventAddBusiness: EventAddBusiness;
-  constructor(private eventService: EventService, private router: Router) { }
+  constructor(private eventService: EventService, private router: Router,
+              private loggedInUserService: LoggedInUserService) { }
 
   ngOnInit() {
   }
