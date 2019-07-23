@@ -1,9 +1,13 @@
+import { User } from './User';
+import { LoggedInUser } from './logged-in-user';
+
 export class EventAdd {
     title: string;
     location: string;
     timeOfEvent: string;
     dateOfEvent: string;
     description: string;
+    user: LoggedInUser;
 
     constructor(title: string, location: string, timeOfEvent: string, 
         dateOfEvent: string, description: string) {

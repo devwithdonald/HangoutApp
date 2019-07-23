@@ -6,6 +6,8 @@ import { UserDTO } from './user-dto';
 import { BusinessUserService } from './BusinessUser.service';
 import { BusinessEmployeeUserService } from './business-employee-user.service';
 import { Router } from '@angular/router';
+import { LoggedInUserService } from './logged-in-user.service';
+import { LoggedInUser } from './logged-in-user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class UserService {
   user: User;
  
   constructor(private router: Router, private http: HttpClient, private basicUserService: BasicUserService, 
-    private businessUserService: BusinessUserService, private businessEmployeeUserService: BusinessEmployeeUserService) { }
+              private businessUserService: BusinessUserService, private businessEmployeeUserService: BusinessEmployeeUserService, 
+              private loggedInUserService: LoggedInUserService) { }
 
   url = 'http://localhost:8080/HangoutApp/';
   
@@ -23,9 +26,10 @@ export class UserService {
   // url -> 'login'
   postLogin(urlEnd: string, user: User) {
     this.http.post(this.url + urlEnd, user).subscribe(
-        responseUser =>  {
+        (responseUser: LoggedInUser) =>  {
           console.log('--- server sent back ---');
           console.log(responseUser);
+          this.loggedInUserService.loggedInUser = responseUser;
           this.checkUser(responseUser);
         }
     );

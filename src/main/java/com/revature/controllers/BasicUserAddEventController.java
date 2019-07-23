@@ -56,10 +56,12 @@ public class BasicUserAddEventController {
 
 		// TODO Need to Delete
 		// Faking user
-		User user = new User();
-		user.setUsername("test_user1");
-		user.setPassword("user1");
-		event.setUser(userDao.getUser(user));
+//		User user = new User();
+//		user.setUsername("test_user1");
+//		user.setPassword("user1");
+//		event.setUser(userDao.getUser(user));
+		
+		System.out.println("Event passed in contents -> " + event);
 
 		if (eventService.addBasicUserEvent(event)) {
 			return true;

@@ -1,3 +1,5 @@
+import { LoggedInUser } from './logged-in-user';
+
 export class EventAddBusiness {
     title: string;
     location: string;
@@ -5,6 +7,7 @@ export class EventAddBusiness {
     dateOfEvent: string;
     description: string;
     businessMessage: string;
+    user: LoggedInUser;
 
     constructor(title: string, location: string, timeOfEvent: string, 
         dateOfEvent: string, description: string, businessMessage: string) {
