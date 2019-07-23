@@ -162,7 +162,8 @@ public class EventDaoImpl implements EventDao {
 		Session sess = sf.openSession();
 		Criteria crit = sess.createCriteria(Event.class);
 
-		crit.add(Restrictions.eq("user.userId", user.getUserId()));
+		crit.add(Restrictions.and(Restrictions.eq("user.userId", user.getUserId()), 
+				Restrictions.eq("onTimeLine", true)));
 		List<Event> eventList = crit.list();
 
 		for (Event event : eventList) {
