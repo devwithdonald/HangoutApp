@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './User';
 import { BasicUserService } from './BasicUser.service';
@@ -30,6 +30,8 @@ export class UserService {
           console.log('--- server sent back ---');
           console.log(responseUser);
           this.loggedInUserService.loggedInUser = responseUser;
+          console.log('--logged in user--');
+          console.log(this.loggedInUserService.loggedInUser);
           this.checkUser(responseUser);
         }
     );
