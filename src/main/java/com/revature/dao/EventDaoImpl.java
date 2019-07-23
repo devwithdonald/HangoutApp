@@ -30,7 +30,12 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public Event getEventByEventId(Integer eventId) {
 		// TODO Auto-generated method stub
-		return null;
+		log.log(Level.INFO, "getEventById - EventDAO");
+		log.log(Level.INFO, "passed id: " + eventId);
+		Session sess = sf.openSession();
+		Event event = (Event) sess.get(Event.class, eventId);
+		log.log(Level.INFO, "Returned Event: " + event);
+		return event;
 	}
 
 	@Override

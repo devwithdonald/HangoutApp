@@ -67,6 +67,8 @@ import { BasicUserMessagesTableComponent } from './basic-user-messages/basic-use
 import { BasicUserSendNewMessageButtonComponent } from './basic-user-messages/basic-user-send-new-message-button/basic-user-send-new-message-button.component';
 import { BasicUserService } from './BasicUser.service';
 import { BusinessUserService } from './BusinessUser.service';
+import { BasicUserViewEventsPageComponent } from './basic-user-view-events-page/basic-user-view-events-page.component';
+import { RSVPFormComponent } from './basic-user-view-events-page/rsvpform/rsvpform.component';
 
 
 
@@ -92,6 +94,7 @@ const appRoutes: Routes = [
     { path: 'BasicUser/Messages', component: BasicUserMessagesComponent},
     { path: 'BasicUser/Homepage', component: BasicUserHomepageComponent},
     { path: 'BasicUser/Subscriptions', component: SubscriptionComponent},
+    { path: 'BasicUser/Events', component: BasicUserViewEventsPageComponent}
 
   ];
 
@@ -140,7 +143,9 @@ const appRoutes: Routes = [
       SubscriptionTableComponent,
       BasicUserMessagesComponent,
       BasicUserMessagesTableComponent,
-      BasicUserSendNewMessageButtonComponent
+      BasicUserSendNewMessageButtonComponent,
+      BasicUserViewEventsPageComponent,
+      RSVPFormComponent
 
 
     ],
