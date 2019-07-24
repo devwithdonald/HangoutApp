@@ -24,3 +24,9 @@ h3 {
     text-align: center;
 }
 
+.rsvp {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+}
+

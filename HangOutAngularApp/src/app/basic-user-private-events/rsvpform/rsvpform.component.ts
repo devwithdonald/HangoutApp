@@ -25,7 +25,7 @@ export class RSVPFormComponent implements OnInit {
     return this.http.post(url, rsvp).subscribe(Boolean);
   }
 
-  onRejected() {
+  onReject() {
     const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
     const rsvp = new RSVP('Rejected', this.eventId);
     console.log(rsvp);

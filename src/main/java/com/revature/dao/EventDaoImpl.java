@@ -165,6 +165,7 @@ public class EventDaoImpl implements EventDao {
 		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.desc("timePosted"));
 		List<Event> eventList = crit.list();
 		log.log(Level.INFO, "grabbing event list: " + eventList);
+		sess.close();
 		return eventList;
 
 	}
@@ -222,6 +223,7 @@ public class EventDaoImpl implements EventDao {
 		Event returnedEvent = (Event) crit.uniqueResult();
 
 		log.log(Level.INFO, "validateEventForUser returned the event: " + returnedEvent);
+		sess.close();
 
 		if (returnedEvent == null) {
 			return null;
@@ -279,6 +281,7 @@ public class EventDaoImpl implements EventDao {
 		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.asc("eventId"));
 		List<Event> publicEventList = crit.list();
 		log.log(Level.INFO, "grabbing event list: " + publicEventList);
+		sess.close();
 		return publicEventList;
 	}
 

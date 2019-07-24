@@ -42,7 +42,7 @@ public class RsvpDaoImpl implements RsvpDao {
 	public boolean rejectRSVP(RsvpDTO rsvp) {
 		Session sess = sf.openSession();
 
-		String hql = "DELETE FROM RSVPS as r WHERE r.basic_user_id = :userid AND u.event_id = :eventid";
+		String hql = "DELETE FROM Rsvp as r WHERE r.basic_user_id = :userid AND u.event_id = :eventid";
 
 		Query query = sess.createQuery(hql);
 
