@@ -14,6 +14,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
@@ -291,7 +292,7 @@ public class EventDaoImpl implements EventDao {
 	public List<Event> getAllPublicEvents() {
 		log.log(Level.INFO, "in get public events - EventDao");
 		Session sess = sf.openSession();
-		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true));
+		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.asc("eventId"));
 		List<Event> publicEventList = crit.list();
 		log.log(Level.INFO, "grabbing event list: " + publicEventList);
 		return publicEventList;

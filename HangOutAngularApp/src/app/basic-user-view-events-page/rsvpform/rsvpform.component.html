@@ -1,10 +1,10 @@
 <div>
     <form>
         <label><b>Event ID</b></label>
-        <input type="text" placeholder="Enter ONE Event ID">
+        <input [(ngModel)]="eventId" name = "eventId" type="number" placeholder="Enter ONE Event ID">
         <div class="row" id="RSVPbuttons">
-            <button type="submit" (click)=onAccept()>Accept Invite</button>
-        <button type="submit" (click)=onReject()>Reject Invite</button>
+            <button class="btn btn-dark" type="submit" (click)=onAccept()>Accept Invite</button>
+        <button class="btn btn-dark" type="submit" (click)=onReject()>Reject Invite</button>
         </div>
         
     </form>

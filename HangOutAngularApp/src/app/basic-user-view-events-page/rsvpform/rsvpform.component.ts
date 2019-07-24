@@ -9,7 +9,7 @@ import { RSVP } from 'src/app/rsvp-dto';
 })
 export class RSVPFormComponent implements OnInit {
 
-  id: number;
+  eventId: number;
 
   constructor(private http: HttpClient) { }
 
@@ -18,13 +18,17 @@ export class RSVPFormComponent implements OnInit {
 
   onAccept() {
     const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
-    const rsvp = new RSVP('Accepted', this.id);
+    const rsvp = new RSVP('Accepted', this.eventId);
+    console.log(`${this.eventId}`);
+
+    console.log(JSON.stringify(rsvp));
     return this.http.post(url, rsvp).subscribe(Boolean);
   }
 
   onRejected() {
     const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
-    const rsvp = new RSVP('Rejected', this.id);
+    const rsvp = new RSVP('Rejected', this.eventId);
+    console.log(rsvp);
     return this.http.post(url, rsvp).subscribe(Boolean);
   }
 }
