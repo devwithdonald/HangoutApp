@@ -5,6 +5,7 @@ import { EventUpdate } from 'src/app/event-update';
 import { EventUpdateBusiness } from 'src/app/event-update-business';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/event.service';
+import { LoggedInUserService } from 'src/app/logged-in-user.service';
 
 @Component({
   selector: 'app-update-business-event-form',
@@ -22,7 +23,8 @@ export class UpdateBusinessEventFormComponent implements OnInit {
   description: string;
   businessMessage: string;
 
-  constructor(private businessUserService: BusinessUserService, private router: Router, private eventService: EventService) { }
+  constructor(private businessUserService: BusinessUserService, private router: Router, private eventService: EventService,
+              private loggedInUserService: LoggedInUserService) { }
 
   ngOnInit() {
   }
@@ -30,7 +32,7 @@ export class UpdateBusinessEventFormComponent implements OnInit {
   onUpdate() {
     // Passing to server
     this.eventUpdateBusiness = new EventUpdateBusiness(this.eventId, this.title, this.location, this.timeOfEvent, this.dateOfEvent,
-      this.description, this.businessMessage);
+      this.description, this.businessMessage, this.loggedInUserService.loggedInUser);
     console.log(this.eventUpdateBusiness);
     // tslint:disable-next-line: max-line-length
     this.eventService.updateEvent('BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent', this.eventUpdateBusiness);

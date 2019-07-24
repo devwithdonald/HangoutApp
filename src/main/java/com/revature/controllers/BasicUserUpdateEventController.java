@@ -39,7 +39,7 @@ public class BasicUserUpdateEventController {
 	}
 
 	@PostMapping(value = "/BasicUser/PrivateEvents/UpdateEvent", consumes = { "application/json" })
-	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event) {
 		log.log(Level.INFO, "inside basicUserEventPost");
 		
 		User user = event.getUser();

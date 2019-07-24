@@ -41,7 +41,7 @@ public class BasicUserAddEventController {
 	}
 
 	@PostMapping(value = "/BasicUser/PrivateEvents/AddEvent", consumes = { "application/json" })
-	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
 		
 		System.out.println("Event passed in contents -> " + event);

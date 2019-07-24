@@ -31,7 +31,7 @@ export class AddBusinessEventFormComponent implements OnInit {
   onCreate() {
     // Passing to server
     this.eventAddBusiness = new EventAddBusiness(this.title, this.location, this.timeOfEvent, this.dateOfEvent,
-      this.description, this.businessMessage);
+      this.description, this.businessMessage, this.loggedInUserService.loggedInUser);
     // tslint:disable-next-line: max-line-length
     this.eventService.postEvent('BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent', this.eventAddBusiness);
 

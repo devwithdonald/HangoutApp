@@ -26,12 +26,12 @@ export class UserService {
   // url -> 'login'
   postLogin(urlEnd: string, user: User) {
     this.http.post(this.url + urlEnd, user).subscribe(
-        (responseUser: LoggedInUser) =>  {
+        responseUser =>  {
           console.log('--- server sent back ---');
           console.log(responseUser);
-          this.loggedInUserService.loggedInUser = responseUser;
-          console.log('--logged in user--');
-          console.log(this.loggedInUserService.loggedInUser);
+          // this.loggedInUserService.loggedInUser = responseUser;
+ //         console.log('--logged in user--');
+          // console.log(this.loggedInUserService.loggedInUser);
           this.checkUser(responseUser);
         }
     );
@@ -51,6 +51,11 @@ export class UserService {
 
     // populate the userDTO
     this.userDTO = responseUser;
+    console.log('--------');
+    this.loggedInUserService.loggedInUser = new LoggedInUser(this.userDTO.userId, this.userDTO.username, this.userDTO.password, this.userDTO.role);
+    console.log('--------');
+    console.log(this.loggedInUserService.loggedInUser.userId);
+    console.log(this.loggedInUserService.loggedInUser);
 
     if (this.userDTO.role.roleType === 'BasicUser') {
       console.log('basic user passed');
