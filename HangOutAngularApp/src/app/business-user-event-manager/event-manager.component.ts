@@ -63,8 +63,7 @@ export class EventManagerComponent implements OnInit {
         return response;
       }
     );
-    this.router.navigate(['BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent']);
-    this.router.navigate(['BusinessUser/BusinessUserEventManager']);
+
   }
 
 }
