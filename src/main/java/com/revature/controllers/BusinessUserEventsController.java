@@ -27,47 +27,27 @@ public class BusinessUserEventsController {
 
 	private EventService eventService;
 
-	// NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDao userDao;
-
-	// NEED TO DELETE ONCE USER SESSION WORKS
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
 
 	@Autowired
 	public void setEventService(EventService eventService) {
 		this.eventService = eventService;
 	}
 
-	@GetMapping("/BusinessUser/BusinessUserEventManager")
-	public List<Event> businessUserEventGet(HttpSession sess) {
+	@PostMapping(path = "/BusinessUser/BusinessUserEventManager", consumes = {
+	"application/json" })
+	public @ResponseBody List<Event> businessUserEventGet(@RequestBody User user) {
 		log.log(Level.INFO, "inside businessUserEventGet");
-		// TODO need to uncomment when session works
-		// User user = (User) sess.getAttribute("user");
 
-		// TODO THIS NEEDS TO CHANGE
-		User user = new User();
-		user.setUserId(2);
+		System.out.println("logged in business user: " + user);
 
 		return eventService.getAllBusinessUserEvents(user);
 	}
 
 	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent", consumes = {
 			"application/json" })
-	public @ResponseBody Boolean businessUserEventPost(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody Boolean businessUserEventPost(@RequestBody Event event) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
 
-		// TODO ADD USER SESSION
-		// event.setUser((User) sess.getAttribute("user"));
-
-		// Need to Delete
-		// Faking user
-		User user = new User();
-		user.setUsername("test_biz2");
-		user.setPassword("biz1");
-		event.setUser(userDao.getUser(user));
 
 		if (eventService.addBusinessPublicEvent(event)) {
 			return true;
@@ -77,20 +57,12 @@ public class BusinessUserEventsController {
 
 	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent", consumes = {
 			"application/json" })
-	public @ResponseBody Boolean businessUserEventUpdate(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody Boolean businessUserEventUpdate(@RequestBody Event event) {
 		log.log(Level.INFO, "Attempting to update event: " + event);
 
-		// TODO ADD USER SESSION
-		// event.setUser((User) sess.getAttribute("user"));
 
-		// Need to Delete
-		// Faking user
-		User user = new User();
-		user.setUsername("test_biz2");
-		user.setPassword("biz1");
-		user = userDao.getUser(user);
-		event.setUser(user);
-
+		User user = event.getUser();
+		
 		// verifying event
 		Event verifiedEvent = eventService.validateEventForUser(event, user);
 
@@ -100,24 +72,17 @@ public class BusinessUserEventsController {
 			return false;
 		}
 
-		// return eventService.validateEventForUser(event, user);
+
 	}
 
 	@PostMapping(path = "/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent", consumes = {
 			"application/json" })
-	public @ResponseBody Boolean businessUserEventRemove(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody Boolean businessUserEventRemove(@RequestBody Event event) {
 		log.log(Level.INFO, "Attempting to delete event: " + event);
 
-		// TODO ADD USER SESSION
-		// event.setUser((User) sess.getAttribute("user"));
 
-		// Need to Delete
-		// Faking user
-		User user = new User();
-		user.setUsername("test_biz2");
-		user.setPassword("biz1");
-		user = userDao.getUser(user);
-		event.setUser(user);
+	
+		User user = event.getUser();
 
 		// verifying event
 		Event verifiedEvent = eventService.validateEventForUser(event, user);

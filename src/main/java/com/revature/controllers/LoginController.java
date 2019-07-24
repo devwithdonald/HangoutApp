@@ -35,14 +35,12 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/login", consumes = { "application/json" })
-	public @ResponseBody User loginPost(@RequestBody User user, HttpSession sess) {
+	public @ResponseBody User loginPost(@RequestBody User user) {
 		log.log(Level.INFO, "Attempted Login: " + user);
 
 		User authUser = userService.validateUser(user);
 
 		if (authUser != null) {
-			sess.setAttribute("user", authUser);
-			log.log(Level.INFO, "Session attribute set to: " + sess.getAttribute("user"));
 			log.log(Level.INFO, "Logged in user: " + authUser);
 			return authUser;
 		}

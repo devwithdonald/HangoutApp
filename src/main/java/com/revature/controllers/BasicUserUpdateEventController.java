@@ -24,14 +24,7 @@ public class BasicUserUpdateEventController {
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
 	private EventService eventService;
-	// NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDao userDao;
 
-	// NEED TO DELETE ONCE USER SESSION WORKS
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
 
 	@Autowired
 	public void setEventService(EventService eventService) {
@@ -39,19 +32,10 @@ public class BasicUserUpdateEventController {
 	}
 
 	@PostMapping(value = "/BasicUser/PrivateEvents/UpdateEvent", consumes = { "application/json" })
-	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody boolean basicUserEventPost(@RequestBody Event event) {
 		log.log(Level.INFO, "inside basicUserEventPost");
-
-		// TODO uncomment when session works
-		// User user = (User) sess.getAttribute("user");
-
-		// Need to Delete
-		// Faking user
-		User user = new User();
-		user.setUsername("test_user1");
-		user.setPassword("user1");
-		user = userDao.getUser(user);
-		event.setUser(user);
+		
+		User user = event.getUser();
 
 		// verifying event
 		Event verifiedEvent = eventService.validateEventForUser(event, user);

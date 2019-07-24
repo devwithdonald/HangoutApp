@@ -1,1 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="#">HangOut</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/BasicUser/PrivateEvents">Home <span
+                        class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/BasicUser/PrivateEvents" active>Event Manager</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/BasicUser/Friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/BasicUser/Rsvps">RSVPs</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="nav-item">
+        <a class="nav-link" routerLink="/login">Logout</a>
+    </div>
+</nav>
+
 <app-basic-user-add-event-form></app-basic-user-add-event-form>

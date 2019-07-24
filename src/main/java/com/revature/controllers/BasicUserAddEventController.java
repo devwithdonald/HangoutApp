@@ -26,40 +26,16 @@ public class BasicUserAddEventController {
 
 	private EventService eventService;
 	
-	//NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDao userDao;
-
-	//NEED TO DELETE ONCE USER SESSION WORKS
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
 	@Autowired
 	public void setEventService(EventServiceImpl eventService) {
 		this.eventService = eventService;
 	}
 
 	@PostMapping(value = "/BasicUser/PrivateEvents/AddEvent", consumes = { "application/json" })
-	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event, HttpSession sess) {
+	public @ResponseBody Boolean basicUserEventPost(@RequestBody Event event) {
 		log.log(Level.INFO, "Attempting to add event: " + event);
-
 		
-		
-//		// attempting to get the user from the session
-//		System.out.println(sess.getAttribute("user"));
-//		
-//		// TODO ADD USER SESSION
-//		event.setUser((User) sess.getAttribute("user"));
-//		
-		
-
-		// TODO Need to Delete
-		// Faking user
-		User user = new User();
-		user.setUsername("test_user1");
-		user.setPassword("user1");
-		event.setUser(userDao.getUser(user));
+		System.out.println("Event passed in contents -> " + event);
 
 		if (eventService.addBasicUserEvent(event)) {
 			return true;
