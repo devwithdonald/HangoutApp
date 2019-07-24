@@ -14,6 +14,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,13 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public Event getEventByEventId(Integer eventId) {
 		// TODO Auto-generated method stub
-		return null;
+		log.log(Level.INFO, "getEventById - EventDAO");
+		log.log(Level.INFO, "passed id: " + eventId);
+		Session sess = sf.openSession();
+		Event event = (Event) sess.get(Event.class, eventId);
+		log.log(Level.INFO, "Returned Event: " + event);
+		sess.close();
+		return event;
 	}
 
 	@Override
@@ -279,6 +286,16 @@ public class EventDaoImpl implements EventDao {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Event> getAllPublicEvents() {
+		log.log(Level.INFO, "in get public events - EventDao");
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.asc("eventId"));
+		List<Event> publicEventList = crit.list();
+		log.log(Level.INFO, "grabbing event list: " + publicEventList);
+		return publicEventList;
 	}
 
 }

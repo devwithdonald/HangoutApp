@@ -39,4 +39,6 @@ public interface EventDao {
 	
 	public Event validateEventForUser(Event event, User user);
 	
+	public List<Event> getAllPublicEvents();
+	
 }

@@ -5,10 +5,13 @@ import java.util.List;
 import com.revature.beans.BasicUser;
 import com.revature.beans.Event;
 import com.revature.beans.Rsvp;
+import com.revature.beans.RsvpDTO;
 
 public interface RsvpDao {
 	
-	public void addRSVP(Rsvp rsvp);
+	public boolean addRSVP(RsvpDTO rsvp);
+	
+	public boolean rejectRSVP(RsvpDTO rsvp);
 	
 	public Rsvp getRSVPbyUser(BasicUser user);
 	

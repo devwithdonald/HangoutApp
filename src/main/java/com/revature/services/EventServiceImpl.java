@@ -115,4 +115,9 @@ public class EventServiceImpl implements EventService {
 		return eventDao.validateEventForUser(event, user);
 	}
 
+	@Override
+	public List<Event> getAllPublicEvents() {
+		return eventDao.getAllPublicEvents();
+	}
+
 }

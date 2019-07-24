@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +26,8 @@ public class UserDaoImpl implements UserDao {
 	
 	private SessionFactory sf = SessionFactoryUtil.getSessionFactory();
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
+//	private ApplicationContext applicationContext;
+
 
 	@Override
 	public User getUser(User user) {
@@ -64,27 +65,28 @@ public class UserDaoImpl implements UserDao {
 		boolean createUser = false;
 		try {
 		if(userType.equals("BasicUser")) {
-			//ApplicationContext ac = XMLClasspath(beans.xml)
-			//BasicUser basicUser1 = ac.getBeans("basicUser", BasicUser.class);
-			BasicUser basicUser1 = new BasicUser();
-			basicUser1.setFirstName(user.getFirstName());
-			basicUser1.setLastName(user.getLastName());
-			basicUser1.setPassword(user.getPassword());
-			basicUser1.setUsername(user.getUsername());
-			basicUser1.setRole(user.getRole());
-			sess.save(basicUser1);
+			// need to autowire
+			//ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+			//BasicUser basicUser1 = ac.getBean("basicUser", BasicUser.class);
+//			BasicUser basicUser1 = new BasicUser();
+//			basicUser1.setFirstName(user.getFirstName());
+//			basicUser1.setLastName(user.getLastName());
+//			basicUser1.setPassword(user.getPassword());
+//			basicUser1.setUsername(user.getUsername());
+//			basicUser1.setRole(user.getRole());
+			sess.save(new BasicUser(user));
 			tx.commit();
 			createUser = true;
 			// ac.close();
 		}
 		else if(userType.equals("BusinessUser")) {
-			BusinessUser businessUser = new BusinessUser();
-			businessUser.setBusinessName(user.getBusinessName());
-			businessUser.setLocation(user.getLocation());
-			businessUser.setPassword(user.getPassword());
-			businessUser.setUsername(user.getUsername());
-			businessUser.setRole(user.getRole());
-			sess.save(businessUser);
+//			BusinessUser businessUser = new BusinessUser();
+//			businessUser.setBusinessName(user.getBusinessName());
+//			businessUser.setLocation(user.getLocation());
+//			businessUser.setPassword(user.getPassword());
+//			businessUser.setUsername(user.getUsername());
+//			businessUser.setRole(user.getRole());
+			sess.save(new BusinessUser(user));
 			tx.commit();
 			createUser = true;
 		}
@@ -92,6 +94,7 @@ public class UserDaoImpl implements UserDao {
 			tx.rollback();
 			createUser = false;
 		}
+		sess.close();
 		return createUser;
 	}
 
