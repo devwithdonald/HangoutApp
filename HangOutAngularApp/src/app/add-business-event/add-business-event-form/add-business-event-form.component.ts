@@ -36,7 +36,7 @@ export class AddBusinessEventFormComponent implements OnInit {
     this.eventService.postEvent('BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent', this.eventAddBusiness);
 
      // TODO need to fix navigating before loading all events
-    this.router.navigate(['BusinessUser/BusinessUserEventManager']);
+   // this.router.navigate(['BusinessUser/BusinessUserEventManager']);
 
     }
 }

@@ -8,6 +8,7 @@ import { EventAddBusiness } from '../event-add-business';
 import { EventUpdateBusiness } from '../event-update-business';
 import { User } from '../User';
 import { LoggedInUser } from '../logged-in-user';
+import { RemoveEvent } from '../remove-event';
 
 @Component({
   selector: 'app-event-manager',
@@ -19,7 +20,7 @@ export class EventManagerComponent implements OnInit {
   events: Event[];
   eventIdUpdate: number;
   eventId: number;
-  removeEvent: EventUpdateBusiness;
+  removeEvent: RemoveEvent;
 
   user: LoggedInUser;
 
@@ -29,10 +30,6 @@ export class EventManagerComponent implements OnInit {
 
 
   ngOnInit() {
-    //Sconsole.log(this.loggedInUserService.loggedInUser);
-    // this.user = new LoggedInUser(this.loggedInUserService.loggedInUser.userId,
-    //   this.loggedInUserService.loggedInUser.username, this.loggedInUserService.loggedInUser.password,
-    //   this.loggedInUserService.loggedInUser.role);
     this.http.post('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager', this.loggedInUserService.loggedInUser)
     .subscribe(
       (response: Event[]) => {
@@ -56,8 +53,8 @@ export class EventManagerComponent implements OnInit {
 
   onRemove() {
 
-    this.removeEvent.user = this.loggedInUserService.loggedInUser;
-    this.removeEvent.eventId = this.eventId;
+    this.removeEvent = new RemoveEvent(this.eventId, this.loggedInUserService.loggedInUser);
+
     this.http.post('http://localhost:8080/HangoutApp/BusinessUser/BusinessUserEventManager/BusinessUserRemoveBusinessEvent', 
     this.removeEvent)
     .subscribe(
@@ -66,6 +63,7 @@ export class EventManagerComponent implements OnInit {
         return response;
       }
     );
+
   }
 
 }

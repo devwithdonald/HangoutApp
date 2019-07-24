@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
-//@Scope("session")
 @Entity
 @Table(name="BASIC_USER")
 public class BasicUser extends User{
