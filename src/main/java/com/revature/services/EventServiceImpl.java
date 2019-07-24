@@ -73,8 +73,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public Event getEventByEventId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.getEventByEventId(id);
 	}
 
 	@Override

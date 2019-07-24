@@ -65,15 +65,18 @@ public class BasicUserEventsRSVP {
 		log.log(Level.INFO, "Attempting to RSVP event: " + rsvp.getEventId());
 		
 		rsvp.setUser(new BasicUser(12, "test_user20", "user20", new Role(3, "BascUser"), "don", "jon"));
+		rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
+		System.out.println(eventService.getEventByEventId(rsvp.getEventId()));
+		System.out.println(rsvp.getEventId()+rsvp.getStatus()+rsvp.getUser());
 		if(rsvp.getStatus().equals("Accepted"))
 		{
-			rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
+			
 			log.log(Level.INFO, "RSVP event -> " + rsvp.getEvent());
 			rsvpService.addRsvp(rsvp);
 			return true;
 		}
 		else if(rsvp.getStatus().equals("Rejected")) {
-			rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
+		//	rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
 			rsvpService.rejectRsvp(rsvp);
 			return true;
 		}
