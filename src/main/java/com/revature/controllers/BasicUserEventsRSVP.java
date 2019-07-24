@@ -63,6 +63,7 @@ public class BasicUserEventsRSVP {
 	public @ResponseBody Boolean basicUserRSVPPost(@RequestBody RsvpDTO rsvp, HttpSession sess) {
 		System.out.println(rsvp.getEventId());
 		log.log(Level.INFO, "Attempting to RSVP event: " + rsvp.getEventId());
+		
 		rsvp.setUser(new BasicUser(12, "test_user20", "user20", new Role(3, "BascUser"), "don", "jon"));
 		if(rsvp.getStatus().equals("Accepted"))
 		{
