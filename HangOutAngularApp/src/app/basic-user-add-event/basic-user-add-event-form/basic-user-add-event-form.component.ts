@@ -39,7 +39,7 @@ export class BasicUserAddEventFormComponent implements OnInit {
     this.eventService.postEvent('BasicUser/PrivateEvents/AddEvent', this.eventAdd);
 
     // TODO need to fix navigating before loading all events
-    this.router.navigate(['/BasicUser/PrivateEvents']);
+    //this.router.navigate(['/BasicUser/PrivateEvents']);
   }
 
 }
