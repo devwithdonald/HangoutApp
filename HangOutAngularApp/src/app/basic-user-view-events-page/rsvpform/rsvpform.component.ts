@@ -17,7 +17,7 @@ export class RSVPFormComponent implements OnInit {
   }
 
   onAccept() {
-    const url = 'http://localhost:8082/HangoutApp/BasicUser/Events';
+    const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
     const rsvp = new RSVP('Accepted', this.eventId);
     console.log(`${this.eventId}`);
 
@@ -26,7 +26,7 @@ export class RSVPFormComponent implements OnInit {
   }
 
   onRejected() {
-    const url = 'http://localhost:8082/HangoutApp/BasicUser/Events';
+    const url = 'http://localhost:8080/HangoutApp/BasicUser/Events';
     const rsvp = new RSVP('Rejected', this.eventId);
     console.log(rsvp);
     return this.http.post(url, rsvp).subscribe(Boolean);
