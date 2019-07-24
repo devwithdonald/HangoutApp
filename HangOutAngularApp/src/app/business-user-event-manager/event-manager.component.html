@@ -1,3 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" routerLink="#">HangOut</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/BusinessUser/BusinessUserEventManager">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/BusinessUser/BusinessUserEventManager" active>Event Manager</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 <div>
     <h3>Business Events Table</h3>
 </div>
@@ -42,13 +67,6 @@
             <label for="Event id">Event ID</label>
             <input [(ngModel)]="eventIdUpdate" type="text" name="Eventid" id="UpdateBusinessEventIdbtn">
             <button (click)=onUpdate() type="submit" class="btn btn-light">Update Event</button>
-        </form>
-    </div>
-    <div id="ViewSubscribersEventBtn">
-        <form action="" id="ViewSubscribersEventbutton">
-            <label for="Event id">Event ID</label>
-            <input  type="text" name="UpdateEventid" id="ViewSubsribersBusinessEventIdbtn">
-            <button (click)=onViewSubs() type="submit" class="btn btn-light">VSPE Event</button>
         </form>
     </div>
     <div id="RemoveEventBtn">

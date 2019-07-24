@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggedInUserService } from '../logged-in-user.service';
 
 @Component({
   selector: 'app-basic-user-private-events',

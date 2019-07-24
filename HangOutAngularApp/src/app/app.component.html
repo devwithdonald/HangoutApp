@@ -1,60 +1,56 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="#">HangOut</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="#">HangOut</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Events
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" open>
-            <a class="dropdown-item" href="#">Business Event</a>
-            <a class="dropdown-item" href="#">Public Event</a>
-            <a class="dropdown-item" href="#">Private Event</a>
-          </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <div>
         <li class="nav-item">
-          <a class="nav-link" href="#">Messages</a>
+          <a class="nav-link" routerLink="BusinessUser/BusinessUserEventManager">Event Manager</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Friends</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Subscriptions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Event Manager</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Subscribers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Employee Manager</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Subscriptions</a>
-        </li>
-      </ul>
+      </div>
 
 
-      <div class="btn-group mr-3">
-        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-          <button class="btn btn-outline-primary" ngbDropdownToggle>Account Details</button>
-          <div class="dropdown-menu" ngbDropdownMenu>
-            <button ngbDropdownItem>Account Info</button>
-            <button ngbDropdownItem>Log out</button>
-          </div>
+
+
+
+
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="#">Friends</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Subscribers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Employee Manager</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Subscriptions</a>
+      </li>
+    </ul>
+
+
+    <div class="btn-group mr-3">
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>Account Details</button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem routerLink="BusinessUser/BusinessUserEventManager">Account Info</button>
+          <button ngbDropdownItem>Log out</button>
         </div>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+
+
+<div>hey {{ user.username }} </div>  -->
 <router-outlet></router-outlet>
