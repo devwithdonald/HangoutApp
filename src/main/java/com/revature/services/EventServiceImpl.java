@@ -67,9 +67,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> getAllBasicUserEvents() {
 		log.log(Level.INFO, "in getAllBasicUserEvents - EventService");
-		List<Event> eventList = eventDao.getAllBasicUserEvents();
-		Collections.reverse(eventList);
-		return eventList;
+
+		return eventDao.getAllBasicUserEvents();
 	}
 
 	@Override
@@ -87,9 +86,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<Event> getAllBusinessUserEvents(User user) {
 		log.log(Level.INFO, "in getAllBusinessUserEvents - EventService");
-		List<Event> eventList = eventDao.getAllBusinessUserEvents(user);
-		Collections.reverse(eventList);
-		return eventList;
+
+		return eventDao.getAllBusinessUserEvents(user);
 	}
 
 	@Override

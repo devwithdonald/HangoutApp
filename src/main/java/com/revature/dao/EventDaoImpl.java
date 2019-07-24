@@ -1,16 +1,14 @@
 package com.revature.dao;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
 import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -162,16 +160,13 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public List<Event> getAllBasicUserEvents() {
-		log.log(Level.INFO, "in getAllBasicUserEvents - EventDao");
+		log.log(Level.INFO, "getAllBasicUserEvents - EventDao");
 		Session sess = sf.openSession();
-		Criteria crit = sess.createCriteria(Event.class);
+		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.desc("timePosted"));
 		List<Event> eventList = crit.list();
-		//
-		for (Event event : eventList) {
-			System.out.println(event);
-		}
-		sess.close();
+		log.log(Level.INFO, "grabbing event list: " + eventList);
 		return eventList;
+
 	}
 
 	@Override
@@ -187,7 +182,7 @@ public class EventDaoImpl implements EventDao {
 		Criteria crit = sess.createCriteria(Event.class);
 
 		crit.add(Restrictions.and(Restrictions.eq("user.userId", user.getUserId()), 
-				Restrictions.eq("onTimeLine", true)));
+				Restrictions.eq("onTimeLine", true))).addOrder(Order.desc("timePosted"));
 		List<Event> eventList = crit.list();
 
 		for (Event event : eventList) {
@@ -234,17 +229,6 @@ public class EventDaoImpl implements EventDao {
 			
 			log.log(Level.INFO, "returned event NOT null");
 			return returnedEvent;
-//			if (user.getRole().getRoleType().equals("BasicUser")) {
-//				log.log(Level.INFO, "update basic user event");
-//				// Passing in returnedEvent to get old information that does not get updated
-//				//return updateEvent(event, returnedEvent);
-//				return returnedEvent;
-//			} else if (user.getRole().getRoleType().equals("BusinessUser")){
-//				log.log(Level.INFO, "update business user event");
-//				//return updateBusinessEvent(event, returnedEvent);
-//			} else {
-//				return false;
-//			}
 		}
 	}
 
