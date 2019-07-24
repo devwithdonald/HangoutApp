@@ -16,7 +16,7 @@ export class BasicUserViewEventsPageComponent implements OnInit {
   constructor(private eventService: EventService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/HangoutApp/BasicUser/Events')
+    this.http.get('http://localhost:8082/HangoutApp/BasicUser/Events')
     .subscribe(
       (response: Event[]) => {
         console.log('response from server');

@@ -43,6 +43,11 @@ public class Rsvp {
 		this.basicUser = basicUser;
 	}
 
+	public Rsvp(Event event, BasicUser basicUser) {
+		this.event = event;
+		this.basicUser = basicUser;
+	}
+
 	public Integer getRsvpId() {
 		return rsvpId;
 	}

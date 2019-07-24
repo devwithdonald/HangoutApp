@@ -31,10 +31,8 @@ public class RsvpDaoImpl implements RsvpDao {
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 //		Rsvp rsvps = ac.getBean("rsvp", Rsvp.class);
 		Transaction tx = sess.beginTransaction();
-		Rsvp rsvps = new Rsvp();
-		rsvps.setBasicUser(rsvp.getUser());
-		rsvps.setEvent(rsvp.getEvent());
-		sess.save(rsvps);
+		System.out.println(rsvp.getEvent().getEventId());
+		sess.save(new Rsvp(rsvp.getEvent(), rsvp.getUser()));
 		tx.commit();
 		sess.close();
 		return true;
