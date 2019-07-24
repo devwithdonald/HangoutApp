@@ -68,7 +68,7 @@ import { BasicUserSendNewMessageButtonComponent } from './basic-user-messages/ba
 import { BasicUserService } from './BasicUser.service';
 import { BusinessUserService } from './BusinessUser.service';
 import { BasicUserViewEventsPageComponent } from './basic-user-view-events-page/basic-user-view-events-page.component';
-import { RSVPFormComponent } from './basic-user-view-events-page/rsvpform/rsvpform.component';
+import { RSVPFormComponent } from './basic-user-private-events/rsvpform/rsvpform.component';
 
 
 
