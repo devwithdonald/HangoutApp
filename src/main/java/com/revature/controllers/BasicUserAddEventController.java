@@ -26,15 +26,6 @@ public class BasicUserAddEventController {
 
 	private EventService eventService;
 	
-	//NEED TO DELETE ONCE USER SESSION WORKS
-	private UserDao userDao;
-
-	//NEED TO DELETE ONCE USER SESSION WORKS
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
 	@Autowired
 	public void setEventService(EventServiceImpl eventService) {
 		this.eventService = eventService;

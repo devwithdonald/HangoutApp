@@ -15,14 +15,10 @@ import com.revature.dao.EventDao;
 @Service
 public class EventServiceImpl implements EventService {
 	
-	//private EventDaoImpl eventDao;
+
 	private EventDao eventDao;
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 	
-//	@Autowired
-//	private void setEventDao(EventDaoImpl eventDao) {
-//		this.eventDao = eventDao;
-//	}
 	
 	@Autowired
 	private void setEventDao(EventDao eventDao) {

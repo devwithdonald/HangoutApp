@@ -13,12 +13,6 @@ import com.revature.dao.UserDaoImpl;
 @Service
 public class UserServiceImpl implements UserService {
 
-//	private UserDaoImpl userDao;
-//	
-//	@Autowired
-//	public void setUserDao(UserDaoImpl userDao) {
-//		this.userDao = userDao;
-//	}
 
 	private UserDao userDao;
 
