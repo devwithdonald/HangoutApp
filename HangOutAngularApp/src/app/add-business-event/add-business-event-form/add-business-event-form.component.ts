@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventAddBusiness } from 'src/app/event-add-business';
 import { EventService } from 'src/app/event.service';
 import { Router } from '@angular/router';
+import { LoggedInUserService } from 'src/app/logged-in-user.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AddBusinessEventFormComponent implements OnInit {
   response: boolean;
 
   eventAddBusiness: EventAddBusiness;
-  constructor(private eventService: EventService, private router: Router) { }
+  constructor(private eventService: EventService, private router: Router,
+              private loggedInUserService: LoggedInUserService) { }
 
   ngOnInit() {
   }
@@ -29,7 +31,7 @@ export class AddBusinessEventFormComponent implements OnInit {
   onCreate() {
     // Passing to server
     this.eventAddBusiness = new EventAddBusiness(this.title, this.location, this.timeOfEvent, this.dateOfEvent,
-      this.description, this.businessMessage);
+      this.description, this.businessMessage, this.loggedInUserService.loggedInUser);
     // tslint:disable-next-line: max-line-length
     this.eventService.postEvent('BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent', this.eventAddBusiness);
 
