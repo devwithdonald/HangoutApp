@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -102,13 +103,23 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getAllUsers() {
 		Session sess = sf.openSession();
-		Criteria crit = sess.createCriteria(BasicUser.class);
+		
+		// CHANGE THIS!!
+		Criteria crit = sess.createCriteria(BasicUser.class).add(Restrictions.eq("userId", 14));
 		List<User> result = crit.list();
 		
 		for (User u : result) {
 			System.out.println(u);
 		}
+		
+		
+		if (result.size() > 1) {
+			for (int i = result.size(); i > 1; i--) {
+				result.remove(i - 1);
+			}
+		}
 		sess.close();
+		
 		return result;
 	}
 }

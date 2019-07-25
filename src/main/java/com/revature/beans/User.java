@@ -124,7 +124,6 @@ public class User {
 //	public int hashCode() {
 //		final int prime = 31;
 //		int result = 1;
-//		result = prime * result + ((friendList == null) ? 0 : friendList.hashCode());
 //		result = prime * result + ((password == null) ? 0 : password.hashCode());
 //		result = prime * result + ((role == null) ? 0 : role.hashCode());
 //		result = prime * result + userId;
@@ -141,11 +140,6 @@ public class User {
 //		if (getClass() != obj.getClass())
 //			return false;
 //		User other = (User) obj;
-//		if (friendList == null) {
-//			if (other.friendList != null)
-//				return false;
-//		} else if (!friendList.equals(other.friendList))
-//			return false;
 //		if (password == null) {
 //			if (other.password != null)
 //				return false;
@@ -165,7 +159,9 @@ public class User {
 //			return false;
 //		return true;
 //	}
-//	
+
+
+	
 	 
 
 //	@Override
