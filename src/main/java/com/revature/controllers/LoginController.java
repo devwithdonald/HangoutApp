@@ -1,9 +1,8 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,8 +29,9 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
-	public void loginGet() {
+	public List<User> loginGet() {
 		// TODO
+		return userService.getAllUsers();
 	}
 
 	@PostMapping(value = "/login", consumes = { "application/json" })

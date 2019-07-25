@@ -44,22 +44,22 @@ public class BusinessUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessUser(int userId, String username, String password, Role role) {
-		super(userId, username, password, role);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BusinessUser(int userId, String username, String password, Role role, String businessName, String location) {
-		super(userId, username, password, role);
-		this.businessName = businessName;
-		this.location = location;
-	}
-
-	public BusinessUser(UserDTO user) {
-		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole());
-		this.businessName = user.getBusinessName();
-		this.location = user.getLocation();
-	}
+//	public BusinessUser(int userId, String username, String password, Role role) {
+//		super(userId, username, password, role);
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public BusinessUser(int userId, String username, String password, Role role, String businessName, String location) {
+//		super(userId, username, password, role);
+//		this.businessName = businessName;
+//		this.location = location;
+//	}
+//
+//	public BusinessUser(UserDTO user) {
+//		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole());
+//		this.businessName = user.getBusinessName();
+//		this.location = user.getLocation();
+//	}
 
 	public String getBusinessName() {
 		return businessName;

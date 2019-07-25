@@ -29,14 +29,14 @@ public class BasicUser extends User{
 	@Column(name="LAST_NAME")
 	private String lastName;
 	
-	//FIX BROTHER
-	@JsonIgnore
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="FRIENDS",
-			joinColumns=@JoinColumn(name="USER_ID"),
-			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
-	private Set<BasicUser> friendList;
-	
+//	//FIX BROTHER
+//	@JsonIgnore
+//	@ManyToMany(fetch=FetchType.LAZY)
+//	@JoinTable(name="FRIENDS",
+//			joinColumns=@JoinColumn(name="USER_ID"),
+//			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
+//	private Set<BasicUser> friendList;
+//	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
@@ -62,30 +62,12 @@ public class BasicUser extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public BasicUser(int userId, String username, String password, Role role) {
-		super(userId, username, password, role);
+
+	public BasicUser(int userId, String username, String password, Role role, Set<User> friendList) {
+		super(userId, username, password, role, friendList);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BasicUser(int userId, String username, String password, Role role, String firstName, String lastName,
-			Set<BasicUser> friendList) {
-		super(userId, username, password, role);
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.friendList = friendList;
-	}
-	
-	public BasicUser(int userId, String username, String password, Role role, String firstName, String lastName) {
-		super(userId, username, password, role);
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
-	public BasicUser(UserDTO userDTO) {
-		super(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getRole());
-		this.firstName = userDTO.getFirstName();
-		this.lastName = userDTO.getLastName();
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -103,23 +85,6 @@ public class BasicUser extends User{
 		this.lastName = lastName;
 	}
 
-	public Set<BasicUser> getFriendList() {
-		return friendList;
-	}
-
-	public void setFriendList(Set<BasicUser> friendList) {
-		this.friendList = friendList;
-	}
-
-//	@Override
-//	public String toString() {
-//		return "BasicUser [firstName=" + firstName + ", lastName=" + lastName + ", friendList=" + friendList
-//				+ ", subscriptions=" + subscriptions + ", sentMessages=" + sentMessages + ", recievedMessages="
-//				+ recievedMessages + ", rsvps=" + rsvps + ", eventMessages=" + eventMessages + "]";
-//	}
-
-
-	
 	
 	
 }

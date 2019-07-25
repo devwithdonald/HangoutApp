@@ -33,10 +33,10 @@ public class BusinessEmployeeUser extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessEmployeeUser(int userId, String username, String password, Role role, BusinessUser businessUser) {
-		super(userId, username, password, role);
-		this.businessUser = businessUser;
-	}
+//	public BusinessEmployeeUser(int userId, String username, String password, Role role, BusinessUser businessUser) {
+//		super(userId, username, password, role);
+//		this.businessUser = businessUser;
+//	}
 
 	
 	//CHANGING THIS

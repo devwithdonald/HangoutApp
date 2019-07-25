@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -46,22 +48,43 @@ public class User {
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="user")
 	private Set<Event> events = new HashSet<Event>();
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="ROLE_ID")
     private Role role;
+	
+	
+	
+	//FIX BROTHER
+//	@JsonIgnore
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.MERGE})
+	@JoinTable(name="FRIENDS",
+			joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
+	@JsonIgnoreProperties("friendList")  
+	private Set<User> friendList;
+	
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Set<User> getFriendList() {
+		return friendList;
 	}
 
-	public User(int userId, String username, String password, Role role) {
+	public void setFriendList(Set<User> friendList) {
+		this.friendList = friendList;
+	}
+
+	public User(int userId, String username, String password, Role role, Set<User> friendList) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.friendList = friendList;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getUserId() {
@@ -97,9 +120,60 @@ public class User {
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((friendList == null) ? 0 : friendList.hashCode());
+//		result = prime * result + ((password == null) ? 0 : password.hashCode());
+//		result = prime * result + ((role == null) ? 0 : role.hashCode());
+//		result = prime * result + userId;
+//		result = prime * result + ((username == null) ? 0 : username.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		User other = (User) obj;
+//		if (friendList == null) {
+//			if (other.friendList != null)
+//				return false;
+//		} else if (!friendList.equals(other.friendList))
+//			return false;
+//		if (password == null) {
+//			if (other.password != null)
+//				return false;
+//		} else if (!password.equals(other.password))
+//			return false;
+//		if (role == null) {
+//			if (other.role != null)
+//				return false;
+//		} else if (!role.equals(other.role))
+//			return false;
+//		if (userId != other.userId)
+//			return false;
+//		if (username == null) {
+//			if (other.username != null)
+//				return false;
+//		} else if (!username.equals(other.username))
+//			return false;
+//		return true;
+//	}
+//	
+	 
+
+//	@Override
+//	public String toString() {
+//		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role
+//				+ ", friendList=" + friendList + "]";
+//	}
+
+	
 
 }
