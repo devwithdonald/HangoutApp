@@ -36,7 +36,7 @@ export class UpdateBusinessEventFormComponent implements OnInit {
     console.log(this.eventUpdateBusiness);
     // tslint:disable-next-line: max-line-length
     this.eventService.updateEvent('BusinessUser/BusinessUserEventManager/BusinessUserUpdateBusinessEvent', this.eventUpdateBusiness);
-
+    alert('Event successfully updated.');
      // TODO need to fix navigating before loading all events
     //this.router.navigate(['BusinessUser/BusinessUserEventManager']);
 

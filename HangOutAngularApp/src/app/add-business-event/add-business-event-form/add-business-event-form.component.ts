@@ -34,7 +34,7 @@ export class AddBusinessEventFormComponent implements OnInit {
       this.description, this.businessMessage, this.loggedInUserService.loggedInUser);
     // tslint:disable-next-line: max-line-length
     this.eventService.postEvent('BusinessUser/BusinessUserEventManager/BusinessUserAddBusinessEvent', this.eventAddBusiness);
-
+    alert('Event successfully created.');
      // TODO need to fix navigating before loading all events
    // this.router.navigate(['BusinessUser/BusinessUserEventManager']);
 

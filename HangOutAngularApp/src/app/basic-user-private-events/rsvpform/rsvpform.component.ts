@@ -23,7 +23,9 @@ export class RSVPFormComponent implements OnInit {
     console.log(`${this.eventId}`);
 
     console.log(JSON.stringify(rsvp));
+    alert(`Successfully RSVP'd to event #${this.eventId}.`);
     return this.http.post(url, rsvp).subscribe(Boolean);
+    
   }
 
   onReject() {

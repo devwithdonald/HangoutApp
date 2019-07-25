@@ -45,6 +45,7 @@ export class BasicUserUpdateEventFormComponent implements OnInit {
     if (this.validation === false) {
       alert(`Couldn't update event! Try again.`);
     } else {
+      alert('Event successfully updated.');
       //this.router.navigate(['/BasicUser/PrivateEvents/']);
     }
 
