@@ -28,6 +28,7 @@ public class LoginController {
 		this.userService = userService;
 	}
 
+	//TODO CHANGE THIS!!!!!!!!!!!!
 	@GetMapping("/login")
 	public List<User> loginGet() {
 		// TODO
