@@ -1,6 +1,6 @@
 package com.revature.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import com.revature.beans.User;
 

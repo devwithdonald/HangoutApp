@@ -61,7 +61,8 @@ export class UserService {
       console.log('basic user passed');
       this.basicUserService.addBasicUser(this.userDTO);
       // navigate
-      this.router.navigate(['/BasicUser/PrivateEvents']);
+      this.router.navigate(['/BasicUser/Friends']);
+      //this.router.navigate(['/BasicUser/PrivateEvents']);
 
     } else if (this.userDTO.role.roleType === 'BusinessUser') {
       console.log('business user passed');

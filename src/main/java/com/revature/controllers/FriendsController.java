@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class FriendsController {
 	@PostMapping(value = "/BasicUser/Friends", consumes = { "application/json" })
 	public @ResponseBody User friendsGet(@RequestBody int userId) {
 		// TODO
+		//return friend list!
 		return friendsService.getAllFriendsByUserId(userId);
 	}
 
