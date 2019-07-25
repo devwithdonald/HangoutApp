@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.Set;
+
 public class UserDTO {
 	private int userId;
 	private String firstName;
@@ -10,6 +12,14 @@ public class UserDTO {
 	private String password;
 	private Role role;
 	private BusinessUser businessUser;
+	private Set<User> friendList;
+	
+	public Set<User> getFriendList() {
+		return friendList;
+	}
+	public void setFriendList(Set<User> friendList) {
+		this.friendList = friendList;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

@@ -28,15 +28,7 @@ public class BasicUser extends User{
 	
 	@Column(name="LAST_NAME")
 	private String lastName;
-	
-//	//FIX BROTHER
-//	@JsonIgnore
-//	@ManyToMany(fetch=FetchType.LAZY)
-//	@JoinTable(name="FRIENDS",
-//			joinColumns=@JoinColumn(name="USER_ID"),
-//			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
-//	private Set<BasicUser> friendList;
-//	
+		
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="basicUser")
 	private Set<Subscriptions> subscriptions = new HashSet<Subscriptions>();
@@ -67,6 +59,13 @@ public class BasicUser extends User{
 		super(userId, username, password, role, friendList);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public BasicUser(UserDTO userDTO) {
+		super(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getRole(), userDTO.getFriendList());
+		this.firstName = userDTO.getFirstName();
+		this.lastName = userDTO.getLastName();
+	}
+
 
 
 	public String getFirstName() {

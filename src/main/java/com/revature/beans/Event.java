@@ -32,7 +32,7 @@ public class Event {
 	
 	// changed this for getting all events!
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID")
 	private User user;
 	

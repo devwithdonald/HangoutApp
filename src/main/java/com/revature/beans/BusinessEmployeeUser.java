@@ -26,7 +26,7 @@ public class BusinessEmployeeUser extends User{
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="BUSINESS_ID")
 	private BusinessUser businessUser;
-//	private BusinessUser businessUser;
+
 
 	public BusinessEmployeeUser() {
 		super();

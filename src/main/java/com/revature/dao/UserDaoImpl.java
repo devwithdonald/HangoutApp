@@ -60,43 +60,43 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public Boolean addUser(UserDTO user, String userType) {
-//		// TODO Auto-generated method stub
-//		Session sess = sf.openSession();
-//		Transaction tx = sess.beginTransaction();
-//		System.out.println(userType);
-//		boolean createUser = false;
-//		try {
-//		if(userType.equals("BasicUser")) {
-//			// need to autowire
-//			//ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-//			//BasicUser basicUser1 = ac.getBean("basicUser", BasicUser.class);
-////			BasicUser basicUser1 = new BasicUser();
-////			basicUser1.setFirstName(user.getFirstName());
-////			basicUser1.setLastName(user.getLastName());
-////			basicUser1.setPassword(user.getPassword());
-////			basicUser1.setUsername(user.getUsername());
-////			basicUser1.setRole(user.getRole());
-//			sess.save(new BasicUser(user));
-//			tx.commit();
-//			createUser = true;
-//			// ac.close();
-//		}
-//		else if(userType.equals("BusinessUser")) {
-////			BusinessUser businessUser = new BusinessUser();
-////			businessUser.setBusinessName(user.getBusinessName());
-////			businessUser.setLocation(user.getLocation());
-////			businessUser.setPassword(user.getPassword());
-////			businessUser.setUsername(user.getUsername());
-////			businessUser.setRole(user.getRole());
-//			sess.save(new BusinessUser(user));
-//			tx.commit();
-//			createUser = true;
-//		}
-//		} catch(Exception e) {
-//			tx.rollback();
-//			createUser = false;
-//		}
-//		sess.close();
+		// TODO Auto-generated method stub
+		Session sess = sf.openSession();
+		Transaction tx = sess.beginTransaction();
+		System.out.println(userType);
+		boolean createUser = false;
+		try {
+		if(userType.equals("BasicUser")) {
+			// need to autowire
+			//ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+			//BasicUser basicUser1 = ac.getBean("basicUser", BasicUser.class);
+//			BasicUser basicUser1 = new BasicUser();
+//			basicUser1.setFirstName(user.getFirstName());
+//			basicUser1.setLastName(user.getLastName());
+//			basicUser1.setPassword(user.getPassword());
+//			basicUser1.setUsername(user.getUsername());
+//			basicUser1.setRole(user.getRole());
+			sess.save(new BasicUser(user));
+			tx.commit();
+			createUser = true;
+			// ac.close();
+		}
+		else if(userType.equals("BusinessUser")) {
+//			BusinessUser businessUser = new BusinessUser();
+//			businessUser.setBusinessName(user.getBusinessName());
+//			businessUser.setLocation(user.getLocation());
+//			businessUser.setPassword(user.getPassword());
+//			businessUser.setUsername(user.getUsername());
+//			businessUser.setRole(user.getRole());
+			sess.save(new BusinessUser(user));
+			tx.commit();
+			createUser = true;
+		}
+		} catch(Exception e) {
+			tx.rollback();
+			createUser = false;
+		}
+		sess.close();
 		return null;
 	}
 
