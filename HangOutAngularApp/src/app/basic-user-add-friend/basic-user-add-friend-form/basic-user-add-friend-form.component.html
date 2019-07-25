@@ -1,0 +1,9 @@
+<form>
+    <h2>Add Friend Form</h2>
+    <div class="form-group">
+        <label for="usernameInput"></label>
+        <input [(ngModel)]="username" name="username" type="text" class="form-control" id="username" placeholder="Username" required>
+    </div>
+
+    <button (click)="onAddFriend()" type="submit" class="btn btn-dark">Add Friend</button>
+</form>

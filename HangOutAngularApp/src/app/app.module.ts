@@ -71,6 +71,8 @@ import { BasicUserViewEventsPageComponent } from './basic-user-view-events-page/
 import { RSVPFormComponent } from './basic-user-private-events/rsvpform/rsvpform.component';
 import { BasicUserFriendsComponent } from './basic-user-friends/basic-user-friends.component';
 import { BasicUserFriendsTableComponent } from './basic-user-friends/basic-user-friends-table/basic-user-friends-table.component';
+import { BasicUserAddFriendComponent } from './basic-user-add-friend/basic-user-add-friend.component';
+import { BasicUserAddFriendFormComponent } from './basic-user-add-friend/basic-user-add-friend-form/basic-user-add-friend-form.component';
 
 
 
@@ -97,7 +99,8 @@ const appRoutes: Routes = [
     { path: 'BasicUser/Homepage', component: BasicUserHomepageComponent},
     { path: 'BasicUser/Subscriptions', component: SubscriptionComponent},
     { path: 'BasicUser/Events', component: BasicUserViewEventsPageComponent},
-    { path: 'BasicUser/Friends', component: BasicUserFriendsComponent}
+    { path: 'BasicUser/Friends', component: BasicUserFriendsComponent},
+    { path: 'BasicUser/Friends/AddFriend', component: BasicUserAddFriendComponent}
 
   ];
 
@@ -150,7 +153,9 @@ const appRoutes: Routes = [
       BasicUserViewEventsPageComponent,
       RSVPFormComponent,
       BasicUserFriendsComponent,
-      BasicUserFriendsTableComponent
+      BasicUserFriendsTableComponent,
+      BasicUserAddFriendComponent,
+      BasicUserAddFriendFormComponent
 
 
     ],
