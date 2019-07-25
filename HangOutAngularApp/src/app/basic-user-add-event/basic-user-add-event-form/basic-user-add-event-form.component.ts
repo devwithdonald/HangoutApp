@@ -37,7 +37,7 @@ export class BasicUserAddEventFormComponent implements OnInit {
     this.eventAdd = new EventAdd(this.title, this.location, this.timeOfEvent, this.dateOfEvent,
     this.description, this.loggedInUserService.loggedInUser);
     this.eventService.postEvent('BasicUser/PrivateEvents/AddEvent', this.eventAdd);
-
+    alert('Event successfully created.');
     // TODO need to fix navigating before loading all events
     //this.router.navigate(['/BasicUser/PrivateEvents']);
   }

@@ -101,8 +101,10 @@ public class RsvpDaoImpl implements RsvpDao {
 		try {
 			rsvp = (Rsvp) query.getSingleResult();
 		}catch(NoResultException e) {
+			sess.close();
 			return null;
 		}
+		sess.close();
 		return rsvp;
 	}
 
