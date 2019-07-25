@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
-//@Scope("session")
 @Entity
 @Table(name="USERS")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -46,22 +47,40 @@ public class User {
 	@OneToMany(cascade=CascadeType.MERGE, fetch=FetchType.LAZY, mappedBy="user")
 	private Set<Event> events = new HashSet<Event>();
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="ROLE_ID")
     private Role role;
+	
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.MERGE})
+	@JoinTable(name="FRIENDS",
+			joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="FRIEND_ID"))
+	@JsonIgnoreProperties("friendList")  
+	private Set<User> friendList;
+	
+
+	public Set<User> getFriendList() {
+		return friendList;
 	}
 
-	public User(int userId, String username, String password, Role role) {
+	public void setFriendList(Set<User> friendList) {
+		this.friendList = friendList;
+	}
+
+	public User(int userId, String username, String password, Role role, Set<User> friendList) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.friendList = friendList;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getUserId() {
@@ -97,9 +116,12 @@ public class User {
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", role=" + role
+//				+ ", friendList=" + friendList + "]";
+//	}
+
+	
 
 }

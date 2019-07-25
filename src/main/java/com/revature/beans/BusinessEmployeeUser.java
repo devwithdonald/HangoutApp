@@ -26,17 +26,17 @@ public class BusinessEmployeeUser extends User{
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="BUSINESS_ID")
 	private BusinessUser businessUser;
-//	private BusinessUser businessUser;
+
 
 	public BusinessEmployeeUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessEmployeeUser(int userId, String username, String password, Role role, BusinessUser businessUser) {
-		super(userId, username, password, role);
-		this.businessUser = businessUser;
-	}
+//	public BusinessEmployeeUser(int userId, String username, String password, Role role, BusinessUser businessUser) {
+//		super(userId, username, password, role);
+//		this.businessUser = businessUser;
+//	}
 
 	
 	//CHANGING THIS

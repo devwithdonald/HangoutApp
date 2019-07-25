@@ -69,6 +69,8 @@ import { BasicUserService } from './BasicUser.service';
 import { BusinessUserService } from './BusinessUser.service';
 import { BasicUserViewEventsPageComponent } from './basic-user-view-events-page/basic-user-view-events-page.component';
 import { RSVPFormComponent } from './basic-user-private-events/rsvpform/rsvpform.component';
+import { BasicUserFriendsComponent } from './basic-user-friends/basic-user-friends.component';
+import { BasicUserFriendsTableComponent } from './basic-user-friends/basic-user-friends-table/basic-user-friends-table.component';
 
 
 
@@ -94,7 +96,8 @@ const appRoutes: Routes = [
     { path: 'BasicUser/Messages', component: BasicUserMessagesComponent},
     { path: 'BasicUser/Homepage', component: BasicUserHomepageComponent},
     { path: 'BasicUser/Subscriptions', component: SubscriptionComponent},
-    { path: 'BasicUser/Events', component: BasicUserViewEventsPageComponent}
+    { path: 'BasicUser/Events', component: BasicUserViewEventsPageComponent},
+    { path: 'BasicUser/Friends', component: BasicUserFriendsComponent}
 
   ];
 
@@ -145,7 +148,9 @@ const appRoutes: Routes = [
       BasicUserMessagesTableComponent,
       BasicUserSendNewMessageButtonComponent,
       BasicUserViewEventsPageComponent,
-      RSVPFormComponent
+      RSVPFormComponent,
+      BasicUserFriendsComponent,
+      BasicUserFriendsTableComponent
 
 
     ],

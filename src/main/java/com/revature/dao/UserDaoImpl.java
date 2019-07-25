@@ -11,12 +11,14 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.BasicUser;
 import com.revature.beans.BusinessUser;
+import com.revature.beans.Event;
 import com.revature.beans.User;
 import com.revature.beans.UserDTO;
 import com.revature.util.SessionFactoryUtil;
@@ -95,16 +97,12 @@ public class UserDaoImpl implements UserDao {
 			createUser = false;
 		}
 		sess.close();
-		return createUser;
+		return null;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		Session sess = sf.openSession();
-		Criteria crit = sess.createCriteria(User.class);
-		List<User> result = crit.list();
-		sess.close();
-		return result;
+		return null;
 	}
 
 	@Override

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Component
-//@Scope("session")
 @Entity
 @Table(name="BUSINESS_USER")
 public class BusinessUser extends User {
@@ -44,25 +43,40 @@ public class BusinessUser extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BusinessUser(int userId, String username, String password, Role role) {
-		super(userId, username, password, role);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BusinessUser(int userId, String username, String password, Role role, String businessName, String location) {
-		super(userId, username, password, role);
-		this.businessName = businessName;
-		this.location = location;
-	}
-
-	public BusinessUser(UserDTO user) {
-		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole());
-		this.businessName = user.getBusinessName();
-		this.location = user.getLocation();
-	}
+//	public BusinessUser(int userId, String username, String password, Role role) {
+//		super(userId, username, password, role);
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public BusinessUser(int userId, String username, String password, Role role, String businessName, String location) {
+//		super(userId, username, password, role);
+//		this.businessName = businessName;
+//		this.location = location;
+//	}
+//
+//	public BusinessUser(UserDTO user) {
+//		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole());
+//		this.businessName = user.getBusinessName();
+//		this.location = user.getLocation();
+//	}
+	
+	
 
 	public String getBusinessName() {
 		return businessName;
+	}
+
+	public BusinessUser(int userId, String username, String password, Role role, Set<User> friendList, String businessName,
+		String location) {
+	super(userId, username, password, role, friendList);
+	this.businessName = businessName;
+	this.location = location;
+	}
+	
+	public BusinessUser(UserDTO user) {
+		super(user.getUserId(), user.getUsername(), user.getPassword(), user.getRole(), user.getFriendList());
+		this.businessName = user.getBusinessName();
+		this.location = user.getLocation();
 	}
 
 	public void setBusinessName(String businessName) {

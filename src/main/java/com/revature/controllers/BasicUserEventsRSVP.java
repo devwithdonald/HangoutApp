@@ -33,13 +33,20 @@ public class BasicUserEventsRSVP {
 	private static Logger log = Logger.getLogger("DRIVER_LOGGER");
 
 	private RsvpService rsvpService;
-
+	
+	private UserDao userDao;
+	
 	private EventService eventService;
 	
 	private UserService userService;
 	
 	@Autowired
-	private void setUserService(UserService userService) {
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
+	@Autowired
+	public void setuserService(UserService userService) {
 		this.userService = userService;
 	}
 	
@@ -58,12 +65,15 @@ public class BasicUserEventsRSVP {
 		return eventService.getAllPublicEvents();
 	}
 	
-	@PostMapping(value = "/BasicUser/Events", consumes = { "application/json" })
+	@PostMapping(path = "/BasicUser/Events", consumes = { "application/json" })
 	public @ResponseBody Boolean basicUserRSVPPost(@RequestBody RsvpDTO rsvp, HttpSession sess) {
 		System.out.println(rsvp.getEventId());
 		log.log(Level.INFO, "Attempting to RSVP event: " + rsvp.getEventId());
 		
+		//rsvp.setUser(new BasicUser(12, "test_user20", "user20", new Role(3, "BascUser"), "don", "jon"));
 		rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
+		System.out.println(eventService.getEventByEventId(rsvp.getEventId()));
+		System.out.println(rsvp.getEventId()+rsvp.getStatus()+rsvp.getUser());
 		rsvp.setUser(userService.getBasicUserByUsername(rsvp.getUser1().getUsername()));
 		log.log(Level.INFO, "User id" + rsvp.getUser().getUserId());
 		if(rsvp.getStatus().equals("Accepted"))
