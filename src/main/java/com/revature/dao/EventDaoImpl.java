@@ -2,13 +2,13 @@ package com.revature.dao;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -165,8 +165,18 @@ public class EventDaoImpl implements EventDao {
 		Criteria crit = sess.createCriteria(Event.class).add(Restrictions.eq("onTimeLine", true)).addOrder(Order.desc("timePosted"));
 		List<Event> eventList = crit.list();
 		log.log(Level.INFO, "grabbing event list: " + eventList);
+		
+		List<Event> resultList = new ArrayList<>();
+		
+		for (Event e: eventList) {
+			if(!resultList.contains(e)) {
+				resultList.add(e);
+			}
+		}
+		
+		
 		sess.close();
-		return eventList;
+		return resultList;
 
 	}
 

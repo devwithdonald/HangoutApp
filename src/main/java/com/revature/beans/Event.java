@@ -32,7 +32,7 @@ public class Event {
 	
 	// changed this for getting all events!
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID")
 	private User user;
 	
@@ -172,14 +172,14 @@ public class Event {
 		this.businessMessage = businessMessage;
 	}
 
-	@Override
-	public String toString() {
-		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
-				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
-				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", businessMessage=" + businessMessage
-				+ "]";
-	}
-
+//	@Override
+//	public String toString() {
+//		return "Event [eventId=" + eventId + ", user=" + user + ", title=" + title + ", location=" + location
+//				+ ", timeOfEvent=" + timeOfEvent + ", dateOfEvent=" + dateOfEvent + ", timePosted=" + timePosted
+//				+ ", description=" + description + ", onTimeLine=" + onTimeLine + ", businessMessage=" + businessMessage
+//				+ "]";
+//	}
+//
 
 
 	
