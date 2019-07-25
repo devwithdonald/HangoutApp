@@ -24,11 +24,11 @@ public class Rsvp {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer rsvpId;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	@JoinColumn(name="EVENT_ID")
 	private Event event;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
 	@JoinColumn(name="BASIC_USER_ID")
 	private BasicUser basicUser;
 

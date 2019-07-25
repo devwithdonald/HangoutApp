@@ -97,11 +97,19 @@ public class UserDaoImpl implements UserDao {
 			createUser = false;
 		}
 		sess.close();
-		return null;
+		return createUser;
 	}
 
 	@Override
 	public List<User> getAllUsers() {
 		return null;
+	}
+
+	@Override
+	public BasicUser getBasicUserByUsername(String username) {
+		Session sess = sf.openSession();
+		BasicUser user = null;
+		user = sess.get(BasicUser.class, username);
+		return user;
 	}
 }

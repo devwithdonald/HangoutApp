@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.BasicUser;
 import com.revature.beans.User;
 import com.revature.beans.UserDTO;
 import com.revature.dao.UserDao;
@@ -44,6 +45,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		return null;
+	}
+
+	@Override
+	public BasicUser getBasicUserByUsername(String username) {
+		return userDao.getBasicUserByUsername(username);
 	}
 
 }

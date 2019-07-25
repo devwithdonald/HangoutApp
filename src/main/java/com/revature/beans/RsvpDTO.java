@@ -3,6 +3,13 @@ package com.revature.beans;
 public class RsvpDTO {
 	private int eventId;
 	private BasicUser user;
+	private User user1;
+	public User getUser1() {
+		return user1;
+	}
+	public void setUser1(User user1) {
+		this.user1 = user1;
+	}
 	private Event event;
 	private String status;
 	
