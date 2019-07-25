@@ -1,1 +1,23 @@
-<p *ngFor="let friend of userFriend.friendList"> {{ friend.username }}</p>
+<!-- <p *ngFor="let friend of userFriend.friendList"> {{ friend.username }}</p> -->
+
+
+<!-- view friends table-->
+<table class="table table-striped table-sm table-light table-curved">
+
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+        </tr>
+    </thead>
+
+    <tbody id="events-view-table-body">
+        <tr *ngFor="let friend of userFriend.friendList">
+            <td>{{ friend.username }}</td>
+            <td>{{ friend.firstName }}</td>
+            <td>{{ friend.lastName }}</td>
+        </tr>
+    </tbody>
+
+</table>
