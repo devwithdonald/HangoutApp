@@ -1,5 +1,6 @@
 import { Role } from './Role';
 import { BusinessUser } from './BusinessUser';
+import { BasicUser } from './BasicUser';
 
 export class UserDTO {
     userId: number;
@@ -11,4 +12,5 @@ export class UserDTO {
     firstName: string;
     lastName: string;
     businessUser: BusinessUser;
+    friendList: BasicUser[];
 }
