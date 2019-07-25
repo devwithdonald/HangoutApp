@@ -106,4 +106,12 @@ public class UserDaoImpl implements UserDao {
 		sess.close();
 		return result;
 	}
+
+	@Override
+	public BasicUser getBasicUserByUsername(String username) {
+		Session sess = sf.openSession();
+		BasicUser user = null;
+		user = sess.get(BasicUser.class, username);
+		return user;
+	}
 }

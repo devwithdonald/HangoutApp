@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import com.revature.beans.BasicUser;
 import com.revature.beans.User;
 import com.revature.beans.UserDTO;
 
@@ -15,4 +16,6 @@ public interface UserService {
 	public Boolean updateUser(User user);
 	
 	public List<User> getAllUsers();
+
+	public BasicUser getBasicUserByUsername(String username);
 }

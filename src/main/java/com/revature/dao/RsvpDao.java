@@ -19,4 +19,6 @@ public interface RsvpDao {
 	
 	public List<Rsvp> getRecentRSVPsByUser(BasicUser user);
 	
+	public Rsvp getRSVPbyUserandEvent(BasicUser user, Event event);
+	
 }
