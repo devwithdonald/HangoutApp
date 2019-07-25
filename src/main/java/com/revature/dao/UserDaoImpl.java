@@ -97,7 +97,7 @@ public class UserDaoImpl implements UserDao {
 			createUser = false;
 		}
 		sess.close();
-		return null;
+		return createUser;
 	}
 
 	@Override

@@ -5,12 +5,12 @@ export class RSVP {
     status: string;
     eventId: number;
     // Event: Event;
-    user: User;
+    user1: User;
 
     constructor(status: string, eventId: number, basicUser: User) {
         this.status = status;
         this.eventId = eventId;
-        this.user = basicUser;
+        this.user1 = basicUser;
     }
 
 }

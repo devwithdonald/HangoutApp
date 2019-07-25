@@ -50,7 +50,7 @@ public class RsvpDaoImpl implements RsvpDao {
 	@Override
 	public boolean rejectRSVP(RsvpDTO rsvp) {
 		Session sess = sf.openSession();
-
+		Transaction tx = sess.beginTransaction();
 		String hql = "DELETE FROM Rsvp as r WHERE r.basicUser = :userid AND r.event = :eventid";
 
 		Query query = sess.createQuery(hql);
@@ -60,7 +60,9 @@ public class RsvpDaoImpl implements RsvpDao {
 
 		try {
 			query.executeUpdate();
+			tx.commit();
 		} catch (NoResultException e) {
+			tx.rollback();
 			sess.close();
 			return false;
 		}

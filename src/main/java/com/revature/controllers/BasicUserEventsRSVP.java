@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.BasicUser;
 import com.revature.beans.Event;
 import com.revature.beans.RsvpDTO;
 import com.revature.services.EventService;
@@ -58,7 +59,8 @@ public class BasicUserEventsRSVP {
 		log.log(Level.INFO, "Attempting to RSVP event: " + rsvp.getEventId());
 		
 		rsvp.setEvent(eventService.getEventByEventId(rsvp.getEventId()));
-		rsvp.setUser(userService.getBasicUserByUsername(rsvp.getUser1().getUsername()));
+		log.log(Level.INFO, "user from angular: " + userService.validateUser(rsvp.getUser1()).getUsername());
+		rsvp.setUser((BasicUser) userService.validateUser(rsvp.getUser1()));
 		log.log(Level.INFO, "User id" + rsvp.getUser().getUserId());
 		if(rsvp.getStatus().equals("Accepted"))
 		{
