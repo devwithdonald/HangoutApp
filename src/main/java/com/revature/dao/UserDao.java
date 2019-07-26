@@ -1,15 +1,19 @@
 package com.revature.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.revature.beans.BasicUser;
 import com.revature.beans.User;
+import com.revature.beans.UserDTO;
 
 public interface UserDao {
 
-	public User getUserByUsername(String username, String password);
+	public User getUser(User user);
 
-	public Boolean addUser(User user, String userType);
+	public Boolean addUser(UserDTO user, String userType);
 
-	public ArrayList<User> getAllUsers();
+	public List<User> getAllUsers();
+
+	public BasicUser getBasicUserByUsername(String username);
 
 }
